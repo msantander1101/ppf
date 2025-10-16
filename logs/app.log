@@ -1,0 +1,1392 @@
+2025-10-15 15:05:13,914 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:05:13,914 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-15 15:05:13,969 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-15 15:05:15,075 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:05:24,202 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:05:28,964 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:05:29,021 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:05:29,026 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 15:05:29,307 [INFO] osint_suite - Login exitoso: msantander
+2025-10-15 15:05:29,310 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-15 15:05:29,358 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:06:59,386 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:06:59,386 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-15 15:06:59,441 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-15 15:07:00,553 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:07:06,354 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:07:10,524 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:07:13,701 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:07:13,703 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 15:07:13,952 [INFO] osint_suite - Login exitoso: msantander
+2025-10-15 15:07:13,953 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-15 15:07:13,955 [ERROR] osint_suite - Excepción durante login: Could not find page: `ui/dashboard.py`. Must be the file path relative to the main script, from the directory: `ui`. Only the main app file and files in the `pages/` directory are supported.
+Traceback (most recent call last):
+  File "C:\Users\Ascii\PycharmProjects\ppf\ui\login.py", line 48, in <module>
+    st.switch_page("ui/dashboard.py")  # 👈 redirige al dashboard tras login
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\streamlit\runtime\metrics_util.py", line 443, in wrapped_func
+    result = non_optional_func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\streamlit\commands\execution_control.py", line 222, in switch_page
+    raise StreamlitAPIException(
+streamlit.errors.StreamlitAPIException: Could not find page: `ui/dashboard.py`. Must be the file path relative to the main script, from the directory: `ui`. Only the main app file and files in the `pages/` directory are supported.
+2025-10-15 15:13:38,355 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:13:38,355 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-15 15:13:38,414 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-15 15:13:39,672 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:13:44,315 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:13:48,931 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:13:49,002 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:13:49,007 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 15:13:49,280 [INFO] osint_suite - Login exitoso: msantander
+2025-10-15 15:13:49,281 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-15 15:13:49,283 [ERROR] osint_suite - Excepción durante login: Could not find page: `dashboard.py`. Must be the file path relative to the main script, from the directory: `ui`. Only the main app file and files in the `pages/` directory are supported.
+Traceback (most recent call last):
+  File "C:\Users\Ascii\PycharmProjects\ppf\ui\login.py", line 48, in <module>
+    st.switch_page("dashboard.py")  # 👈 redirige al dashboard tras login
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\streamlit\runtime\metrics_util.py", line 443, in wrapped_func
+    result = non_optional_func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\streamlit\commands\execution_control.py", line 222, in switch_page
+    raise StreamlitAPIException(
+streamlit.errors.StreamlitAPIException: Could not find page: `dashboard.py`. Must be the file path relative to the main script, from the directory: `ui`. Only the main app file and files in the `pages/` directory are supported.
+2025-10-15 15:15:23,381 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:15:23,381 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-15 15:15:23,436 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-15 15:15:24,728 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:15:29,800 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:15:33,448 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:15:36,319 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:15:36,324 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 15:15:36,597 [INFO] osint_suite - Login exitoso: msantander
+2025-10-15 15:15:36,597 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-15 15:15:36,599 [ERROR] osint_suite - Excepción durante login: Could not find page: `pages/Dashboard1.py`. Must be the file path relative to the main script, from the directory: `ui`. Only the main app file and files in the `pages/` directory are supported.
+Traceback (most recent call last):
+  File "C:\Users\Ascii\PycharmProjects\ppf\ui\login.py", line 48, in <module>
+    st.switch_page("pages/Dashboard1.py")  # 👈 redirige al dashboard tras login
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\streamlit\runtime\metrics_util.py", line 443, in wrapped_func
+    result = non_optional_func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\streamlit\commands\execution_control.py", line 222, in switch_page
+    raise StreamlitAPIException(
+streamlit.errors.StreamlitAPIException: Could not find page: `pages/Dashboard1.py`. Must be the file path relative to the main script, from the directory: `ui`. Only the main app file and files in the `pages/` directory are supported.
+2025-10-15 15:16:40,942 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:16:40,942 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-15 15:16:40,998 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-15 15:16:42,256 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:16:47,673 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:17:05,502 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:17:08,132 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:17:08,138 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 15:17:08,406 [INFO] osint_suite - Login exitoso: msantander
+2025-10-15 15:17:08,407 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-15 15:24:54,750 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 15:25:02,455 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 15:25:42,327 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:25:42,327 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-15 15:25:42,380 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-15 15:25:47,016 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:48:53,134 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:48:53,135 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-15 15:48:53,190 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-15 15:48:54,599 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:48:58,967 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:48:59,483 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:48:59,558 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:48:59,564 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 15:48:59,813 [INFO] osint_suite - Login exitoso: msantander
+2025-10-15 15:48:59,814 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-15 15:48:59,867 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 15:49:03,151 [DEBUG] osint_suite - Mostrando historial para usuario: msantander
+2025-10-15 15:49:20,216 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 15:53:30,694 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 15:53:42,388 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 15:53:46,324 [DEBUG] osint_suite - Añadido nodo: {'id': 'user_1', 'label': 'msantander', 'type': 'user'}
+2025-10-15 15:53:46,324 [DEBUG] osint_suite - Añadido nodo: {'id': 'email_1', 'label': 'msantander@example.com', 'type': 'email'}
+2025-10-15 15:53:46,324 [DEBUG] osint_suite - Añadido nodo: {'id': 'domain_1', 'label': 'example.com', 'type': 'domain'}
+2025-10-15 15:53:46,324 [DEBUG] osint_suite - Añadido nodo: {'id': 'leak_1', 'label': 'LeakDB: 2023', 'type': 'leak'}
+2025-10-15 15:53:46,324 [DEBUG] osint_suite - Añadida relación user_1 -> email_1: usa
+2025-10-15 15:53:46,325 [DEBUG] osint_suite - Añadida relación email_1 -> domain_1: pertenece a
+2025-10-15 15:53:46,325 [DEBUG] osint_suite - Añadida relación email_1 -> leak_1: aparece en
+2025-10-15 15:53:46,325 [ERROR] osint_suite - Error guardando grafo: 'NoneType' object has no attribute 'render'
+Traceback (most recent call last):
+  File "C:\Users\Ascii\PycharmProjects\ppf\modules\graph\builder.py", line 32, in save
+    self.net.show(path)
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\pyvis\network.py", line 546, in show
+    self.write_html(name, open_browser=False,notebook=True)
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\pyvis\network.py", line 515, in write_html
+    self.html = self.generate_html(notebook=notebook)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\pyvis\network.py", line 479, in generate_html
+    self.html = template.render(height=height,
+                ^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'render'
+2025-10-15 15:56:10,197 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:56:10,197 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-15 15:56:10,252 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-15 15:56:11,502 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:56:14,229 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:56:14,936 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:56:15,001 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 15:56:15,005 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 15:56:15,275 [INFO] osint_suite - Login exitoso: msantander
+2025-10-15 15:56:15,276 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-15 15:56:15,330 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 15:56:33,699 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 16:09:21,555 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 16:09:21,555 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-15 16:09:21,612 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-15 16:09:22,871 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 16:12:58,229 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 16:12:59,291 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 16:12:59,381 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 16:12:59,384 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 16:12:59,650 [INFO] osint_suite - Login exitoso: msantander
+2025-10-15 16:12:59,651 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-15 16:12:59,699 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 16:13:17,638 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 16:13:30,741 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 16:13:38,975 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 16:18:06,601 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 16:26:04,716 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 16:26:04,716 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-15 16:26:04,773 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-15 16:26:06,335 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 16:26:11,131 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 16:26:11,536 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 16:26:11,616 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 16:26:11,617 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 16:26:11,862 [INFO] osint_suite - Login exitoso: msantander
+2025-10-15 16:26:11,863 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-15 16:26:11,929 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 16:29:25,472 [DEBUG] osint_suite - [msantander] generando dorks para: msander1101@gmail.com
+2025-10-15 16:29:25,472 [ERROR] osint_suite - Excepción en dorks_ui.run(msantander, msander1101@gmail.com): run() got an unexpected keyword argument 'depth'
+Traceback (most recent call last):
+  File "C:\Users\Ascii\PycharmProjects\ppf\ui\modules\dorks_ui.py", line 40, in run
+    result = dorks_base.run(query.strip(), depth=profundidad.lower())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: run() got an unexpected keyword argument 'depth'
+2025-10-15 16:29:36,035 [DEBUG] osint_suite - [msantander] generando dorks para: msander1101@gmail.com
+2025-10-15 16:29:36,036 [ERROR] osint_suite - Excepción en dorks_ui.run(msantander, msander1101@gmail.com): run() got an unexpected keyword argument 'depth'
+Traceback (most recent call last):
+  File "C:\Users\Ascii\PycharmProjects\ppf\ui\modules\dorks_ui.py", line 40, in run
+    result = dorks_base.run(query.strip(), depth=profundidad.lower())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: run() got an unexpected keyword argument 'depth'
+2025-10-15 16:29:39,936 [DEBUG] osint_suite - [msantander] generando dorks para: msander1101@gmail.com
+2025-10-15 16:29:39,936 [ERROR] osint_suite - Excepción en dorks_ui.run(msantander, msander1101@gmail.com): run() got an unexpected keyword argument 'depth'
+Traceback (most recent call last):
+  File "C:\Users\Ascii\PycharmProjects\ppf\ui\modules\dorks_ui.py", line 40, in run
+    result = dorks_base.run(query.strip(), depth=profundidad.lower())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: run() got an unexpected keyword argument 'depth'
+2025-10-15 16:54:19,565 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 16:54:19,565 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-15 16:54:19,620 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-15 16:54:20,910 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 16:54:23,970 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 16:54:24,041 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 16:54:24,046 [WARNING] osint_suite - Campos de login vacíos.
+2025-10-15 16:54:25,481 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 16:54:25,580 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 16:54:25,586 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 16:54:25,593 [ERROR] osint_suite - Error en login para usuario 'msantander': Mapper 'Mapper[SearchLog(searchlog)]' has no property 'user'.  If this property was indicated from other mappers or configure events, ensure registry.configure() has been called.
+Traceback (most recent call last):
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2522, in get_property
+    return self._props[key]
+           ~~~~~~~~~~~^^^^^
+KeyError: 'user'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ascii\PycharmProjects\ppf\core\auth.py", line 28, in login_user
+    user = session.exec(select(User).where(User.username == username)).first()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlmodel\orm\session.py", line 83, in exec
+    results = super().execute(
+              ^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1633, in _execute_clauseelement
+    compiled_sql, extracted_params, cache_hit = elem._compile_w_cache(
+                                                ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 715, in _compile_w_cache
+    compiled_sql = self._compiler(
+                   ^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 323, in _compiler
+    return dialect.statement_compiler(dialect, self, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 1446, in __init__
+    Compiled.__init__(self, dialect, statement, **kwargs)
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 886, in __init__
+    self.string = self.process(self.statement, **compile_kwargs)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 932, in process
+    return obj._compiler_dispatch(self, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\visitors.py", line 138, in _compiler_dispatch
+    return meth(self, **kw)  # type: ignore  # noqa: E501
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 4781, in visit_select
+    compile_state = select_stmt._compile_state_factory(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\base.py", line 701, in create_for_statement
+    return klass.create_for_statement(statement, compiler, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 447, in create_for_statement
+    return cls._create_orm_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 1175, in _create_orm_context
+    _QueryEntity.to_compile_state(
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 2628, in to_compile_state
+    _MapperEntity(
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 2708, in __init__
+    entity._post_inspect
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 1338, in __get__
+    obj.__dict__[self.__name__] = result = self.fget(obj)
+                                           ^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2724, in _post_inspect
+    self._check_configure()
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2401, in _check_configure
+    _configure_registries({self.registry}, cascade=True)
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 4218, in _configure_registries
+    _do_configure_registries(registries, cascade)
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 4259, in _do_configure_registries
+    mapper._post_configure_properties()
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2418, in _post_configure_properties
+    prop.init()
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\interfaces.py", line 595, in init
+    self.do_init()
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\relationships.py", line 1660, in do_init
+    self._generate_backref()
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\relationships.py", line 2144, in _generate_backref
+    self._add_reverse_property(self.back_populates)
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\relationships.py", line 1591, in _add_reverse_property
+    other = self.mapper.get_property(key, _configure_mappers=False)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2524, in get_property
+    raise sa_exc.InvalidRequestError(
+sqlalchemy.exc.InvalidRequestError: Mapper 'Mapper[SearchLog(searchlog)]' has no property 'user'.  If this property was indicated from other mappers or configure events, ensure registry.configure() has been called.
+2025-10-15 16:54:25,626 [WARNING] osint_suite - Intento de login fallido: msantander
+2025-10-15 16:54:32,706 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 16:54:39,429 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 16:54:42,359 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 16:54:42,365 [DEBUG] osint_suite - Intentando registrar usuario: msantander
+2025-10-15 16:54:42,368 [ERROR] osint_suite - Error registrando usuario 'msantander': One or more mappers failed to initialize - can't proceed with initialization of other mappers. Triggering mapper: 'Mapper[User(user)]'. Original exception was: Mapper 'Mapper[SearchLog(searchlog)]' has no property 'user'.  If this property was indicated from other mappers or configure events, ensure registry.configure() has been called.
+Traceback (most recent call last):
+  File "C:\Users\Ascii\PycharmProjects\ppf\core\auth.py", line 10, in register_user
+    existing = session.exec(select(User).where(User.username == username)).first()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlmodel\orm\session.py", line 83, in exec
+    results = super().execute(
+              ^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1633, in _execute_clauseelement
+    compiled_sql, extracted_params, cache_hit = elem._compile_w_cache(
+                                                ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 715, in _compile_w_cache
+    compiled_sql = self._compiler(
+                   ^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 323, in _compiler
+    return dialect.statement_compiler(dialect, self, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 1446, in __init__
+    Compiled.__init__(self, dialect, statement, **kwargs)
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 886, in __init__
+    self.string = self.process(self.statement, **compile_kwargs)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 932, in process
+    return obj._compiler_dispatch(self, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\visitors.py", line 138, in _compiler_dispatch
+    return meth(self, **kw)  # type: ignore  # noqa: E501
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 4781, in visit_select
+    compile_state = select_stmt._compile_state_factory(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\base.py", line 701, in create_for_statement
+    return klass.create_for_statement(statement, compiler, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 447, in create_for_statement
+    return cls._create_orm_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 1175, in _create_orm_context
+    _QueryEntity.to_compile_state(
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 2628, in to_compile_state
+    _MapperEntity(
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 2708, in __init__
+    entity._post_inspect
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 1338, in __get__
+    obj.__dict__[self.__name__] = result = self.fget(obj)
+                                           ^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2724, in _post_inspect
+    self._check_configure()
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2401, in _check_configure
+    _configure_registries({self.registry}, cascade=True)
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 4218, in _configure_registries
+    _do_configure_registries(registries, cascade)
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 4255, in _do_configure_registries
+    raise e
+sqlalchemy.exc.InvalidRequestError: One or more mappers failed to initialize - can't proceed with initialization of other mappers. Triggering mapper: 'Mapper[User(user)]'. Original exception was: Mapper 'Mapper[SearchLog(searchlog)]' has no property 'user'.  If this property was indicated from other mappers or configure events, ensure registry.configure() has been called.
+2025-10-15 16:54:46,302 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 16:54:46,305 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 16:54:46,306 [ERROR] osint_suite - Error en login para usuario 'msantander': One or more mappers failed to initialize - can't proceed with initialization of other mappers. Triggering mapper: 'Mapper[User(user)]'. Original exception was: Mapper 'Mapper[SearchLog(searchlog)]' has no property 'user'.  If this property was indicated from other mappers or configure events, ensure registry.configure() has been called.
+Traceback (most recent call last):
+  File "C:\Users\Ascii\PycharmProjects\ppf\core\auth.py", line 28, in login_user
+    user = session.exec(select(User).where(User.username == username)).first()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlmodel\orm\session.py", line 83, in exec
+    results = super().execute(
+              ^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1633, in _execute_clauseelement
+    compiled_sql, extracted_params, cache_hit = elem._compile_w_cache(
+                                                ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 715, in _compile_w_cache
+    compiled_sql = self._compiler(
+                   ^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 323, in _compiler
+    return dialect.statement_compiler(dialect, self, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 1446, in __init__
+    Compiled.__init__(self, dialect, statement, **kwargs)
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 886, in __init__
+    self.string = self.process(self.statement, **compile_kwargs)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 932, in process
+    return obj._compiler_dispatch(self, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\visitors.py", line 138, in _compiler_dispatch
+    return meth(self, **kw)  # type: ignore  # noqa: E501
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 4781, in visit_select
+    compile_state = select_stmt._compile_state_factory(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\base.py", line 701, in create_for_statement
+    return klass.create_for_statement(statement, compiler, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 447, in create_for_statement
+    return cls._create_orm_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 1175, in _create_orm_context
+    _QueryEntity.to_compile_state(
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 2628, in to_compile_state
+    _MapperEntity(
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 2708, in __init__
+    entity._post_inspect
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 1338, in __get__
+    obj.__dict__[self.__name__] = result = self.fget(obj)
+                                           ^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2724, in _post_inspect
+    self._check_configure()
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2401, in _check_configure
+    _configure_registries({self.registry}, cascade=True)
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 4218, in _configure_registries
+    _do_configure_registries(registries, cascade)
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 4255, in _do_configure_registries
+    raise e
+sqlalchemy.exc.InvalidRequestError: One or more mappers failed to initialize - can't proceed with initialization of other mappers. Triggering mapper: 'Mapper[User(user)]'. Original exception was: Mapper 'Mapper[SearchLog(searchlog)]' has no property 'user'.  If this property was indicated from other mappers or configure events, ensure registry.configure() has been called.
+2025-10-15 16:54:46,314 [WARNING] osint_suite - Intento de login fallido: msantander
+2025-10-15 16:54:51,880 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 16:54:51,886 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 16:54:51,887 [ERROR] osint_suite - Error en login para usuario 'msantander': One or more mappers failed to initialize - can't proceed with initialization of other mappers. Triggering mapper: 'Mapper[User(user)]'. Original exception was: Mapper 'Mapper[SearchLog(searchlog)]' has no property 'user'.  If this property was indicated from other mappers or configure events, ensure registry.configure() has been called.
+Traceback (most recent call last):
+  File "C:\Users\Ascii\PycharmProjects\ppf\core\auth.py", line 28, in login_user
+    user = session.exec(select(User).where(User.username == username)).first()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlmodel\orm\session.py", line 83, in exec
+    results = super().execute(
+              ^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1633, in _execute_clauseelement
+    compiled_sql, extracted_params, cache_hit = elem._compile_w_cache(
+                                                ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 715, in _compile_w_cache
+    compiled_sql = self._compiler(
+                   ^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 323, in _compiler
+    return dialect.statement_compiler(dialect, self, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 1446, in __init__
+    Compiled.__init__(self, dialect, statement, **kwargs)
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 886, in __init__
+    self.string = self.process(self.statement, **compile_kwargs)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 932, in process
+    return obj._compiler_dispatch(self, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\visitors.py", line 138, in _compiler_dispatch
+    return meth(self, **kw)  # type: ignore  # noqa: E501
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\compiler.py", line 4781, in visit_select
+    compile_state = select_stmt._compile_state_factory(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\base.py", line 701, in create_for_statement
+    return klass.create_for_statement(statement, compiler, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 447, in create_for_statement
+    return cls._create_orm_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 1175, in _create_orm_context
+    _QueryEntity.to_compile_state(
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 2628, in to_compile_state
+    _MapperEntity(
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 2708, in __init__
+    entity._post_inspect
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 1338, in __get__
+    obj.__dict__[self.__name__] = result = self.fget(obj)
+                                           ^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2724, in _post_inspect
+    self._check_configure()
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 2401, in _check_configure
+    _configure_registries({self.registry}, cascade=True)
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 4218, in _configure_registries
+    _do_configure_registries(registries, cascade)
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\mapper.py", line 4255, in _do_configure_registries
+    raise e
+sqlalchemy.exc.InvalidRequestError: One or more mappers failed to initialize - can't proceed with initialization of other mappers. Triggering mapper: 'Mapper[User(user)]'. Original exception was: Mapper 'Mapper[SearchLog(searchlog)]' has no property 'user'.  If this property was indicated from other mappers or configure events, ensure registry.configure() has been called.
+2025-10-15 16:54:51,896 [WARNING] osint_suite - Intento de login fallido: msantander
+2025-10-15 17:03:30,261 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 17:03:30,261 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-15 17:03:30,318 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-15 17:03:31,802 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 17:03:35,072 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 17:03:36,610 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 17:03:37,819 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 17:03:37,824 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 17:03:37,839 [WARNING] osint_suite - Usuario 'msantander' no encontrado.
+2025-10-15 17:03:37,840 [WARNING] osint_suite - Intento de login fallido: msantander
+2025-10-15 17:03:52,505 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 17:03:55,274 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 17:03:56,548 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 17:03:56,553 [DEBUG] osint_suite - Intentando registrar usuario: msantander
+2025-10-15 17:03:56,831 [INFO] osint_suite - Usuario registrado correctamente: msantander
+2025-10-15 17:04:01,870 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 17:04:01,873 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 17:04:02,142 [INFO] osint_suite - Login exitoso: msantander
+2025-10-15 17:04:02,143 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-15 17:04:02,188 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 17:04:39,109 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 17:10:51,868 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 17:10:51,868 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-15 17:10:51,928 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-15 17:10:53,528 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 17:10:58,869 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 17:10:59,669 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 17:10:59,735 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 17:10:59,741 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 17:11:00,023 [INFO] osint_suite - Login exitoso: msantander
+2025-10-15 17:11:00,024 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-15 17:11:00,070 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 17:15:09,011 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 17:15:09,011 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-15 17:15:09,067 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-15 17:15:10,300 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 17:15:14,207 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 17:15:14,673 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 17:15:14,740 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 17:15:14,744 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 17:15:15,020 [INFO] osint_suite - Login exitoso: msantander
+2025-10-15 17:15:15,021 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-15 17:15:15,065 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 17:51:08,739 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 17:51:08,740 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-15 17:51:08,805 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-15 17:51:10,331 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 17:51:13,059 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 17:51:14,515 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 17:51:14,574 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 17:51:14,590 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 17:51:14,910 [INFO] osint_suite - Login exitoso: msantander
+2025-10-15 17:51:14,912 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-15 17:51:14,986 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 17:51:35,108 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 17:54:22,793 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 17:54:22,793 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-15 17:54:22,857 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-15 17:54:25,230 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 17:54:28,472 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 17:54:29,082 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 17:54:29,190 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 17:54:29,197 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 17:54:29,497 [INFO] osint_suite - Login exitoso: msantander
+2025-10-15 17:54:29,498 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-15 17:54:29,568 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 17:54:36,572 [INFO] osint_suite - Relaciones de ejemplo creadas para msantander
+2025-10-15 17:54:38,531 [DEBUG] osint_suite - Generando grafo de relaciones para msantander
+2025-10-15 17:54:38,531 [DEBUG] osint_suite - Inicializando RelationExplorer para usuario msantander
+2025-10-15 17:54:38,538 [DEBUG] osint_suite - Grafo construido con 6 nodos y 5 relaciones.
+2025-10-15 17:54:38,584 [INFO] osint_suite - Grafo de relaciones guardado en data/graphs/relations_msantander.html
+2025-10-15 18:00:43,622 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 18:00:43,622 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-15 18:00:43,680 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-15 18:00:45,178 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 18:00:52,857 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 18:00:52,942 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 18:00:52,946 [WARNING] osint_suite - Campos de login vacíos.
+2025-10-15 18:00:55,377 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 18:00:55,443 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 18:00:55,447 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 18:00:55,720 [INFO] osint_suite - Login exitoso: msantander
+2025-10-15 18:00:55,721 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-15 18:00:55,765 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 18:01:14,710 [INFO] osint_suite - Simulación completada para dork 'site:pastebin.com "contraseña"' — 2 resultados.
+2025-10-15 18:01:14,759 [DEBUG] osint_suite - Registro de búsqueda guardado para msantander
+2025-10-15 18:01:14,793 [DEBUG] osint_suite - Relación añadida automáticamente: user:msantander -> email:msantander@example.com (usa)
+2025-10-15 18:01:14,822 [DEBUG] osint_suite - Relación añadida automáticamente: email:msantander@example.com -> domain:example.com (pertenece a)
+2025-10-15 18:01:14,851 [DEBUG] osint_suite - Relación añadida automáticamente: email:msantander@example.com -> leak:LeakDB 2023 (aparece en)
+2025-10-15 18:01:14,877 [DEBUG] osint_suite - Relación añadida automáticamente: user:admin -> email:admin@corp.com (usa)
+2025-10-15 18:01:14,904 [DEBUG] osint_suite - Relación añadida automáticamente: email:admin@corp.com -> domain:corp.com (pertenece a)
+2025-10-15 18:01:14,939 [DEBUG] osint_suite - Relación añadida automáticamente: email:admin@corp.com -> leak:ExploitForum Leak (aparece en)
+2025-10-15 18:02:08,377 [DEBUG] osint_suite - Añadido nodo: {'id': 'user_msantander', 'label': 'msantander', 'type': 'user'}
+2025-10-15 18:02:08,382 [ERROR] osint_suite - Error en graph_ui.run para msantander: 'SearchLog' object has no attribute 'type'
+Traceback (most recent call last):
+  File "C:\Users\Ascii\PycharmProjects\ppf\ui\modules\graph_ui.py", line 22, in run
+    builder.build_from_user(username)
+  File "C:\Users\Ascii\PycharmProjects\ppf\modules\graph\builder.py", line 116, in build_from_user
+    if log.type == "hibp":
+       ^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\pydantic\main.py", line 1026, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'SearchLog' object has no attribute 'type'
+2025-10-15 18:13:14,903 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 18:13:14,904 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-15 18:13:15,022 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-15 18:13:16,715 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 18:13:21,013 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 18:13:21,815 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 18:13:21,879 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 18:13:21,883 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 18:13:22,140 [INFO] osint_suite - Login exitoso: msantander
+2025-10-15 18:13:22,141 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-15 18:13:22,185 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 18:13:48,781 [INFO] osint_suite - Simulación completada para dork 'site:pastebin.com "ibercaja"' — 2 resultados.
+2025-10-15 18:13:48,801 [DEBUG] osint_suite - Registro de búsqueda guardado para msantander
+2025-10-15 18:13:48,818 [DEBUG] osint_suite - Relación añadida automáticamente: user:msantander -> email:msantander@example.com (usa)
+2025-10-15 18:13:48,831 [DEBUG] osint_suite - Relación añadida automáticamente: email:msantander@example.com -> domain:example.com (pertenece a)
+2025-10-15 18:13:48,847 [DEBUG] osint_suite - Relación añadida automáticamente: email:msantander@example.com -> leak:LeakDB 2023 (aparece en)
+2025-10-15 18:13:48,862 [DEBUG] osint_suite - Relación añadida automáticamente: user:admin -> email:admin@corp.com (usa)
+2025-10-15 18:13:48,873 [DEBUG] osint_suite - Relación añadida automáticamente: email:admin@corp.com -> domain:corp.com (pertenece a)
+2025-10-15 18:13:48,881 [DEBUG] osint_suite - Relación añadida automáticamente: email:admin@corp.com -> leak:ExploitForum Leak (aparece en)
+2025-10-15 18:14:03,552 [DEBUG] osint_suite - GraphBuilder inicializado
+2025-10-15 18:14:03,555 [DEBUG] osint_suite - Añadido nodo: {'id': 'user_msantander', 'label': 'msantander', 'type': 'user'}
+2025-10-15 18:14:03,559 [DEBUG] osint_suite - Añadido nodo: {'id': 'user:msantander', 'label': 'user:msantander', 'type': 'user'}
+2025-10-15 18:14:03,559 [DEBUG] osint_suite - Añadido nodo: {'id': 'email:msantander@example.com', 'label': 'email:msantander@example.com', 'type': 'email'}
+2025-10-15 18:14:03,559 [DEBUG] osint_suite - Añadida relación user:msantander -> email:msantander@example.com: usa
+2025-10-15 18:14:03,559 [DEBUG] osint_suite - Añadido nodo: {'id': 'domain:example.com', 'label': 'domain:example.com', 'type': 'domain'}
+2025-10-15 18:14:03,559 [DEBUG] osint_suite - Añadida relación email:msantander@example.com -> domain:example.com: pertenece a
+2025-10-15 18:14:03,560 [DEBUG] osint_suite - Añadido nodo: {'id': 'social:twitter.com/msantander', 'label': 'social:twitter.com/msantander', 'type': 'social'}
+2025-10-15 18:14:03,560 [DEBUG] osint_suite - Añadida relación user:msantander -> social:twitter.com/msantander: perfil en
+2025-10-15 18:14:03,560 [DEBUG] osint_suite - Añadido nodo: {'id': 'domain:twitter.com', 'label': 'domain:twitter.com', 'type': 'domain'}
+2025-10-15 18:14:03,561 [DEBUG] osint_suite - Añadida relación social:twitter.com/msantander -> domain:twitter.com: dominio de
+2025-10-15 18:14:03,561 [DEBUG] osint_suite - Añadido nodo: {'id': 'leak:2023_breach', 'label': 'leak:2023_breach', 'type': 'leak'}
+2025-10-15 18:14:03,561 [DEBUG] osint_suite - Añadida relación email:msantander@example.com -> leak:2023_breach: aparece en
+2025-10-15 18:14:03,561 [DEBUG] osint_suite - Añadida relación user:msantander -> email:msantander@example.com: usa
+2025-10-15 18:14:03,561 [DEBUG] osint_suite - Añadida relación email:msantander@example.com -> domain:example.com: pertenece a
+2025-10-15 18:14:03,561 [DEBUG] osint_suite - Añadido nodo: {'id': 'leak:LeakDB 2023', 'label': 'leak:LeakDB 2023', 'type': 'leak'}
+2025-10-15 18:14:03,561 [DEBUG] osint_suite - Añadida relación email:msantander@example.com -> leak:LeakDB 2023: aparece en
+2025-10-15 18:14:03,561 [DEBUG] osint_suite - Añadido nodo: {'id': 'user:admin', 'label': 'user:admin', 'type': 'user'}
+2025-10-15 18:14:03,561 [DEBUG] osint_suite - Añadido nodo: {'id': 'email:admin@corp.com', 'label': 'email:admin@corp.com', 'type': 'email'}
+2025-10-15 18:14:03,561 [DEBUG] osint_suite - Añadida relación user:admin -> email:admin@corp.com: usa
+2025-10-15 18:14:03,561 [DEBUG] osint_suite - Añadido nodo: {'id': 'domain:corp.com', 'label': 'domain:corp.com', 'type': 'domain'}
+2025-10-15 18:14:03,561 [DEBUG] osint_suite - Añadida relación email:admin@corp.com -> domain:corp.com: pertenece a
+2025-10-15 18:14:03,561 [DEBUG] osint_suite - Añadido nodo: {'id': 'leak:ExploitForum Leak', 'label': 'leak:ExploitForum Leak', 'type': 'leak'}
+2025-10-15 18:14:03,562 [DEBUG] osint_suite - Añadida relación email:admin@corp.com -> leak:ExploitForum Leak: aparece en
+2025-10-15 18:14:03,562 [DEBUG] osint_suite - Añadida relación user:msantander -> email:msantander@example.com: usa
+2025-10-15 18:14:03,562 [DEBUG] osint_suite - Añadida relación email:msantander@example.com -> domain:example.com: pertenece a
+2025-10-15 18:14:03,562 [DEBUG] osint_suite - Añadida relación email:msantander@example.com -> leak:LeakDB 2023: aparece en
+2025-10-15 18:14:03,562 [DEBUG] osint_suite - Añadida relación user:admin -> email:admin@corp.com: usa
+2025-10-15 18:14:03,562 [DEBUG] osint_suite - Añadida relación email:admin@corp.com -> domain:corp.com: pertenece a
+2025-10-15 18:14:03,563 [DEBUG] osint_suite - Añadida relación email:admin@corp.com -> leak:ExploitForum Leak: aparece en
+2025-10-15 18:14:03,565 [DEBUG] osint_suite - Añadido nodo: {'id': 'log_1', 'label': 'site:pastebin.com "contraseña"', 'type': 'log'}
+2025-10-15 18:14:03,565 [DEBUG] osint_suite - Añadida relación user_msantander -> log_1: realizó búsqueda
+2025-10-15 18:14:03,565 [DEBUG] osint_suite - Añadida relación log_1 -> email:msantander@example.com: mencionado
+2025-10-15 18:14:03,565 [DEBUG] osint_suite - Añadida relación user_msantander -> email:msantander@example.com: vinculado a
+2025-10-15 18:14:03,565 [DEBUG] osint_suite - Añadida relación log_1 -> email:admin@corp.com: mencionado
+2025-10-15 18:14:03,565 [DEBUG] osint_suite - Añadida relación user_msantander -> email:admin@corp.com: vinculado a
+2025-10-15 18:14:03,565 [DEBUG] osint_suite - Añadido nodo: {'id': 'log_2', 'label': 'site:pastebin.com "ibercaja"', 'type': 'log'}
+2025-10-15 18:14:03,565 [DEBUG] osint_suite - Añadida relación user_msantander -> log_2: realizó búsqueda
+2025-10-15 18:14:03,567 [DEBUG] osint_suite - Añadida relación log_2 -> email:msantander@example.com: mencionado
+2025-10-15 18:14:03,567 [DEBUG] osint_suite - Añadida relación user_msantander -> email:msantander@example.com: vinculado a
+2025-10-15 18:14:03,567 [DEBUG] osint_suite - Añadida relación log_2 -> email:admin@corp.com: mencionado
+2025-10-15 18:14:03,567 [DEBUG] osint_suite - Añadida relación user_msantander -> email:admin@corp.com: vinculado a
+2025-10-15 18:14:03,567 [INFO] osint_suite - Grafo construido para usuario 'msantander' con 14 nodos.
+2025-10-15 18:14:03,583 [INFO] osint_suite - Grafo exportado correctamente a data/graph.html
+2025-10-15 18:16:39,483 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 18:16:39,483 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-15 18:16:39,538 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-15 18:16:40,783 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 18:16:44,903 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 18:16:45,693 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 18:16:45,760 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 18:16:45,763 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 18:16:46,048 [INFO] osint_suite - Login exitoso: msantander
+2025-10-15 18:16:46,049 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-15 18:16:46,103 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 18:17:14,716 [INFO] osint_suite - Búsqueda real registrada para msantander: @ibercaja.es
+2025-10-15 18:17:14,732 [DEBUG] osint_suite - Relación añadida automáticamente: user:msantander -> dork:@ibercaja.es (realizó búsqueda)
+2025-10-15 18:17:48,417 [ERROR] osint_suite - Error al cargar historial de msantander: 'SearchLog' object has no attribute 'type'
+Traceback (most recent call last):
+  File "C:\Users\Ascii\PycharmProjects\ppf\ui\modules\history_ui.py", line 39, in run
+    with st.expander(f"🕓 {log.created_at.strftime('%Y-%m-%d %H:%M:%S')} — {log.type.upper()}"):
+                                                                            ^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\pydantic\main.py", line 1026, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'SearchLog' object has no attribute 'type'
+2025-10-15 18:17:52,567 [DEBUG] osint_suite - GraphBuilder inicializado
+2025-10-15 18:17:52,570 [DEBUG] osint_suite - Añadido nodo: {'id': 'user_msantander', 'label': 'msantander', 'type': 'user'}
+2025-10-15 18:17:52,575 [DEBUG] osint_suite - Añadido nodo: {'id': 'user:msantander', 'label': 'user:msantander', 'type': 'user'}
+2025-10-15 18:17:52,576 [DEBUG] osint_suite - Añadido nodo: {'id': 'email:msantander@example.com', 'label': 'email:msantander@example.com', 'type': 'email'}
+2025-10-15 18:17:52,576 [DEBUG] osint_suite - Añadida relación user:msantander -> email:msantander@example.com: usa
+2025-10-15 18:17:52,576 [DEBUG] osint_suite - Añadido nodo: {'id': 'domain:example.com', 'label': 'domain:example.com', 'type': 'domain'}
+2025-10-15 18:17:52,576 [DEBUG] osint_suite - Añadida relación email:msantander@example.com -> domain:example.com: pertenece a
+2025-10-15 18:17:52,576 [DEBUG] osint_suite - Añadido nodo: {'id': 'social:twitter.com/msantander', 'label': 'social:twitter.com/msantander', 'type': 'social'}
+2025-10-15 18:17:52,576 [DEBUG] osint_suite - Añadida relación user:msantander -> social:twitter.com/msantander: perfil en
+2025-10-15 18:17:52,577 [DEBUG] osint_suite - Añadido nodo: {'id': 'domain:twitter.com', 'label': 'domain:twitter.com', 'type': 'domain'}
+2025-10-15 18:17:52,577 [DEBUG] osint_suite - Añadida relación social:twitter.com/msantander -> domain:twitter.com: dominio de
+2025-10-15 18:17:52,577 [DEBUG] osint_suite - Añadido nodo: {'id': 'leak:2023_breach', 'label': 'leak:2023_breach', 'type': 'leak'}
+2025-10-15 18:17:52,577 [DEBUG] osint_suite - Añadida relación email:msantander@example.com -> leak:2023_breach: aparece en
+2025-10-15 18:17:52,577 [DEBUG] osint_suite - Añadida relación user:msantander -> email:msantander@example.com: usa
+2025-10-15 18:17:52,577 [DEBUG] osint_suite - Añadida relación email:msantander@example.com -> domain:example.com: pertenece a
+2025-10-15 18:17:52,577 [DEBUG] osint_suite - Añadido nodo: {'id': 'leak:LeakDB 2023', 'label': 'leak:LeakDB 2023', 'type': 'leak'}
+2025-10-15 18:17:52,578 [DEBUG] osint_suite - Añadida relación email:msantander@example.com -> leak:LeakDB 2023: aparece en
+2025-10-15 18:17:52,578 [DEBUG] osint_suite - Añadido nodo: {'id': 'user:admin', 'label': 'user:admin', 'type': 'user'}
+2025-10-15 18:17:52,578 [DEBUG] osint_suite - Añadido nodo: {'id': 'email:admin@corp.com', 'label': 'email:admin@corp.com', 'type': 'email'}
+2025-10-15 18:17:52,578 [DEBUG] osint_suite - Añadida relación user:admin -> email:admin@corp.com: usa
+2025-10-15 18:17:52,578 [DEBUG] osint_suite - Añadido nodo: {'id': 'domain:corp.com', 'label': 'domain:corp.com', 'type': 'domain'}
+2025-10-15 18:17:52,578 [DEBUG] osint_suite - Añadida relación email:admin@corp.com -> domain:corp.com: pertenece a
+2025-10-15 18:17:52,579 [DEBUG] osint_suite - Añadido nodo: {'id': 'leak:ExploitForum Leak', 'label': 'leak:ExploitForum Leak', 'type': 'leak'}
+2025-10-15 18:17:52,579 [DEBUG] osint_suite - Añadida relación email:admin@corp.com -> leak:ExploitForum Leak: aparece en
+2025-10-15 18:17:52,579 [DEBUG] osint_suite - Añadida relación user:msantander -> email:msantander@example.com: usa
+2025-10-15 18:17:52,579 [DEBUG] osint_suite - Añadida relación email:msantander@example.com -> domain:example.com: pertenece a
+2025-10-15 18:17:52,579 [DEBUG] osint_suite - Añadida relación email:msantander@example.com -> leak:LeakDB 2023: aparece en
+2025-10-15 18:17:52,579 [DEBUG] osint_suite - Añadida relación user:admin -> email:admin@corp.com: usa
+2025-10-15 18:17:52,579 [DEBUG] osint_suite - Añadida relación email:admin@corp.com -> domain:corp.com: pertenece a
+2025-10-15 18:17:52,579 [DEBUG] osint_suite - Añadida relación email:admin@corp.com -> leak:ExploitForum Leak: aparece en
+2025-10-15 18:17:52,579 [DEBUG] osint_suite - Añadido nodo: {'id': 'dork:@ibercaja.es', 'label': 'dork:@ibercaja.es', 'type': 'dork'}
+2025-10-15 18:17:52,579 [DEBUG] osint_suite - Añadida relación user:msantander -> dork:@ibercaja.es: realizó búsqueda
+2025-10-15 18:17:52,583 [DEBUG] osint_suite - Añadido nodo: {'id': 'log_1', 'label': 'site:pastebin.com "contraseña"', 'type': 'log'}
+2025-10-15 18:17:52,583 [DEBUG] osint_suite - Añadida relación user_msantander -> log_1: realizó búsqueda
+2025-10-15 18:17:52,584 [DEBUG] osint_suite - Añadida relación log_1 -> email:admin@corp.com: mencionado
+2025-10-15 18:17:52,584 [DEBUG] osint_suite - Añadida relación user_msantander -> email:admin@corp.com: vinculado a
+2025-10-15 18:17:52,584 [DEBUG] osint_suite - Añadida relación log_1 -> email:msantander@example.com: mencionado
+2025-10-15 18:17:52,584 [DEBUG] osint_suite - Añadida relación user_msantander -> email:msantander@example.com: vinculado a
+2025-10-15 18:17:52,584 [DEBUG] osint_suite - Añadido nodo: {'id': 'log_2', 'label': 'site:pastebin.com "ibercaja"', 'type': 'log'}
+2025-10-15 18:17:52,584 [DEBUG] osint_suite - Añadida relación user_msantander -> log_2: realizó búsqueda
+2025-10-15 18:17:52,584 [DEBUG] osint_suite - Añadida relación log_2 -> email:admin@corp.com: mencionado
+2025-10-15 18:17:52,585 [DEBUG] osint_suite - Añadida relación user_msantander -> email:admin@corp.com: vinculado a
+2025-10-15 18:17:52,585 [DEBUG] osint_suite - Añadida relación log_2 -> email:msantander@example.com: mencionado
+2025-10-15 18:17:52,585 [DEBUG] osint_suite - Añadida relación user_msantander -> email:msantander@example.com: vinculado a
+2025-10-15 18:17:52,585 [DEBUG] osint_suite - Añadido nodo: {'id': 'log_3', 'label': '@ibercaja.es', 'type': 'log'}
+2025-10-15 18:17:52,585 [DEBUG] osint_suite - Añadida relación user_msantander -> log_3: realizó búsqueda
+2025-10-15 18:17:52,585 [INFO] osint_suite - Grafo construido para usuario 'msantander' con 16 nodos.
+2025-10-15 18:17:52,609 [INFO] osint_suite - Grafo exportado correctamente a data/graph.html
+2025-10-15 18:18:07,084 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 18:18:08,202 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 18:29:31,305 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 18:29:31,305 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-15 18:29:31,370 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-15 18:29:32,805 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 18:29:36,707 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 18:29:37,277 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 18:29:37,337 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 18:29:37,341 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 18:29:37,591 [INFO] osint_suite - Login exitoso: msantander
+2025-10-15 18:29:37,592 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-15 18:29:37,627 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 18:29:55,540 [DEBUG] osint_suite - Bing fallback query: @ibercaja.es
+2025-10-15 18:29:55,548 [DEBUG] urllib3.connectionpool - Starting new HTTPS connection (1): www.bing.com:443
+2025-10-15 18:29:56,177 [DEBUG] urllib3.connectionpool - https://www.bing.com:443 "GET /search?q=%40ibercaja.es&count=10 HTTP/1.1" 200 None
+2025-10-15 18:29:57,243 [INFO] osint_suite - Registro de búsqueda guardado para msantander: @ibercaja.es
+2025-10-15 18:29:57,253 [DEBUG] osint_suite - Relación añadida automáticamente: user:msantander -> dork:@ibercaja.es (realizó búsqueda)
+2025-10-15 18:30:26,764 [ERROR] osint_suite - Error ejecutando search_dork (engine=serpapi): SERPAPI_API_KEY no configurada
+Traceback (most recent call last):
+  File "C:\Users\Ascii\PycharmProjects\ppf\modules\search\google_dork.py", line 151, in search_dork
+    return _search_serpapi(query, num=max_results)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\modules\search\google_dork.py", line 51, in _search_serpapi
+    raise RuntimeError("SERPAPI_API_KEY no configurada")
+RuntimeError: SERPAPI_API_KEY no configurada
+2025-10-15 18:30:26,765 [INFO] osint_suite - SerpApi falló, intentando fallback a Bing
+2025-10-15 18:30:26,765 [DEBUG] osint_suite - Bing fallback query: ibercaja
+2025-10-15 18:30:26,767 [DEBUG] urllib3.connectionpool - Starting new HTTPS connection (1): www.bing.com:443
+2025-10-15 18:30:27,442 [DEBUG] urllib3.connectionpool - https://www.bing.com:443 "GET /search?q=ibercaja&count=10 HTTP/1.1" 200 None
+2025-10-15 18:30:28,515 [INFO] osint_suite - Registro de búsqueda guardado para msantander: ibercaja
+2025-10-15 18:30:28,523 [DEBUG] osint_suite - Relación añadida automáticamente: user:msantander -> dork:ibercaja (realizó búsqueda)
+2025-10-15 18:53:07,361 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 18:53:07,361 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-15 18:53:07,418 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-15 18:53:08,560 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 18:53:12,955 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 18:53:13,277 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 18:53:13,591 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 18:53:13,595 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 18:53:13,876 [INFO] osint_suite - Login exitoso: msantander
+2025-10-15 18:53:13,877 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-15 18:53:13,945 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 18:53:24,660 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 18:53:24,660 [DEBUG] osint_suite - Usuario ya logueado: msantander, redirigiendo al dashboard.
+2025-10-15 18:53:50,552 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 18:53:59,449 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 18:54:08,699 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 19:05:01,457 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 19:05:01,457 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-15 19:05:01,521 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-15 19:05:03,147 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 19:05:06,971 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 19:05:07,905 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 19:05:07,979 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 19:05:07,984 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 19:05:08,272 [INFO] osint_suite - Login exitoso: msantander
+2025-10-15 19:05:08,273 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-15 19:05:08,330 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 19:05:12,824 [WARNING] osint_suite - APP_ENCRYPTION_KEY no configurada. Las settings no se cifrarán correctamente.
+2025-10-15 19:05:19,380 [DEBUG] osint_suite - dorks_ui: No hay SerpApi key para usuario msantander (usar fallback).
+2025-10-15 19:05:19,381 [DEBUG] osint_suite - [google_dork] Bing fallback query: ibercaja
+2025-10-15 19:05:19,388 [DEBUG] urllib3.connectionpool - Starting new HTTPS connection (1): www.bing.com:443
+2025-10-15 19:05:20,426 [DEBUG] urllib3.connectionpool - https://www.bing.com:443 "GET /search?q=ibercaja&count=10 HTTP/1.1" 200 None
+2025-10-15 19:05:21,497 [INFO] osint_suite - Registro de búsqueda guardado para msantander: ibercaja
+2025-10-15 19:05:21,510 [DEBUG] osint_suite - Relación añadida automáticamente: user:msantander -> dork:ibercaja (realizó búsqueda)
+2025-10-15 19:05:29,887 [ERROR] osint_suite - Error al cargar historial de msantander: 'SearchLog' object has no attribute 'type'
+Traceback (most recent call last):
+  File "C:\Users\Ascii\PycharmProjects\ppf\ui\modules\history_ui.py", line 39, in run
+    with st.expander(f"🕓 {log.created_at.strftime('%Y-%m-%d %H:%M:%S')} — {log.type.upper()}"):
+                                                                            ^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\pydantic\main.py", line 1026, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'SearchLog' object has no attribute 'type'
+2025-10-15 19:05:35,909 [DEBUG] osint_suite - Inicializando RelationExplorer para usuario msantander
+2025-10-15 19:05:38,356 [DEBUG] osint_suite - Inicializando RelationExplorer para usuario msantander
+2025-10-15 20:17:29,110 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 20:17:29,111 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-15 20:17:29,166 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-15 20:17:30,381 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 20:17:38,984 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 20:17:44,448 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 20:17:44,551 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 20:17:44,561 [DEBUG] osint_suite - Intentando registrar usuario: msantander
+2025-10-15 20:17:45,014 [INFO] osint_suite - Usuario registrado correctamente: msantander
+2025-10-15 20:17:52,308 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 20:17:53,265 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 20:17:53,342 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 20:17:53,346 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 20:17:53,617 [INFO] osint_suite - Login exitoso: msantander
+2025-10-15 20:17:53,618 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-15 20:17:53,662 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 20:18:06,252 [DEBUG] osint_suite - Inicializando RelationExplorer para usuario msantander
+2025-10-15 21:24:57,122 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 21:24:57,122 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-15 21:24:57,176 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-15 21:24:58,567 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 21:25:01,087 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 21:25:01,651 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 21:25:01,714 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 21:25:01,717 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 21:25:01,961 [INFO] osint_suite - Login exitoso: msantander
+2025-10-15 21:25:01,962 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-15 21:25:02,006 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-15 21:25:03,543 [WARNING] osint_suite - APP_ENCRYPTION_KEY no configurada. Los valores se almacenarán en claro (no recomendado).
+2025-10-15 21:28:58,527 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 21:28:58,527 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-15 21:28:58,581 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-15 21:28:59,898 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 21:29:06,781 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 21:29:06,875 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 21:29:06,882 [WARNING] osint_suite - Campos de login vacíos.
+2025-10-15 21:29:09,418 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 21:29:09,503 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 21:29:09,507 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 21:29:09,523 [WARNING] osint_suite - Usuario 'msantander' no encontrado.
+2025-10-15 21:29:09,523 [WARNING] osint_suite - Intento de login fallido: msantander
+2025-10-15 21:29:11,913 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 21:29:11,919 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 21:29:11,920 [WARNING] osint_suite - Usuario 'msantander' no encontrado.
+2025-10-15 21:29:11,921 [WARNING] osint_suite - Intento de login fallido: msantander
+2025-10-15 21:29:18,104 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 21:29:23,124 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 21:29:23,207 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 21:29:23,215 [DEBUG] osint_suite - Intentando registrar usuario: msantander
+2025-10-15 21:29:23,497 [INFO] osint_suite - Usuario registrado correctamente: msantander
+2025-10-15 21:29:26,677 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 21:29:26,681 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 21:29:26,941 [INFO] osint_suite - Login exitoso: msantander
+2025-10-15 21:29:26,942 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-15 21:29:27,018 [WARNING] osint_suite - APP_ENCRYPTION_KEY no configurada. Los valores se almacenarán en claro (no recomendado).
+2025-10-15 21:32:52,473 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 21:32:52,473 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-15 21:32:52,527 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-15 21:32:53,782 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 21:32:56,506 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 21:32:57,153 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 21:32:57,216 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 21:32:57,219 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 21:32:57,466 [INFO] osint_suite - Login exitoso: msantander
+2025-10-15 21:32:57,467 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-15 21:39:22,862 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 21:39:22,862 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-15 21:39:22,915 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-15 21:39:24,189 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 21:39:26,639 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 21:39:27,226 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 21:39:27,298 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 21:39:27,303 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 21:39:27,550 [INFO] osint_suite - Login exitoso: msantander
+2025-10-15 21:39:27,551 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-15 22:50:34,281 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 22:50:34,281 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-15 22:50:34,344 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-15 22:50:39,037 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 22:50:51,510 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 22:50:52,117 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 22:50:52,225 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 22:50:52,229 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 22:50:52,496 [INFO] osint_suite - Login exitoso: msantander
+2025-10-15 22:50:52,497 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-15 22:51:28,469 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 22:51:28,469 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-15 22:51:28,524 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-15 22:51:29,586 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 22:51:33,172 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 22:51:34,108 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 22:51:34,182 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 22:51:34,186 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 22:51:34,435 [INFO] osint_suite - Login exitoso: msantander
+2025-10-15 22:51:34,437 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-15 22:53:39,478 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 22:53:39,478 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-15 22:53:39,531 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-15 22:53:40,587 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 22:53:43,209 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 22:53:43,771 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 22:53:43,848 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-15 22:53:43,851 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-15 22:53:44,093 [INFO] osint_suite - Login exitoso: msantander
+2025-10-15 22:53:44,093 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-16 18:29:26,728 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 18:29:26,728 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-16 18:29:26,794 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-16 18:29:27,962 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 18:29:34,694 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 18:29:34,747 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 18:29:34,749 [WARNING] osint_suite - Campos de login vacíos.
+2025-10-16 18:29:36,852 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 18:29:37,186 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 18:29:37,189 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-16 18:29:37,436 [INFO] osint_suite - Login exitoso: msantander
+2025-10-16 18:29:37,436 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-16 18:29:37,751 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-16 18:46:07,844 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 18:46:07,845 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-16 18:46:07,899 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-16 18:46:09,427 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 18:46:14,323 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 18:46:14,397 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 18:46:14,402 [WARNING] osint_suite - Campos de login vacíos.
+2025-10-16 18:46:16,056 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 18:46:16,115 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 18:46:16,118 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-16 18:46:16,398 [INFO] osint_suite - Login exitoso: msantander
+2025-10-16 18:46:16,399 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-16 18:46:16,743 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-16 18:46:28,335 [ERROR] osint_suite - Error al cargar historial de msantander: (sqlite3.OperationalError) no such column: searchlog.type
+[SQL: SELECT searchlog.id, searchlog."query", searchlog.result, searchlog.type, searchlog.created_at, searchlog.user_id 
+FROM searchlog 
+WHERE searchlog.user_id = ? ORDER BY searchlog.created_at DESC]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 951, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: searchlog.type
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ascii\PycharmProjects\ppf\ui\modules\history_ui.py", line 26, in run
+    logs = session.exec(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlmodel\orm\session.py", line 83, in exec
+    results = super().execute(
+              ^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2351, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 951, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: searchlog.type
+[SQL: SELECT searchlog.id, searchlog."query", searchlog.result, searchlog.type, searchlog.created_at, searchlog.user_id 
+FROM searchlog 
+WHERE searchlog.user_id = ? ORDER BY searchlog.created_at DESC]
+[parameters: (1,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-10-16 18:46:31,588 [DEBUG] osint_suite - Inicializando RelationExplorer para usuario msantander
+2025-10-16 18:46:37,986 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-16 18:46:51,595 [DEBUG] osint_suite - [google_dork] Bing fallback query: ibercaja.es
+2025-10-16 18:46:51,603 [DEBUG] urllib3.connectionpool - Starting new HTTPS connection (1): www.bing.com:443
+2025-10-16 18:46:52,280 [DEBUG] urllib3.connectionpool - https://www.bing.com:443 "GET /search?q=ibercaja.es&count=10 HTTP/1.1" 200 None
+2025-10-16 18:46:53,353 [ERROR] osint_suite - Error ejecutando búsqueda dork 'ibercaja.es': (sqlite3.OperationalError) table searchlog has no column named type
+[SQL: INSERT INTO searchlog ("query", result, type, created_at, user_id) VALUES (?, ?, ?, ?, ?)]
+[parameters: ('ibercaja.es', '[]', 'dork', '2025-10-16 16:46:53.350628', 1)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Traceback (most recent call last):
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 951, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: table searchlog has no column named type
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Ascii\PycharmProjects\ppf\ui\modules\dorks_ui.py", line 78, in run
+    session.commit()
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 1311, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 1286, in _prepare_impl
+    self.session.flush()
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4331, in flush
+    self._flush(objects)
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4466, in _flush
+    with util.safe_reraise():
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4427, in _flush
+    flush_context.execute()
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\sqlalchemy\engine\default.py", line 951, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) table searchlog has no column named type
+[SQL: INSERT INTO searchlog ("query", result, type, created_at, user_id) VALUES (?, ?, ?, ?, ?)]
+[parameters: ('ibercaja.es', '[]', 'dork', '2025-10-16 16:46:53.350628', 1)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-10-16 18:51:59,161 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 18:51:59,161 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-16 18:51:59,215 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-16 18:52:00,379 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 18:52:14,866 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 18:52:20,320 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 18:52:20,395 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 18:52:20,403 [DEBUG] osint_suite - Intentando registrar usuario: msantander
+2025-10-16 18:52:20,706 [INFO] osint_suite - Usuario registrado correctamente: msantander
+2025-10-16 18:52:24,146 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 18:52:24,929 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 18:52:25,396 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 18:52:25,402 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-16 18:52:25,672 [INFO] osint_suite - Login exitoso: msantander
+2025-10-16 18:52:25,673 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-16 18:52:25,954 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-16 18:52:44,888 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-16 18:52:53,901 [DEBUG] osint_suite - [google_dork] Bing fallback query: ibercaja.es
+2025-10-16 18:52:53,906 [DEBUG] urllib3.connectionpool - Starting new HTTPS connection (1): www.bing.com:443
+2025-10-16 18:52:54,583 [DEBUG] urllib3.connectionpool - https://www.bing.com:443 "GET /search?q=ibercaja.es&count=10 HTTP/1.1" 200 None
+2025-10-16 18:52:55,634 [INFO] osint_suite - Búsqueda guardada para msantander: ibercaja.es
+2025-10-16 18:52:55,643 [DEBUG] osint_suite - Relación añadida automáticamente: user:msantander -> dork:ibercaja.es (realizó búsqueda)
+2025-10-16 18:53:29,488 [ERROR] osint_suite - [google_dork] Error ejecutando search_dork (engine=serpapi): SERPAPI API key no disponible
+Traceback (most recent call last):
+  File "C:\Users\Ascii\PycharmProjects\ppf\modules\search\google_dork.py", line 139, in search_dork
+    return _search_serpapi(query, num=max_results, api_key=api_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\modules\search\google_dork.py", line 51, in _search_serpapi
+    raise RuntimeError("SERPAPI API key no disponible")
+RuntimeError: SERPAPI API key no disponible
+2025-10-16 18:53:29,489 [INFO] osint_suite - [google_dork] SerpApi falló, intentando fallback a Bing
+2025-10-16 18:53:29,489 [DEBUG] osint_suite - [google_dork] Bing fallback query: ibercaja.es
+2025-10-16 18:53:29,491 [DEBUG] urllib3.connectionpool - Starting new HTTPS connection (1): www.bing.com:443
+2025-10-16 18:53:30,101 [DEBUG] urllib3.connectionpool - https://www.bing.com:443 "GET /search?q=ibercaja.es&count=10 HTTP/1.1" 200 None
+2025-10-16 18:53:31,802 [INFO] osint_suite - Búsqueda guardada para msantander: ibercaja.es
+2025-10-16 18:53:31,811 [DEBUG] osint_suite - Relación añadida automáticamente: user:msantander -> dork:ibercaja.es (realizó búsqueda)
+2025-10-16 19:05:40,105 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 19:05:40,106 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-16 19:05:40,161 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-16 19:05:41,649 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 19:06:07,303 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 19:06:07,896 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 19:06:07,981 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 19:06:07,984 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-16 19:06:08,239 [INFO] osint_suite - Login exitoso: msantander
+2025-10-16 19:06:08,240 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-16 19:06:08,680 [WARNING] osint_suite - APP_ENCRYPTION_KEY no configurada. Los valores se almacenarán en claro (no recomendado).
+2025-10-16 19:06:08,686 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-16 19:06:46,541 [DEBUG] osint_suite - [google_dork] Bing fallback query: ibercaja.es
+2025-10-16 19:06:46,549 [DEBUG] urllib3.connectionpool - Starting new HTTPS connection (1): www.bing.com:443
+2025-10-16 19:06:47,412 [DEBUG] urllib3.connectionpool - https://www.bing.com:443 "GET /search?q=ibercaja.es&count=20 HTTP/1.1" 200 None
+2025-10-16 19:06:48,522 [INFO] osint_suite - Búsqueda guardada para msantander: ibercaja.es
+2025-10-16 19:06:48,531 [DEBUG] osint_suite - Relación añadida automáticamente: user:msantander -> dork:ibercaja.es (realizó búsqueda)
+2025-10-16 19:07:15,436 [ERROR] osint_suite - [google_dork] Error ejecutando search_dork (engine=serpapi): SERPAPI API key no disponible
+Traceback (most recent call last):
+  File "C:\Users\Ascii\PycharmProjects\ppf\modules\search\google_dork.py", line 139, in search_dork
+    return _search_serpapi(query, num=max_results, api_key=api_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\modules\search\google_dork.py", line 51, in _search_serpapi
+    raise RuntimeError("SERPAPI API key no disponible")
+RuntimeError: SERPAPI API key no disponible
+2025-10-16 19:07:15,438 [INFO] osint_suite - [google_dork] SerpApi falló, intentando fallback a Bing
+2025-10-16 19:07:15,438 [DEBUG] osint_suite - [google_dork] Bing fallback query: ibercaja.es
+2025-10-16 19:07:15,441 [DEBUG] urllib3.connectionpool - Starting new HTTPS connection (1): www.bing.com:443
+2025-10-16 19:07:16,062 [DEBUG] urllib3.connectionpool - https://www.bing.com:443 "GET /search?q=ibercaja.es&count=20 HTTP/1.1" 200 None
+2025-10-16 19:07:17,155 [INFO] osint_suite - Búsqueda guardada para msantander: ibercaja.es
+2025-10-16 19:07:17,165 [DEBUG] osint_suite - Relación añadida automáticamente: user:msantander -> dork:ibercaja.es (realizó búsqueda)
+2025-10-16 19:09:41,435 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 19:09:41,435 [DEBUG] osint_suite - Usuario ya logueado: msantander, redirigiendo al dashboard.
+2025-10-16 19:09:42,775 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-16 19:13:00,209 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 19:13:00,210 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-16 19:13:00,278 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-16 19:13:01,397 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 19:13:05,536 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 19:13:06,100 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 19:13:06,571 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 19:13:06,576 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-16 19:13:06,848 [INFO] osint_suite - Login exitoso: msantander
+2025-10-16 19:13:06,849 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-16 19:13:07,199 [WARNING] osint_suite - APP_ENCRYPTION_KEY no configurada. Los valores se almacenarán en claro (no recomendado).
+2025-10-16 19:13:07,204 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-16 19:16:24,360 [WARNING] osint_suite - APP_ENCRYPTION_KEY no configurada: almacenando en claro
+2025-10-16 19:16:24,375 [INFO] osint_suite - Setting 'serpapi' guardado para usuario msantander
+2025-10-16 19:16:57,064 [DEBUG] osint_suite - [google_dork] SerpApi query: site:pastebin.com "ibercaja.es"
+2025-10-16 19:16:57,070 [DEBUG] urllib3.connectionpool - Starting new HTTPS connection (1): serpapi.com:443
+2025-10-16 19:16:58,708 [DEBUG] urllib3.connectionpool - https://serpapi.com:443 "GET /search.json?engine=google&q=site%3Apastebin.com+%22ibercaja.es%22&num=10&api_key=2c76c945bdd511de7b4c17065ea75ecaea246b9a3b389680a18d63df274936f6 HTTP/1.1" 200 None
+2025-10-16 19:16:58,723 [INFO] osint_suite - Búsqueda guardada para msantander: site:pastebin.com "ibercaja.es"
+2025-10-16 19:16:58,732 [DEBUG] osint_suite - Relación añadida automáticamente: user:msantander -> dork:site:pastebin.com "ibercaja.es" (realizó búsqueda)
+2025-10-16 19:24:08,058 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 19:24:08,058 [INFO] osint_suite - Arrancando OSINT Suite desde main.py
+2025-10-16 19:24:08,112 [DEBUG] asyncio - Using selector: SelectSelector
+2025-10-16 19:24:09,457 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 19:24:12,698 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 19:24:13,150 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 19:24:13,212 [INFO] osint_suite - Base de datos inicializada correctamente.
+2025-10-16 19:24:13,215 [DEBUG] osint_suite - Intentando login para usuario: msantander
+2025-10-16 19:24:13,467 [INFO] osint_suite - Login exitoso: msantander
+2025-10-16 19:24:13,468 [INFO] osint_suite - Usuario 'msantander' inició sesión correctamente.
+2025-10-16 19:24:13,750 [WARNING] osint_suite - APP_ENCRYPTION_KEY no configurada. Los valores se almacenarán en claro (no recomendado).
+2025-10-16 19:24:13,753 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-16 19:24:43,948 [WARNING] osint_suite - APP_ENCRYPTION_KEY no configurada: almacenando en claro
+2025-10-16 19:24:43,962 [INFO] osint_suite - Setting 'google_api_key' guardado para usuario msantander
+2025-10-16 19:24:43,963 [WARNING] osint_suite - APP_ENCRYPTION_KEY no configurada: almacenando en claro
+2025-10-16 19:24:43,975 [INFO] osint_suite - Setting 'google_cx' guardado para usuario msantander
+2025-10-16 19:24:47,461 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.
+2025-10-16 19:25:06,090 [DEBUG] osint_suite - [google_dork] SerpApi query: "ibercaja.es"
+2025-10-16 19:25:06,096 [DEBUG] urllib3.connectionpool - Starting new HTTPS connection (1): serpapi.com:443
+2025-10-16 19:25:08,234 [DEBUG] urllib3.connectionpool - https://serpapi.com:443 "GET /search.json?engine=google&q=%22ibercaja.es%22&num=10&api_key=2c76c945bdd511de7b4c17065ea75ecaea246b9a3b389680a18d63df274936f6 HTTP/1.1" 200 None
+2025-10-16 19:25:08,249 [INFO] osint_suite - Búsqueda guardada para msantander: "ibercaja.es"
+2025-10-16 19:25:08,258 [DEBUG] osint_suite - Relación añadida automáticamente: user:msantander -> dork:"ibercaja.es" (realizó búsqueda)
+2025-10-16 19:25:08,268 [DEBUG] osint_suite - Relación añadida automáticamente: dork:"ibercaja.es" -> url:https://www.ibercaja.es/ (devuelve)
+2025-10-16 19:25:08,276 [DEBUG] osint_suite - Relación añadida automáticamente: url:https://www.ibercaja.es/ -> domain:www.ibercaja.es (pertenece a)
+2025-10-16 19:25:08,285 [DEBUG] osint_suite - Relación añadida automáticamente: url:https://www.ibercaja.es/ -> meta:title:Ibercaja ≫ Banco online para particulares y empresas | Ibercaja (título)
+2025-10-16 19:25:08,296 [DEBUG] osint_suite - Relación añadida automáticamente: dork:"ibercaja.es" -> url:https://www.ibercaja.com/en/ (devuelve)
+2025-10-16 19:25:08,305 [DEBUG] osint_suite - Relación añadida automáticamente: url:https://www.ibercaja.com/en/ -> domain:www.ibercaja.com (pertenece a)
+2025-10-16 19:25:08,313 [DEBUG] osint_suite - Relación añadida automáticamente: url:https://www.ibercaja.com/en/ -> meta:title:Home - Corporate Website | Ibercaja Bank (título)
+2025-10-16 19:25:08,321 [DEBUG] osint_suite - Relación añadida automáticamente: dork:"ibercaja.es" -> url:https://es.wikipedia.org/wiki/Ibercaja (devuelve)
+2025-10-16 19:25:08,330 [DEBUG] osint_suite - Relación añadida automáticamente: url:https://es.wikipedia.org/wiki/Ibercaja -> domain:es.wikipedia.org (pertenece a)
+2025-10-16 19:25:08,340 [DEBUG] osint_suite - Relación añadida automáticamente: url:https://es.wikipedia.org/wiki/Ibercaja -> meta:title:Ibercaja - Wikipedia, la enciclopedia libre (título)
+2025-10-16 19:25:08,349 [DEBUG] osint_suite - Relación añadida automáticamente: dork:"ibercaja.es" -> url:https://www.fundacionibercaja.es/ (devuelve)
+2025-10-16 19:25:08,357 [DEBUG] osint_suite - Relación añadida automáticamente: url:https://www.fundacionibercaja.es/ -> domain:www.fundacionibercaja.es (pertenece a)
+2025-10-16 19:25:08,369 [DEBUG] osint_suite - Relación añadida automáticamente: url:https://www.fundacionibercaja.es/ -> meta:title:Fundación Ibercaja (título)
+2025-10-16 19:25:08,376 [DEBUG] osint_suite - Relación añadida automáticamente: dork:"ibercaja.es" -> url:https://play.google.com/store/apps/details?id=es.ibercaja.ibercajaapp (devuelve)
+2025-10-16 19:25:08,385 [DEBUG] osint_suite - Relación añadida automáticamente: url:https://play.google.com/store/apps/details?id=es.ibercaja.ibercajaapp -> domain:play.google.com (pertenece a)
+2025-10-16 19:25:08,392 [DEBUG] osint_suite - Relación añadida automáticamente: url:https://play.google.com/store/apps/details?id=es.ibercaja.ibercajaapp -> meta:title:Ibercaja - Apps on Google Play (título)
+2025-10-16 19:25:08,400 [DEBUG] osint_suite - Relación añadida automáticamente: url:https://play.google.com/store/apps/details?id=es.ibercaja.ibercajaapp -> email:idirecto@ibercaja.es (menciona correo)
+2025-10-16 19:25:08,407 [DEBUG] osint_suite - Relación añadida automáticamente: email:idirecto@ibercaja.es -> domain:play.google.com (pertenece a)
+2025-10-16 19:25:08,417 [DEBUG] osint_suite - Relación añadida automáticamente: dork:"ibercaja.es" -> url:https://www.ibercaja.com/detalle-sala-de-prensa/noticias/5747/ (devuelve)
+2025-10-16 19:25:08,424 [DEBUG] osint_suite - Relación añadida automáticamente: url:https://www.ibercaja.com/detalle-sala-de-prensa/noticias/5747/ -> domain:www.ibercaja.com (pertenece a)
+2025-10-16 19:25:08,434 [DEBUG] osint_suite - Relación añadida automáticamente: url:https://www.ibercaja.com/detalle-sala-de-prensa/noticias/5747/ -> meta:title:IBERCAJA ES EL BANCO ESPAÑOL MEJOR VALORADO ... (título)
+2025-10-16 19:25:08,446 [DEBUG] osint_suite - Relación añadida automáticamente: dork:"ibercaja.es" -> url:https://es.linkedin.com/company/ibercaja (devuelve)
+2025-10-16 19:25:08,455 [DEBUG] osint_suite - Relación añadida automáticamente: url:https://es.linkedin.com/company/ibercaja -> domain:es.linkedin.com (pertenece a)
+2025-10-16 19:25:08,463 [DEBUG] osint_suite - Relación añadida automáticamente: url:https://es.linkedin.com/company/ibercaja -> meta:title:Ibercaja (título)
+2025-10-16 19:25:08,474 [DEBUG] osint_suite - Relación añadida automáticamente: dork:"ibercaja.es" -> url:https://www.zoominfo.com/c/ibercaja-banco-sa/73567384 (devuelve)
+2025-10-16 19:25:08,488 [DEBUG] osint_suite - Relación añadida automáticamente: url:https://www.zoominfo.com/c/ibercaja-banco-sa/73567384 -> domain:www.zoominfo.com (pertenece a)
+2025-10-16 19:25:08,498 [DEBUG] osint_suite - Relación añadida automáticamente: url:https://www.zoominfo.com/c/ibercaja-banco-sa/73567384 -> meta:title:Ibercaja Bank - Overview, News & Similar companies (título)
+2025-10-16 19:25:38,459 [ERROR] osint_suite - Error al cargar historial de msantander: There are multiple `text_area` elements with the same auto-generated ID. When this element is created, it is assigned an internal ID based on the element type and provided parameters. Multiple elements with the same type and parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `text_area` element.
+Traceback (most recent call last):
+  File "C:\Users\Ascii\PycharmProjects\ppf\ui\modules\history_ui.py", line 45, in run
+    st.text_area("Resultado", log.result, height=150)
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\streamlit\runtime\metrics_util.py", line 443, in wrapped_func
+    result = non_optional_func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\streamlit\elements\widgets\text_widgets.py", line 598, in text_area
+    return self._text_area(
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\streamlit\elements\widgets\text_widgets.py", line 645, in _text_area
+    element_id = compute_and_register_element_id(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\streamlit\elements\lib\utils.py", line 265, in compute_and_register_element_id
+    _register_element_id(ctx, element_type, element_id)
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\streamlit\elements\lib\utils.py", line 150, in _register_element_id
+    raise StreamlitDuplicateElementId(element_type)
+streamlit.errors.StreamlitDuplicateElementId: There are multiple `text_area` elements with the same auto-generated ID. When this element is created, it is assigned an internal ID based on the element type and provided parameters. Multiple elements with the same type and parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `text_area` element.
+2025-10-16 19:25:55,280 [ERROR] osint_suite - Error al cargar historial de msantander: There are multiple `text_area` elements with the same auto-generated ID. When this element is created, it is assigned an internal ID based on the element type and provided parameters. Multiple elements with the same type and parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `text_area` element.
+Traceback (most recent call last):
+  File "C:\Users\Ascii\PycharmProjects\ppf\ui\modules\history_ui.py", line 45, in run
+    st.text_area("Resultado", log.result, height=150)
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\streamlit\runtime\metrics_util.py", line 443, in wrapped_func
+    result = non_optional_func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\streamlit\elements\widgets\text_widgets.py", line 598, in text_area
+    return self._text_area(
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\streamlit\elements\widgets\text_widgets.py", line 645, in _text_area
+    element_id = compute_and_register_element_id(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\streamlit\elements\lib\utils.py", line 265, in compute_and_register_element_id
+    _register_element_id(ctx, element_type, element_id)
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\streamlit\elements\lib\utils.py", line 150, in _register_element_id
+    raise StreamlitDuplicateElementId(element_type)
+streamlit.errors.StreamlitDuplicateElementId: There are multiple `text_area` elements with the same auto-generated ID. When this element is created, it is assigned an internal ID based on the element type and provided parameters. Multiple elements with the same type and parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `text_area` element.
+2025-10-16 19:26:09,800 [ERROR] osint_suite - Error al cargar historial de msantander: There are multiple `text_area` elements with the same auto-generated ID. When this element is created, it is assigned an internal ID based on the element type and provided parameters. Multiple elements with the same type and parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `text_area` element.
+Traceback (most recent call last):
+  File "C:\Users\Ascii\PycharmProjects\ppf\ui\modules\history_ui.py", line 45, in run
+    st.text_area("Resultado", log.result, height=150)
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\streamlit\runtime\metrics_util.py", line 443, in wrapped_func
+    result = non_optional_func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\streamlit\elements\widgets\text_widgets.py", line 598, in text_area
+    return self._text_area(
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\streamlit\elements\widgets\text_widgets.py", line 645, in _text_area
+    element_id = compute_and_register_element_id(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\streamlit\elements\lib\utils.py", line 265, in compute_and_register_element_id
+    _register_element_id(ctx, element_type, element_id)
+  File "C:\Users\Ascii\PycharmProjects\ppf\.venv\Lib\site-packages\streamlit\elements\lib\utils.py", line 150, in _register_element_id
+    raise StreamlitDuplicateElementId(element_type)
+streamlit.errors.StreamlitDuplicateElementId: There are multiple `text_area` elements with the same auto-generated ID. When this element is created, it is assigned an internal ID based on the element type and provided parameters. Multiple elements with the same type and parameters will cause this error.
+
+To fix this error, please pass a unique `key` argument to the `text_area` element.
+2025-10-16 19:26:24,567 [DEBUG] osint_suite - Inicializando RelationExplorer para usuario msantander
+2025-10-16 19:26:30,225 [DEBUG] osint_suite - GraphBuilder inicializado
+2025-10-16 19:26:30,227 [DEBUG] osint_suite - Añadido nodo: {'id': 'user_msantander', 'label': 'msantander', 'type': 'user'}
+2025-10-16 19:26:30,232 [DEBUG] osint_suite - Añadido nodo: {'id': 'user:msantander', 'label': 'user:msantander', 'type': 'user'}
+2025-10-16 19:26:30,232 [DEBUG] osint_suite - Añadido nodo: {'id': 'dork:ibercaja.es', 'label': 'dork:ibercaja.es', 'type': 'dork'}
+2025-10-16 19:26:30,232 [DEBUG] osint_suite - Añadida relación user:msantander -> dork:ibercaja.es: realizó búsqueda
+2025-10-16 19:26:30,232 [DEBUG] osint_suite - Añadida relación user:msantander -> dork:ibercaja.es: realizó búsqueda
+2025-10-16 19:26:30,232 [DEBUG] osint_suite - Añadida relación user:msantander -> dork:ibercaja.es: realizó búsqueda
+2025-10-16 19:26:30,232 [DEBUG] osint_suite - Añadida relación user:msantander -> dork:ibercaja.es: realizó búsqueda
+2025-10-16 19:26:30,234 [DEBUG] osint_suite - Añadido nodo: {'id': 'dork:site:pastebin.com "ibercaja.es"', 'label': 'dork:site:pastebin.com "ibercaja.es"', 'type': 'dork'}
+2025-10-16 19:26:30,234 [DEBUG] osint_suite - Añadida relación user:msantander -> dork:site:pastebin.com "ibercaja.es": realizó búsqueda
+2025-10-16 19:26:30,234 [DEBUG] osint_suite - Añadido nodo: {'id': 'dork:"ibercaja.es"', 'label': 'dork:"ibercaja.es"', 'type': 'dork'}
+2025-10-16 19:26:30,234 [DEBUG] osint_suite - Añadida relación user:msantander -> dork:"ibercaja.es": realizó búsqueda
+2025-10-16 19:26:30,234 [DEBUG] osint_suite - Añadido nodo: {'id': 'url:https://www.ibercaja.es/', 'label': 'url:https://www.ibercaja.es/', 'type': 'url'}
+2025-10-16 19:26:30,235 [DEBUG] osint_suite - Añadida relación dork:"ibercaja.es" -> url:https://www.ibercaja.es/: devuelve
+2025-10-16 19:26:30,235 [DEBUG] osint_suite - Añadido nodo: {'id': 'domain:www.ibercaja.es', 'label': 'domain:www.ibercaja.es', 'type': 'domain'}
+2025-10-16 19:26:30,235 [DEBUG] osint_suite - Añadida relación url:https://www.ibercaja.es/ -> domain:www.ibercaja.es: pertenece a
+2025-10-16 19:26:30,235 [DEBUG] osint_suite - Añadido nodo: {'id': 'meta:title:Ibercaja ≫ Banco online para particulares y empresas | Ibercaja', 'label': 'meta:title:Ibercaja ≫ Banco online para particulares y empresas | Ibercaja', 'type': 'custom'}
+2025-10-16 19:26:30,235 [DEBUG] osint_suite - Añadida relación url:https://www.ibercaja.es/ -> meta:title:Ibercaja ≫ Banco online para particulares y empresas | Ibercaja: título
+2025-10-16 19:26:30,236 [DEBUG] osint_suite - Añadido nodo: {'id': 'url:https://www.ibercaja.com/en/', 'label': 'url:https://www.ibercaja.com/en/', 'type': 'url'}
+2025-10-16 19:26:30,236 [DEBUG] osint_suite - Añadida relación dork:"ibercaja.es" -> url:https://www.ibercaja.com/en/: devuelve
+2025-10-16 19:26:30,236 [DEBUG] osint_suite - Añadido nodo: {'id': 'domain:www.ibercaja.com', 'label': 'domain:www.ibercaja.com', 'type': 'domain'}
+2025-10-16 19:26:30,236 [DEBUG] osint_suite - Añadida relación url:https://www.ibercaja.com/en/ -> domain:www.ibercaja.com: pertenece a
+2025-10-16 19:26:30,236 [DEBUG] osint_suite - Añadido nodo: {'id': 'meta:title:Home - Corporate Website | Ibercaja Bank', 'label': 'meta:title:Home - Corporate Website | Ibercaja Bank', 'type': 'custom'}
+2025-10-16 19:26:30,237 [DEBUG] osint_suite - Añadida relación url:https://www.ibercaja.com/en/ -> meta:title:Home - Corporate Website | Ibercaja Bank: título
+2025-10-16 19:26:30,237 [DEBUG] osint_suite - Añadido nodo: {'id': 'url:https://es.wikipedia.org/wiki/Ibercaja', 'label': 'url:https://es.wikipedia.org/wiki/Ibercaja', 'type': 'url'}
+2025-10-16 19:26:30,237 [DEBUG] osint_suite - Añadida relación dork:"ibercaja.es" -> url:https://es.wikipedia.org/wiki/Ibercaja: devuelve
+2025-10-16 19:26:30,237 [DEBUG] osint_suite - Añadido nodo: {'id': 'domain:es.wikipedia.org', 'label': 'domain:es.wikipedia.org', 'type': 'domain'}
+2025-10-16 19:26:30,237 [DEBUG] osint_suite - Añadida relación url:https://es.wikipedia.org/wiki/Ibercaja -> domain:es.wikipedia.org: pertenece a
+2025-10-16 19:26:30,238 [DEBUG] osint_suite - Añadido nodo: {'id': 'meta:title:Ibercaja - Wikipedia, la enciclopedia libre', 'label': 'meta:title:Ibercaja - Wikipedia, la enciclopedia libre', 'type': 'custom'}
+2025-10-16 19:26:30,238 [DEBUG] osint_suite - Añadida relación url:https://es.wikipedia.org/wiki/Ibercaja -> meta:title:Ibercaja - Wikipedia, la enciclopedia libre: título
+2025-10-16 19:26:30,238 [DEBUG] osint_suite - Añadido nodo: {'id': 'url:https://www.fundacionibercaja.es/', 'label': 'url:https://www.fundacionibercaja.es/', 'type': 'url'}
+2025-10-16 19:26:30,238 [DEBUG] osint_suite - Añadida relación dork:"ibercaja.es" -> url:https://www.fundacionibercaja.es/: devuelve
+2025-10-16 19:26:30,238 [DEBUG] osint_suite - Añadido nodo: {'id': 'domain:www.fundacionibercaja.es', 'label': 'domain:www.fundacionibercaja.es', 'type': 'domain'}
+2025-10-16 19:26:30,239 [DEBUG] osint_suite - Añadida relación url:https://www.fundacionibercaja.es/ -> domain:www.fundacionibercaja.es: pertenece a
+2025-10-16 19:26:30,239 [DEBUG] osint_suite - Añadido nodo: {'id': 'meta:title:Fundación Ibercaja', 'label': 'meta:title:Fundación Ibercaja', 'type': 'custom'}
+2025-10-16 19:26:30,239 [DEBUG] osint_suite - Añadida relación url:https://www.fundacionibercaja.es/ -> meta:title:Fundación Ibercaja: título
+2025-10-16 19:26:30,239 [DEBUG] osint_suite - Añadido nodo: {'id': 'url:https://play.google.com/store/apps/details?id=es.ibercaja.ibercajaapp', 'label': 'url:https://play.google.com/store/apps/details?id=es.ibercaja.ibercajaapp', 'type': 'url'}
+2025-10-16 19:26:30,239 [DEBUG] osint_suite - Añadida relación dork:"ibercaja.es" -> url:https://play.google.com/store/apps/details?id=es.ibercaja.ibercajaapp: devuelve
+2025-10-16 19:26:30,239 [DEBUG] osint_suite - Añadido nodo: {'id': 'domain:play.google.com', 'label': 'domain:play.google.com', 'type': 'domain'}
+2025-10-16 19:26:30,240 [DEBUG] osint_suite - Añadida relación url:https://play.google.com/store/apps/details?id=es.ibercaja.ibercajaapp -> domain:play.google.com: pertenece a
+2025-10-16 19:26:30,240 [DEBUG] osint_suite - Añadido nodo: {'id': 'meta:title:Ibercaja - Apps on Google Play', 'label': 'meta:title:Ibercaja - Apps on Google Play', 'type': 'custom'}
+2025-10-16 19:26:30,240 [DEBUG] osint_suite - Añadida relación url:https://play.google.com/store/apps/details?id=es.ibercaja.ibercajaapp -> meta:title:Ibercaja - Apps on Google Play: título
+2025-10-16 19:26:30,240 [DEBUG] osint_suite - Añadido nodo: {'id': 'email:idirecto@ibercaja.es', 'label': 'email:idirecto@ibercaja.es', 'type': 'email'}
+2025-10-16 19:26:30,240 [DEBUG] osint_suite - Añadida relación url:https://play.google.com/store/apps/details?id=es.ibercaja.ibercajaapp -> email:idirecto@ibercaja.es: menciona correo
+2025-10-16 19:26:30,240 [DEBUG] osint_suite - Añadida relación email:idirecto@ibercaja.es -> domain:play.google.com: pertenece a
+2025-10-16 19:26:30,241 [DEBUG] osint_suite - Añadido nodo: {'id': 'url:https://www.ibercaja.com/detalle-sala-de-prensa/noticias/5747/', 'label': 'url:https://www.ibercaja.com/detalle-sala-de-prensa/noticias/5747/', 'type': 'url'}
+2025-10-16 19:26:30,241 [DEBUG] osint_suite - Añadida relación dork:"ibercaja.es" -> url:https://www.ibercaja.com/detalle-sala-de-prensa/noticias/5747/: devuelve
+2025-10-16 19:26:30,241 [DEBUG] osint_suite - Añadida relación url:https://www.ibercaja.com/detalle-sala-de-prensa/noticias/5747/ -> domain:www.ibercaja.com: pertenece a
+2025-10-16 19:26:30,241 [DEBUG] osint_suite - Añadido nodo: {'id': 'meta:title:IBERCAJA ES EL BANCO ESPAÑOL MEJOR VALORADO ...', 'label': 'meta:title:IBERCAJA ES EL BANCO ESPAÑOL MEJOR VALORADO ...', 'type': 'custom'}
+2025-10-16 19:26:30,241 [DEBUG] osint_suite - Añadida relación url:https://www.ibercaja.com/detalle-sala-de-prensa/noticias/5747/ -> meta:title:IBERCAJA ES EL BANCO ESPAÑOL MEJOR VALORADO ...: título
+2025-10-16 19:26:30,241 [DEBUG] osint_suite - Añadido nodo: {'id': 'url:https://es.linkedin.com/company/ibercaja', 'label': 'url:https://es.linkedin.com/company/ibercaja', 'type': 'url'}
+2025-10-16 19:26:30,242 [DEBUG] osint_suite - Añadida relación dork:"ibercaja.es" -> url:https://es.linkedin.com/company/ibercaja: devuelve
+2025-10-16 19:26:30,242 [DEBUG] osint_suite - Añadido nodo: {'id': 'domain:es.linkedin.com', 'label': 'domain:es.linkedin.com', 'type': 'domain'}
+2025-10-16 19:26:30,242 [DEBUG] osint_suite - Añadida relación url:https://es.linkedin.com/company/ibercaja -> domain:es.linkedin.com: pertenece a
+2025-10-16 19:26:30,242 [DEBUG] osint_suite - Añadido nodo: {'id': 'meta:title:Ibercaja', 'label': 'meta:title:Ibercaja', 'type': 'custom'}
+2025-10-16 19:26:30,242 [DEBUG] osint_suite - Añadida relación url:https://es.linkedin.com/company/ibercaja -> meta:title:Ibercaja: título
+2025-10-16 19:26:30,242 [DEBUG] osint_suite - Añadido nodo: {'id': 'url:https://www.zoominfo.com/c/ibercaja-banco-sa/73567384', 'label': 'url:https://www.zoominfo.com/c/ibercaja-banco-sa/73567384', 'type': 'url'}
+2025-10-16 19:26:30,243 [DEBUG] osint_suite - Añadida relación dork:"ibercaja.es" -> url:https://www.zoominfo.com/c/ibercaja-banco-sa/73567384: devuelve
+2025-10-16 19:26:30,243 [DEBUG] osint_suite - Añadido nodo: {'id': 'domain:www.zoominfo.com', 'label': 'domain:www.zoominfo.com', 'type': 'domain'}
+2025-10-16 19:26:30,243 [DEBUG] osint_suite - Añadida relación url:https://www.zoominfo.com/c/ibercaja-banco-sa/73567384 -> domain:www.zoominfo.com: pertenece a
+2025-10-16 19:26:30,243 [DEBUG] osint_suite - Añadido nodo: {'id': 'meta:title:Ibercaja Bank - Overview, News & Similar companies', 'label': 'meta:title:Ibercaja Bank - Overview, News & Similar companies', 'type': 'custom'}
+2025-10-16 19:26:30,243 [DEBUG] osint_suite - Añadida relación url:https://www.zoominfo.com/c/ibercaja-banco-sa/73567384 -> meta:title:Ibercaja Bank - Overview, News & Similar companies: título
+2025-10-16 19:26:30,245 [DEBUG] osint_suite - Añadido nodo: {'id': 'log_1', 'label': 'ibercaja.es', 'type': 'log'}
+2025-10-16 19:26:30,245 [DEBUG] osint_suite - Añadida relación user_msantander -> log_1: realizó búsqueda
+2025-10-16 19:26:30,246 [DEBUG] osint_suite - Añadido nodo: {'id': 'log_2', 'label': 'ibercaja.es', 'type': 'log'}
+2025-10-16 19:26:30,246 [DEBUG] osint_suite - Añadida relación user_msantander -> log_2: realizó búsqueda
+2025-10-16 19:26:30,246 [DEBUG] osint_suite - Añadido nodo: {'id': 'log_3', 'label': 'ibercaja.es', 'type': 'log'}
+2025-10-16 19:26:30,246 [DEBUG] osint_suite - Añadida relación user_msantander -> log_3: realizó búsqueda
+2025-10-16 19:26:30,247 [DEBUG] osint_suite - Añadido nodo: {'id': 'log_4', 'label': 'ibercaja.es', 'type': 'log'}
+2025-10-16 19:26:30,247 [DEBUG] osint_suite - Añadida relación user_msantander -> log_4: realizó búsqueda
+2025-10-16 19:26:30,247 [DEBUG] osint_suite - Añadido nodo: {'id': 'log_5', 'label': 'site:pastebin.com "ibercaja.es"', 'type': 'log'}
+2025-10-16 19:26:30,247 [DEBUG] osint_suite - Añadida relación user_msantander -> log_5: realizó búsqueda
+2025-10-16 19:26:30,247 [DEBUG] osint_suite - Añadido nodo: {'id': 'log_6', 'label': '"ibercaja.es"', 'type': 'log'}
+2025-10-16 19:26:30,247 [DEBUG] osint_suite - Añadida relación user_msantander -> log_6: realizó búsqueda
+2025-10-16 19:26:30,248 [DEBUG] osint_suite - Añadida relación log_6 -> email:idirecto@ibercaja.es: mencionado
+2025-10-16 19:26:30,248 [DEBUG] osint_suite - Añadida relación user_msantander -> email:idirecto@ibercaja.es: vinculado a
+2025-10-16 19:26:30,248 [DEBUG] osint_suite - Añadida relación log_6 -> url:https://es.linkedin.com/company/ibercaja: mencionado
+2025-10-16 19:26:30,248 [DEBUG] osint_suite - Añadida relación user_msantander -> url:https://es.linkedin.com/company/ibercaja: vinculado a
+2025-10-16 19:26:30,248 [DEBUG] osint_suite - Añadida relación url:https://es.linkedin.com/company/ibercaja -> domain:es.linkedin.com: pertenece a
+2025-10-16 19:26:30,249 [DEBUG] osint_suite - Añadido nodo: {'id': 'url:http://www.ibercaja.es/.', 'label': 'www.ibercaja.es', 'type': 'url'}
+2025-10-16 19:26:30,249 [DEBUG] osint_suite - Añadida relación log_6 -> url:http://www.ibercaja.es/.: mencionado
+2025-10-16 19:26:30,249 [DEBUG] osint_suite - Añadida relación user_msantander -> url:http://www.ibercaja.es/.: vinculado a
+2025-10-16 19:26:30,249 [DEBUG] osint_suite - Añadida relación url:http://www.ibercaja.es/. -> domain:www.ibercaja.es: pertenece a
+2025-10-16 19:26:30,249 [DEBUG] osint_suite - Añadida relación log_6 -> url:https://play.google.com/store/apps/details?id=es.ibercaja.ibercajaapp: mencionado
+2025-10-16 19:26:30,250 [DEBUG] osint_suite - Añadida relación user_msantander -> url:https://play.google.com/store/apps/details?id=es.ibercaja.ibercajaapp: vinculado a
+2025-10-16 19:26:30,250 [DEBUG] osint_suite - Añadida relación url:https://play.google.com/store/apps/details?id=es.ibercaja.ibercajaapp -> domain:play.google.com: pertenece a
+2025-10-16 19:26:30,250 [DEBUG] osint_suite - Añadida relación log_6 -> url:https://www.ibercaja.es/: mencionado
+2025-10-16 19:26:30,250 [DEBUG] osint_suite - Añadida relación user_msantander -> url:https://www.ibercaja.es/: vinculado a
+2025-10-16 19:26:30,250 [DEBUG] osint_suite - Añadida relación url:https://www.ibercaja.es/ -> domain:www.ibercaja.es: pertenece a
+2025-10-16 19:26:30,250 [DEBUG] osint_suite - Añadida relación log_6 -> url:https://es.wikipedia.org/wiki/Ibercaja: mencionado
+2025-10-16 19:26:30,251 [DEBUG] osint_suite - Añadida relación user_msantander -> url:https://es.wikipedia.org/wiki/Ibercaja: vinculado a
+2025-10-16 19:26:30,251 [DEBUG] osint_suite - Añadida relación url:https://es.wikipedia.org/wiki/Ibercaja -> domain:es.wikipedia.org: pertenece a
+2025-10-16 19:26:30,251 [DEBUG] osint_suite - Añadida relación log_6 -> url:https://www.ibercaja.com/en/: mencionado
+2025-10-16 19:26:30,251 [DEBUG] osint_suite - Añadida relación user_msantander -> url:https://www.ibercaja.com/en/: vinculado a
+2025-10-16 19:26:30,251 [DEBUG] osint_suite - Añadida relación url:https://www.ibercaja.com/en/ -> domain:www.ibercaja.com: pertenece a
+2025-10-16 19:26:30,252 [DEBUG] osint_suite - Añadida relación log_6 -> url:https://www.zoominfo.com/c/ibercaja-banco-sa/73567384: mencionado
+2025-10-16 19:26:30,252 [DEBUG] osint_suite - Añadida relación user_msantander -> url:https://www.zoominfo.com/c/ibercaja-banco-sa/73567384: vinculado a
+2025-10-16 19:26:30,252 [DEBUG] osint_suite - Añadida relación url:https://www.zoominfo.com/c/ibercaja-banco-sa/73567384 -> domain:www.zoominfo.com: pertenece a
+2025-10-16 19:26:30,252 [DEBUG] osint_suite - Añadida relación log_6 -> url:https://www.ibercaja.com/detalle-sala-de-prensa/noticias/5747/: mencionado
+2025-10-16 19:26:30,252 [DEBUG] osint_suite - Añadida relación user_msantander -> url:https://www.ibercaja.com/detalle-sala-de-prensa/noticias/5747/: vinculado a
+2025-10-16 19:26:30,252 [DEBUG] osint_suite - Añadida relación url:https://www.ibercaja.com/detalle-sala-de-prensa/noticias/5747/ -> domain:www.ibercaja.com: pertenece a
+2025-10-16 19:26:30,252 [DEBUG] osint_suite - Añadida relación log_6 -> url:https://www.fundacionibercaja.es/: mencionado
+2025-10-16 19:26:30,253 [DEBUG] osint_suite - Añadida relación user_msantander -> url:https://www.fundacionibercaja.es/: vinculado a
+2025-10-16 19:26:30,253 [DEBUG] osint_suite - Añadida relación url:https://www.fundacionibercaja.es/ -> domain:www.fundacionibercaja.es: pertenece a
+2025-10-16 19:26:30,253 [INFO] osint_suite - Grafo construido para usuario 'msantander' con 36 nodos.
+2025-10-16 19:26:30,293 [INFO] osint_suite - Grafo exportado correctamente a data/graph.html
+2025-10-16 19:26:49,544 [DEBUG] osint_suite - Mostrando página de inicio en dashboard.

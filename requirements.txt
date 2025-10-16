@@ -1,0 +1,13 @@
+tqdm
+cryptography
+beautifulsoup4
+pandas
+streamlit
+sqlmodel
+fastapi
+uvicorn
+requests
+jinja2
+bcrypt
+python-dotenv
+pyvis
