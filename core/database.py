@@ -71,36 +71,6 @@ class UserSetting(SQLModel, table=True):
     user: Optional["User"] = Relationship(back_populates="settings")
 
 # =========================
-#  Modelos de datos para Person/Email/Domain/Profile + persistencia
-# =========================
-
-class Person(SQLModel, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
-    name: str
-    notes: Optional[str] = None
-    created_at: datetime = Field(default_factory=datetime.utcnow)
-    # relations
-    emails: List["Email"] = Relationship(back_populates="person")
-    profiles: List["Profile"] = Relationship(back_populates="person")
-
-class Email(SQLModel, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
-    address: str = Field(index=True)
-    validated: bool = Field(default=False)
-    leaks_summary: Optional[str] = None
-    person_id: Optional[int] = Field(default=None, foreign_key="person.id")
-    person: Optional[Person] = Relationship(back_populates="emails")
-
-class Profile(SQLModel, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
-    platform: str  # 'twitter','instagram','linkedin'
-    handle: str
-    url: str
-    metadata: Optional[str] = None
-    person_id: Optional[int] = Field(default=None, foreign_key="person.id")
-    person: Optional[Person] = Relationship(back_populates="profiles")
-
-# =========================
 #  Inicialización
 # =========================
 from core.entities import Person, Email, Profile

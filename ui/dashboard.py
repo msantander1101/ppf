@@ -18,6 +18,7 @@ def main():
         "Selecciona módulo",
         [
             "Inicio",
+            "Personas",
             "Dorks",
             "Búsqueda",
             "Enriquecimiento",
@@ -47,9 +48,9 @@ def main():
         st.info("Selecciona un módulo en la barra lateral para comenzar una investigación.")
         logger.debug("Mostrando página de inicio en dashboard.")
 
-    elif selected_module == "Personas":
-        person_ui.run(username)
-
+    elif page == "Personas":
+        from ui.modules import person_ui
+        person_ui.run(st.session_state.username)
 
     elif page == "Dorks":
         from ui.modules import dorks_ui

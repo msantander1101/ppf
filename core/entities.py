@@ -8,7 +8,7 @@ class Person(SQLModel, table=True):
     name: str
     notes: Optional[str] = None
     created_at: datetime = Field(default_factory=datetime.utcnow)
-    # Relaciones
+
     emails: List["Email"] = Relationship(back_populates="person")
     profiles: List["Profile"] = Relationship(back_populates="person")
 
@@ -19,14 +19,16 @@ class Email(SQLModel, table=True):
     validated: bool = Field(default=False)
     leaks_summary: Optional[str] = None
     person_id: Optional[int] = Field(default=None, foreign_key="person.id")
+
     person: Optional[Person] = Relationship(back_populates="emails")
 
 
 class Profile(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
-    platform: str  # Ej: twitter, linkedin, instagram
+    platform: str  # 'twitter','instagram','linkedin'
     handle: str
     url: str
-    metadata: Optional[str] = None
+    info_json: Optional[str] = None  # 🔁 antes era `metadata`
     person_id: Optional[int] = Field(default=None, foreign_key="person.id")
+
     person: Optional[Person] = Relationship(back_populates="profiles")
