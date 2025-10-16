@@ -1,86 +1,79 @@
-from ui.modules import dorks_ui
 import streamlit as st
+from core.database import get_session
+from core.entities import Person
+from core.database import SearchLog
+from sqlmodel import select
 from utils.logger import logger
-from core.engine import engine
-from ui.modules import person_ui
+
+# Importamos los módulos UI disponibles
+from ui.modules import person_ui, history_ui, settings_ui, graph_ui
 
 def main():
-    st.set_page_config(page_title="Dashboard - OSINT Suite", page_icon="🕵️", layout="wide")
+    """
+    Panel principal de OSINT Suite.
+    Gestiona la navegación entre módulos y muestra métricas globales.
+    """
 
-    if not st.session_state.get("logged_in"):
-        st.warning("Debes iniciar sesión para acceder al dashboard.")
-        st.stop()
+    st.set_page_config(page_title="OSINT Suite Dashboard", page_icon="🕵️‍♂️", layout="wide")
+    st.sidebar.title("📂 OSINT Suite")
 
-    st.sidebar.title("🧭 Navegación")
-
-    # Nota: Usamos "Configuración" con tilde de acuerdo al condicional más adelante. Asegúrate de que las etiquetas coincidan.
-    page = st.sidebar.radio(
-        "Selecciona módulo",
-        [
-            "Inicio",
-            "Personas",
-            "Dorks",
-            "Búsqueda",
-            "Enriquecimiento",
-            "Historial",
-            "Grafo",
-            "Relaciones",
-            "Configuración",
-            "Salir",
-        ],
-        index=0,
+    # Menú lateral de navegación
+    menu = st.sidebar.radio(
+        "Navegación",
+        ["Inicio", "Personas", "Historial", "Grafo", "Configuración"]
     )
-    # --- Detección de búsqueda repetida desde historial ---
-    if "previous_query" in st.session_state and "previous_type" in st.session_state:
-        if st.session_state.previous_type == "dork":
-            from ui.modules import dorks_ui
-            previous_query = st.session_state.previous_query
-            st.session_state.pop("previous_query")
-            st.session_state.pop("previous_type")
-            dorks_ui.run(st.session_state.username, previous_query=previous_query)
-            st.stop()
 
-    st.title(f"🕵️ OSINT Suite - Dashboard")
-    st.markdown(f"**Usuario activo:** `{st.session_state.username}`")
+    username = st.session_state.get("username", "Invitado")
 
-    if page == "Inicio":
-        st.markdown("### Bienvenido al panel OSINT.")
-        st.info("Selecciona un módulo en la barra lateral para comenzar una investigación.")
-        logger.debug("Mostrando página de inicio en dashboard.")
+    if menu == "Inicio":
+        st.title("🕵️‍♂️ OSINT Suite — Panel Principal")
+        st.markdown(f"👋 Bienvenido, **{username}**.")
+        st.info("Selecciona un módulo en el menú lateral para comenzar tu investigación OSINT.")
 
-    elif page == "Personas":
-        from ui.modules import person_ui
-        person_ui.run(st.session_state.username)
+        try:
+            with get_session() as session:
+                total_personas = session.exec(select(Person)).count()
+                total_logs = session.exec(select(SearchLog)).count()
 
-    elif page == "Dorks":
-        from ui.modules import dorks_ui
-        dorks_ui.run(st.session_state.username)
+            col1, col2 = st.columns(2)
+            col1.metric("👤 Personas registradas", total_personas)
+            col2.metric("🔍 Búsquedas ejecutadas", total_logs)
 
-    elif page == "Búsqueda":
-        from ui.modules import search_ui
-        search_ui.run(st.session_state.username)
+            # Mostrar últimos logs de actividad
+            st.markdown("### 🕓 Actividad reciente")
+            with get_session() as session:
+                logs = session.exec(
+                    select(SearchLog).order_by(SearchLog.created_at.desc()).limit(5)
+                ).all()
 
-    elif page == "Enriquecimiento":
-        from ui.modules import enrichment_ui
-        enrichment_ui.run(st.session_state.username)
+                if not logs:
+                    st.info("No hay actividad reciente registrada.")
+                else:
+                    for log in logs:
+                        st.markdown(
+                            f"- **{log.query}**  \n"
+                            f"🧩 Tipo: `{log.type}`  \n"
+                            f"🕒 {log.created_at.strftime('%Y-%m-%d %H:%M:%S')}"
+                        )
+        except Exception as e:
+            st.error(f"Error cargando métricas: {e}")
+            logger.exception("Error en dashboard metrics")
 
-    elif page == "Historial":
-        from ui.modules import history_ui
-        history_ui.run(st.session_state.username)
+    elif menu == "Personas":
+        person_ui.run(username)
 
-    elif page == "Grafo":
-        from ui.modules import graph_ui
-        graph_ui.run(st.session_state.username)
+    elif menu == "Historial":
+        history_ui.run(username)
 
-    elif page == "Relaciones":
-        from ui.modules import relations_ui
-        relations_ui.run(st.session_state.username)
+    elif menu == "Grafo":
+        graph_ui.run(username)
 
-    elif page == "Configuración":
-        from ui.modules import settings_ui
-        settings_ui.run(st.session_state.username)
+    elif menu == "Configuración":
+        settings_ui.run(username)
 
-    elif page == "Salir":
-        st.session_state.logged_in = False
-        st.session_state.username = None
-        st.switch_page("ui/login.py")
+    else:
+        st.warning("Selecciona una opción válida en el menú lateral.")
+
+
+if __name__ == "__main__":
+    main()
