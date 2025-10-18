@@ -18,6 +18,7 @@ class User(SQLModel, table=True):
     username: str = Field(index=True, unique=True)
     password_hash: str = Field(nullable=False)
     created_at: datetime = Field(default_factory=datetime.utcnow)
+    __table_args__ = {"extend_existing": True}
 
     # Relaciones
     logs: List["SearchLog"] = Relationship(back_populates="user")

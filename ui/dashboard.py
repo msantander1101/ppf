@@ -31,9 +31,10 @@ def main():
         st.info("Selecciona un módulo en el menú lateral para comenzar tu investigación OSINT.")
 
         try:
+            from sqlalchemy import func
             with get_session() as session:
-                total_personas = session.exec(select(Person)).count()
-                total_logs = session.exec(select(SearchLog)).count()
+                total_personas = session.exec(select(func.count()).select_from(Person)).one()
+                total_logs = session.exec(select(func.count()).select_from(SearchLog)).one()
 
             col1, col2 = st.columns(2)
             col1.metric("👤 Personas registradas", total_personas)
