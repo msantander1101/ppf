@@ -10,7 +10,8 @@ from typing import Optional
 import streamlit as st
 
 from core.user_utils import get_user_id
-from core.database import get_session, SearchLog
+from core.database import get_session
+from core.entities import SearchLog
 from utils.logger import logger
 from utils import config
 from core.config import get_user_setting

@@ -1,4 +1,5 @@
-from core.database import get_session, Relation, User
+from core.database import get_session
+from core.entities import Relation, User
 from utils.logger import logger
 
 

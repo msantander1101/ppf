@@ -1,91 +1,114 @@
-import os
+# core/config.py
+import logging
 from typing import Optional
-from cryptography.fernet import Fernet, InvalidToken
-from core.database import get_session, UserSetting, User
-from utils.logger import logger
 
-FERNET_KEY = os.environ.get("APP_ENCRYPTION_KEY")
+from core.database import get_session
+from core.entities import UserSetting, User
+from typing import Union
 
-if not FERNET_KEY:
-    logger.warning("APP_ENCRYPTION_KEY no configurada. Los valores se almacenarán en claro (no recomendado).")
+logger = logging.getLogger("osint_suite")
 
-def _get_fernet() -> Optional[Fernet]:
-    if not FERNET_KEY:
-        return None
-    try:
-        return Fernet(FERNET_KEY.encode())
-    except Exception as e:
-        logger.exception(f"Clave Fernet inválida: {e}")
-        return None
 
-def store_user_setting(username: str, key: str, value: str) -> bool:
-    try:
-        with get_session() as session:
-            user = session.query(User).filter(User.username == username).first()
-            if not user:
-                logger.error(f"store_user_setting: usuario {username} no encontrado")
-                return False
+# =========================================
+# Obtener la configuración de un usuario
+# =========================================
+def get_user_setting(user: Union[int, str], key: str) -> Optional[str]:
+    """
+    Devuelve el valor de una configuración concreta para un usuario.
 
-            f = _get_fernet()
-            if f:
-                encrypted = f.encrypt(value.encode()).decode()
-            else:
-                logger.warning("APP_ENCRYPTION_KEY no configurada: almacenando en claro")
-                encrypted = value
-
-            existing = session.query(UserSetting).filter(
-                UserSetting.user_id == user.id, UserSetting.key == key
-            ).first()
-            if existing:
-                existing.value_encrypted = encrypted
-            else:
-                s = UserSetting(user_id=user.id, key=key, value_encrypted=encrypted)
-                session.add(s)
-            session.commit()
-            logger.info(f"Setting '{key}' guardado para usuario {username}")
-            return True
-    except Exception as e:
-        logger.exception(f"Error en store_user_setting: {e}")
-        return False
-
-def get_user_setting(username: str, key: str) -> Optional[str]:
+    Este helper acepta tanto un identificador numérico (`user_id`) como un
+    nombre de usuario (`username`). Si se pasa un `username`, se realizará
+    una búsqueda en la base de datos para obtener su `id`. Si el usuario no
+    existe o la configuración no está almacenada, se devuelve `None`.
+    """
     try:
         with get_session() as session:
-            user = session.query(User).filter(User.username == username).first()
-            if not user:
-                return None
-            existing = session.query(UserSetting).filter(
-                UserSetting.user_id == user.id, UserSetting.key == key
-            ).first()
-            if not existing:
-                return None
-            f = _get_fernet()
-            if f:
-                try:
-                    return f.decrypt(existing.value_encrypted.encode()).decode()
-                except InvalidToken:
-                    logger.exception("La APP_ENCRYPTION_KEY es inválida. No puedo descifrar settings.")
+            # Determinar el user_id a partir del parámetro
+            if isinstance(user, int):
+                user_id = user
+            else:
+                # Buscar por nombre de usuario
+                u = session.query(User).filter_by(username=user).first()
+                if not u:
+                    logger.debug(f"Usuario no encontrado: {user}")
                     return None
+                user_id = u.id
+
+            setting = session.query(UserSetting).filter_by(user_id=user_id, key=key).first()
+            if setting:
+                logger.debug(f"Configuración encontrada [{key}] = {setting.value}")
+                return setting.value
             else:
-                return existing.value_encrypted
+                logger.debug(f"Configuración [{key}] no encontrada para usuario {user_id}")
+                return None
     except Exception as e:
-        logger.exception(f"Error en get_user_setting: {e}")
+        logger.error(f"Error obteniendo configuración '{key}' para usuario {user}: {e}")
         return None
 
-def delete_user_setting(username: str, key: str) -> bool:
+
+# =========================================
+# Guardar o actualizar una configuración
+# =========================================
+def set_user_setting(user: Union[int, str], key: str, value: str) -> None:
+    """
+    Crea o actualiza un valor de configuración para un usuario.
+
+    Se acepta como primer parámetro tanto el `user_id` (int) como el
+    `username` (str). Si el usuario no existe en la base de datos, no se
+    realizará ninguna operación.
+    """
     try:
         with get_session() as session:
-            user = session.query(User).filter(User.username == username).first()
-            if not user:
-                return False
-            existing = session.query(UserSetting).filter(
-                UserSetting.user_id == user.id, UserSetting.key == key
-            ).first()
-            if existing:
-                session.delete(existing)
-                session.commit()
-                logger.info(f"Setting '{key}' eliminado para usuario {username}")
-            return True
+            # Determinar el user_id
+            if isinstance(user, int):
+                user_id = user
+            else:
+                u = session.query(User).filter_by(username=user).first()
+                if not u:
+                    logger.debug(f"No existe el usuario '{user}' para guardar configuración.")
+                    return
+                user_id = u.id
+
+            setting = session.query(UserSetting).filter_by(user_id=user_id, key=key).first()
+            if setting:
+                setting.value = value
+                logger.debug(f"Configuración actualizada [{key}] = {value}")
+            else:
+                setting = UserSetting(user_id=user_id, key=key, value=value)
+                session.add(setting)
+                logger.debug(f"Nueva configuración creada [{key}] = {value}")
+
+            session.commit()
     except Exception as e:
-        logger.exception(f"Error en delete_user_setting: {e}")
-        return False
+        logger.error(f"Error guardando configuración '{key}' para usuario {user}: {e}")
+
+
+# =========================================
+# Cargar todas las configuraciones de un usuario
+# =========================================
+def get_all_user_settings(user: Union[int, str]) -> dict:
+    """
+    Devuelve todas las configuraciones del usuario en forma de diccionario.
+
+    Acepta tanto `user_id` como `username`. Si el usuario no existe o no tiene
+    configuraciones, se devuelve un diccionario vacío.
+    """
+    try:
+        with get_session() as session:
+            # Determinar el user_id
+            if isinstance(user, int):
+                user_id = user
+            else:
+                u = session.query(User).filter_by(username=user).first()
+                if not u:
+                    logger.debug(f"Usuario no encontrado: {user}")
+                    return {}
+                user_id = u.id
+
+            settings = session.query(UserSetting).filter_by(user_id=user_id).all()
+            config_dict = {s.key: s.value for s in settings}
+            logger.debug(f"Configuraciones cargadas para usuario {user_id}: {config_dict}")
+            return config_dict
+    except Exception as e:
+        logger.error(f"Error obteniendo todas las configuraciones para usuario {user}: {e}")
+        return {}

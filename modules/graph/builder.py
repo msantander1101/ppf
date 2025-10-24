@@ -5,7 +5,12 @@ from urllib.parse import urlparse
 from typing import Dict, Optional
 from sqlmodel import select
 from pyvis.network import Network
-from core.database import get_session, Person, Email, Profile, Relation, SearchLog, User
+# Importar únicamente la función get_session desde core.database. Las entidades
+# se importan desde core.entities para evitar dependencias circulares y errores
+# de importación. core.database expone un engine y un context manager, pero no
+# define los modelos.
+from core.database import get_session
+from core.entities import Person, Email, Profile, Relation, SearchLog, User
 from utils.logger import logger
 
 GRAPH_OUTPUT = "data/graph.html"

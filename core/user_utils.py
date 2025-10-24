@@ -1,5 +1,6 @@
 from sqlmodel import select
-from core.database import User, get_session
+from core.database import get_session
+from core.entities import User
 from utils.logger import logger
 
 def get_user_id(username: str) -> int | None:

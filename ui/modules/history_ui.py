@@ -1,6 +1,7 @@
 import streamlit as st
 from sqlmodel import select
-from core.database import get_session, SearchLog, User
+from core.database import get_session
+from core.entities import SearchLog, User
 from utils.logger import logger
 
 

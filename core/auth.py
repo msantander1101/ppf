@@ -1,40 +1,96 @@
-import bcrypt
-from sqlmodel import select
-from core.database import User, get_session
-from utils.logger import logger
+# core/auth.py
+"""
+Módulo de autenticación y gestión de usuarios.
+Incluye registro, login, hashing de contraseñas y persistencia de sesión segura.
+"""
 
+from core.database import get_session
+from core.entities import User
+from utils.logger import logger
+from sqlmodel import select
+from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
+import streamlit as st
+
+
+# ======================================================
+# 🔐 REGISTRO DE USUARIO
+# ======================================================
 def register_user(username: str, password: str) -> bool:
-    logger.debug(f"Intentando registrar usuario: {username}")
+    """Registra un nuevo usuario en la base de datos."""
     try:
         with get_session() as session:
+            # Verificar si ya existe
             existing = session.exec(select(User).where(User.username == username)).first()
             if existing:
-                logger.warning(f"Intento de registro duplicado para usuario '{username}'")
+                logger.warning(f"Intento de registrar usuario existente: {username}")
                 return False
-            hashed = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
-            user = User(username=username, password_hash=hashed)
-            session.add(user)
+
+            # Crear nuevo usuario
+            new_user = User(
+                username=username,
+                password_hash=generate_password_hash(password),
+                created_at=datetime.utcnow(),
+            )
+            session.add(new_user)
             session.commit()
+
             logger.info(f"Usuario registrado correctamente: {username}")
             return True
+
     except Exception as e:
         logger.exception(f"Error registrando usuario '{username}': {e}")
         return False
 
+
+# ======================================================
+# 🔑 LOGIN DE USUARIO
+# ======================================================
 def login_user(username: str, password: str) -> bool:
-    logger.debug(f"Intentando login para usuario: {username}")
+    """Valida las credenciales del usuario y guarda los datos en sesión Streamlit."""
     try:
         with get_session() as session:
             user = session.exec(select(User).where(User.username == username)).first()
+
             if not user:
-                logger.warning(f"Usuario '{username}' no encontrado.")
+                logger.warning(f"Intento de login con usuario inexistente: {username}")
                 return False
-            if bcrypt.checkpw(password.encode(), user.password_hash.encode()):
-                logger.info(f"Login exitoso: {username}")
-                return True
-            else:
-                logger.warning(f"Contraseña incorrecta para usuario '{username}'")
+
+            if not check_password_hash(user.password_hash, password):
+                logger.warning(f"Contraseña incorrecta para usuario: {username}")
                 return False
+
+            # 💾 Guardar datos del usuario en la sesión (solo valores primitivos)
+            st.session_state["user"] = {
+                "id": user.id,
+                "username": user.username,
+                "created_at": user.created_at.strftime("%Y-%m-%d %H:%M:%S"),
+            }
+
+            logger.info(f"Login exitoso: {username}")
+            return True
+
     except Exception as e:
-        logger.exception(f"Error en login para usuario '{username}': {e}")
+        logger.exception(f"Error en login de usuario '{username}': {e}")
         return False
+
+
+# ======================================================
+# 🚪 LOGOUT DE USUARIO
+# ======================================================
+def logout_user():
+    """Cierra la sesión actual del usuario."""
+    if "user" in st.session_state:
+        username = st.session_state["user"]["username"]
+        del st.session_state["user"]
+        logger.info(f"Usuario '{username}' cerró sesión correctamente.")
+    else:
+        logger.warning("Intento de logout sin usuario activo.")
+
+
+# ======================================================
+# 👤 OBTENER USUARIO ACTUAL
+# ======================================================
+def get_current_user():
+    """Devuelve el usuario actual desde la sesión Streamlit."""
+    return st.session_state.get("user", None)

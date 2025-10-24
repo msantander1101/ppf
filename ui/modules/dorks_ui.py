@@ -3,7 +3,8 @@ import json
 from datetime import datetime
 from typing import Optional
 from utils.logger import logger
-from core.database import get_session, SearchLog, User
+from core.database import get_session
+from core.entities import SearchLog, User
 # Se evita importar add_relation en el ámbito global para que el módulo
 # funcione incluso si las dependencias de relaciones no están disponibles.
 from modules.search.google_dork import search_dork

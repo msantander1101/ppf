@@ -1,405 +1,267 @@
-# ui/modules/person_ui.py
-
+# ui/modules/person_ui.py  (tu base + añadidos de categorías)
 import streamlit as st
 from sqlmodel import select
 from core.database import get_session
-from core.entities import Person, Email, Profile
+from core.entities import Person, Email, Profile, Relation, SearchLog
 from utils.logger import logger
-import streamlit.components.v1 as components
-from pyvis.network import Network
-import os
-from core.config import get_user_setting
-from modules.search.dorks_engine import fill_template, search_dork, wayback_urls
-from modules.relations.utils import add_relation
-from core.database import SearchLog, User
-import json
 from datetime import datetime
-from ui.modules import auto_enrich_ui
-from core import enrichment as core_enrichment
-
-
-# ==============================================================
-# 🔧 CONFIGURACIÓN DE DORKS
-# ==============================================================
-DORK_TEMPLATES = {
-    "documents": [
-        ("Documentos en web (pdf/docx)", 'site:{entity} filetype:pdf OR filetype:docx'),
-        ("Documentos en Google Drive", 'site:drive.google.com "{entity}"'),
-    ],
-    "files": [
-        ("Archivos comprimidos", 'site:{entity} filetype:zip OR filetype:rar'),
-        ("Excel/Sheets", 'site:{entity} filetype:xls OR filetype:xlsx OR filetype:csv'),
-    ],
-    "content": [
-        ("Coincidencia exacta", '"{entity}"'),
-        ("Contenido en foros", 'site:reddit.com "{entity}" OR site:stackoverflow.com "{entity}"'),
-    ],
-    "wayback": [
-        ("Histórico (Wayback)", "{entity}"),
-    ]
-}
-
-
-# ==============================================================
-# 🔹 FUNCIONES AUXILIARES
-# ==============================================================
-
-def _persist_dork_result(username: str, person: Person, result: dict, tpl: str):
-    """Guarda en SearchLog un resultado de búsqueda Dork."""
-    try:
-        with get_session() as session:
-            user = session.exec(select(User).where(User.username == username)).first()
-            if user:
-                log = SearchLog(
-                    query=tpl.replace("{entity}", person.name),
-                    result=json.dumps(result, ensure_ascii=False),
-                    user_id=user.id,
-                    type="dork",
-                    created_at=datetime.utcnow(),
-                )
-                session.add(log)
-                session.commit()
-    except Exception as e:
-        logger.exception(f"Error guardando SearchLog (dork): {e}")
-
-
-def _delete_dork_results(username: str, person: Person):
-    """Elimina todos los resultados de búsqueda Dork para una persona."""
-    try:
-        with get_session() as session:
-            logs = session.exec(
-                select(SearchLog).where(SearchLog.query.contains(person.name))
-            ).all()
-            for log in logs:
-                session.delete(log)
-            session.commit()
-    except Exception as e:
-        logger.exception(f"Error eliminando resultados de Dorks: {e}")
-
-
-def _delete_person(username: str, person: Person):
-    """Elimina completamente una persona y sus datos relacionados."""
-    try:
-        with get_session() as session:
-            p = session.get(Person, person.id)
-            if not p:
-                logger.warning(f"Tried to delete non-existing person id={person.id}")
-                return
-
-            # Eliminar SearchLogs
-            logs = session.exec(select(SearchLog).where(SearchLog.query.contains(p.name))).all()
-            for log in logs:
-                session.delete(log)
-
-            # Eliminar relaciones si existe el modelo Relation
-            try:
-                from core.database import Relation
-                rels = session.exec(
-                    select(Relation).where(
-                        (Relation.source_id == f"person:{p.id}") |
-                        (Relation.target_id.contains(f"person:{p.id}"))
-                    )
-                ).all()
-                for r in rels:
-                    session.delete(r)
-            except Exception:
-                logger.debug("Relation model not present or error querying relations while deleting person.")
-
-            # Eliminar emails y perfiles asociados
-            emails = session.exec(select(Email).where(Email.person_id == p.id)).all()
-            for e in emails:
-                session.delete(e)
-
-            profiles = session.exec(select(Profile).where(Profile.person_id == p.id)).all()
-            for pr in profiles:
-                session.delete(pr)
-
-            # Finalmente eliminar la persona
-            session.delete(p)
-            session.commit()
-            logger.info(f"Persona y datos relacionados eliminados: {p.name} (id={p.id})")
-    except Exception as e:
-        logger.exception(f"Error eliminando persona {person.id}: {e}")
-
-
-# ==============================================================
-# 🔹 DORKS
-# ==============================================================
-
-def _run_dork_batch(p: Person, username: str, category: str = "documents"):
-    """Ejecuta un conjunto de dorks predefinidos según categoría."""
-    api_key = get_user_setting(username, "serpapi")
-    templates = DORK_TEMPLATES.get(category, [])
-    all_results = []
-
-    with st.spinner(f"Ejecutando dorks ({category}) para {p.name}..."):
-        for label, tpl in templates:
-            query = fill_template(tpl, p.name)
-
-            if category == "wayback":
-                items = wayback_urls(p.name, limit=20)
-                for it in items:
-                    res = {"title": "Wayback", "link": it["url"], "snippet": f"timestamp:{it['timestamp']}", "tpl": tpl}
-                    all_results.append(res)
-                    _persist_dork_result(username, p, res, tpl)
-            else:
-                try:
-                    items = search_dork(query, engine="auto", max_results=10, api_key=api_key)
-                except Exception as e:
-                    st.error(f"Error ejecutando dork {label}: {e}")
-                    continue
-                for it in items:
-                    res = {
-                        "title": it.get("title") or it.get("link") or "(sin título)",
-                        "link": it.get("link") or it.get("url") or "",
-                        "snippet": (it.get("snippet") or "")[:150],
-                        "tpl": tpl
-                    }
-                    all_results.append(res)
-                    _persist_dork_result(username, p, res, tpl)
-
-    st.markdown("---")
-    if all_results:
-        st.success(f"Se han encontrado {len(all_results)} resultados para {p.name}.")
-        if st.button("🗑️ Eliminar todos los resultados", key=f"del_all_{p.id}"):
-            _delete_dork_results(username, p)
-            st.warning("Resultados eliminados.")
-            st.rerun()
-
-        for i, r in enumerate(all_results, start=1):
-            with st.container():
-                st.markdown(f"**{i}. [{r['title']}]({r['link']})**")
-                st.caption(r.get("snippet", ""))
-                c1, c2, c3 = st.columns([1, 1, 1])
-                if c1.button("🌐 Abrir", key=f"open_{p.id}_{i}"):
-                    st.write(f"[Abrir enlace]({r['link']})")
-                if c2.button("📊 Añadir al grafo", key=f"add_{p.id}_{i}"):
-                    add_relation(username, f"person:{p.id}", f"url:{r['link']}", "referencia")
-                    st.success("Añadido al grafo.")
-                if c3.button("🗑️ Eliminar", key=f"del_{p.id}_{i}"):
-                    with get_session() as session:
-                        logs = session.exec(select(SearchLog).where(SearchLog.result.contains(r['link']))).all()
-                        for log in logs:
-                            session.delete(log)
-                        session.commit()
-                    st.warning("Resultado eliminado.")
-                    st.rerun()
-                st.markdown("---")
-    else:
-        st.info("No se encontraron resultados para esos dorks.")
-
-
-# ==============================================================
-# 🔹 ENRIQUECIMIENTO
-# ==============================================================
-
-def _persist_enrich_result(username: str, person: Person, result):
-    """Guarda resultado de enriquecimiento en SearchLog."""
-    try:
-        with get_session() as session:
-            user = session.exec(select(User).where(User.username == username)).first()
-            if user:
-                payload = result.to_dict() if hasattr(result, "to_dict") else result
-                log = SearchLog(
-                    query=f"enrich:{person.name}:{payload.get('source','')}",
-                    result=json.dumps(payload, ensure_ascii=False),
-                    user_id=user.id,
-                    type="enrich",
-                    created_at=datetime.utcnow()
-                )
-                session.add(log)
-                session.commit()
-    except Exception as e:
-        logger.exception(f"Error guardando SearchLog (enrich): {e}")
-
-
-def _quick_enrich_person(person: Person, username: str):
-    """Enriquecimiento rápido usando core.enrichment"""
-    st.info(f"Iniciando enriquecimiento rápido para {person.name}...")
-    try:
-        extra = {
-            "name": person.name,
-            "email": person.emails[0].address if person.emails else "",
-            "username": person.profiles[0].handle if person.profiles else "",
-        }
-
-        results = core_enrichment.enrich_person(username, extra)
-        if not results:
-            st.warning("No se obtuvieron resultados.")
-            return
-
-        for r in results:
-            _persist_enrich_result(username, person, r)
-        st.success(f"Enriquecimiento completado: {len(results)} fuentes procesadas.")
-    except Exception as e:
-        st.error(f"Error durante el enriquecimiento: {e}")
-        logger.exception(e)
-
-
-# ==============================================================
-# 🔹 GRAFO DE PERSONA
-# ==============================================================
-
-def build_graph_for_person(person_id: int) -> str:
-    """Genera grafo visual de una persona y sus relaciones."""
-    net = Network(height="700px", width="100%", bgcolor="#111", font_color="white")
-
-    with get_session() as session:
-        person = session.get(Person, person_id)
-        if not person:
-            raise ValueError("Persona no encontrada")
-
-        net.add_node(f"person:{person.id}", label=person.name, color="#00aaff", shape="ellipse", size=35)
-
-        for e in person.emails:
-            net.add_node(f"email:{e.id}", label=e.address, color="#ffcc00", shape="dot")
-            net.add_edge(f"person:{person.id}", f"email:{e.id}", title="tiene email")
-
-        for pr in person.profiles:
-            net.add_node(f"profile:{pr.id}", label=f"{pr.platform}:{pr.handle}", title=pr.url, color="#66cc66", shape="box")
-            net.add_edge(f"person:{person.id}", f"profile:{pr.id}", title="perfil")
-
-        try:
-            from core.database import Relation
-            relations = session.exec(select(Relation).where(Relation.user_id == person.id)).all()
-            for r in relations:
-                target = r.target_id
-                nid = f"node:{target}"
-                net.add_node(nid, label=target, title=r.relation, color="#ffa500", shape="diamond")
-                net.add_edge(f"person:{person.id}", nid, title=r.relation)
-        except Exception:
-            pass
-
-    os.makedirs("data", exist_ok=True)
-    out_path = f"data/person_graph_{person_id}.html"
-    net.show(out_path)
-    return out_path
-
-
-# ==============================================================
-# 🔹 INTERFAZ PRINCIPAL
-# ==============================================================
+import pandas as pd
+import json
+import re
+from modules.search.general_search import search_general
+from modules.search.documents_search import search_documents
+from modules.search.pastes_search import search_pastes
+from modules.search.social_search import search_social
+from modules.search.code_search import search_code
+from modules.search.archive_search import search_archive
+from modules.relations.utils import add_relation
+from ui.modules.enrich_utils import smart_enrich
 
 def run(username: str):
-    st.header("🧑‍💻 Personas — Huella Digital")
-    st.info("Crea y gestiona entidades 'Persona', añade correos, perfiles y ejecuta búsquedas OSINT.")
+    st.subheader("🧍 Investigación y Gestión de Personas")
+    st.caption("Registra, busca y analiza la huella digital de una persona en distintas fuentes OSINT.")
 
-    # Crear persona
-    with st.form("new_person_form"):
-        name = st.text_input("Nombre completo")
-        notes = st.text_area("Notas (opcional)")
-        if st.form_submit_button("Crear persona"):
-            if not name.strip():
-                st.warning("El nombre no puede estar vacío.")
-            else:
-                with get_session() as session:
-                    person = Person(name=name.strip(), notes=notes or None)
-                    session.add(person)
-                    session.commit()
-                    st.success(f"✅ Persona creada: {person.name}")
-                    st.rerun()
+    tab1, tab2, tab3 = st.tabs(["📋 Lista", "➕ Nueva persona", "🔍 Búsqueda OSINT"])
 
-    # Listado de personas
-    st.subheader("Personas registradas")
+    with tab1:
+        _show_person_table(username)
+
+    with tab2:
+        _add_new_person(username)
+
+    with tab3:
+        _search_osint_interface(username)
+
+# ----------------------- LISTA -----------------------
+def _show_person_table(username: str):
+    # Mantener la sesión abierta para evitar DetachedInstanceError
     with get_session() as session:
         persons = session.exec(select(Person)).all()
+
         if not persons:
             st.info("No hay personas registradas todavía.")
             return
 
-        # ✅ Cargar datos antes de cerrar la sesión
-        persons_data = []
+        data = []
         for p in persons:
-            emails = [e.address for e in p.emails]
-            profiles = [f"{pr.platform}:{pr.handle}" for pr in p.profiles]
-            persons_data.append({
-                "id": p.id,
-                "name": p.name,
-                "notes": p.notes,
-                "emails": emails,
-                "profiles": profiles
+            emails = ", ".join([e.address for e in (p.emails or [])])
+            profiles = ", ".join([f"{pr.platform}:{pr.handle}" for pr in (p.profiles or [])])
+            data.append({
+                "ID": p.id,
+                "Nombre": p.name,
+                "Emails": emails,
+                "Perfiles": profiles,
+                "Notas": p.notes or "",
+                "Creado": p.created_at.strftime("%Y-%m-%d %H:%M:%S")
             })
 
-    # 🔽 Interfaz fuera de la sesión
-    for pdata in persons_data:
-        with st.expander(f"👤 {pdata['name']} (ID: {pdata['id']})"):
-            st.write("🗒️ **Notas:**", pdata['notes'] or "—")
-            st.write("📧 **Emails:**", ", ".join(pdata['emails']) or "—")
-            st.write("🌐 **Perfiles:**", ", ".join(pdata['profiles']) or "—")
+    df = pd.DataFrame(data)
+    st.dataframe(df, width='stretch', hide_index=True)
 
-            with get_session() as s:
-                p = s.get(Person, pdata['id'])
-                if not p:
-                    st.warning("Persona no encontrada.")
-                    continue
+    st.markdown("---")
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        person_id = st.text_input("ID de persona a gestionar", key="input_manage_id")
+        if st.button("👁️ Ver Detalles", key="btn_view_person"):
+            if person_id.strip():
+                _view_person_detail(username, person_id.strip())
+            else:
+                st.warning("Introduce un ID válido.")
+    with col2:
+        if st.button("🔄 Refrescar lista"):
+            st.rerun()
+    with col3:
+        if st.button("💾 Exportar CSV"):
+            csv = df.to_csv(index=False)
+            st.download_button(
+                label="📥 Descargar CSV",
+                data=csv.encode("utf-8"),
+                file_name="personas_osint.csv",
+                mime="text/csv",
+            )
 
-                # Botones de búsqueda
-                col_doc, col_files, col_content, col_way = st.columns(4)
-                if col_doc.button("📄 Documentos", key=f"doc_{p.id}"):
-                    _run_dork_batch(p, username, category="documents")
-                if col_files.button("🗂️ Archivos", key=f"files_{p.id}"):
-                    _run_dork_batch(p, username, category="files")
-                if col_content.button("📝 Contenido", key=f"content_{p.id}"):
-                    _run_dork_batch(p, username, category="content")
-                if col_way.button("⏳ Wayback", key=f"way_{p.id}"):
-                    _run_dork_batch(p, username, category="wayback")
+# ------------------- NUEVA PERSONA -------------------
+def _add_new_person(username: str):
+    with st.form("new_person_form"):
+        name = st.text_input("👤 Nombre completo")
+        notes = st.text_area("🗒️ Notas o contexto")
+        email_list = st.text_area("📧 Correos asociados (uno por línea)")
+        profiles_data = st.text_area("🌐 Perfiles o identificadores (plataforma:handle)")
+        submitted = st.form_submit_button("✅ Guardar Persona")
 
-                # Enriquecimiento
-                en_col1, en_col2 = st.columns([1, 1])
-                if en_col1.button("🧠 Enriquecer (rápido)", key=f"quick_enrich_{p.id}"):
-                    _quick_enrich_person(p, username)
-                if en_col2.button("🧩 Enriquecer (UI)", key=f"ui_enrich_{p.id}"):
-                    auto_enrich_ui.run(username, "person", p.name)
+        if submitted:
+            if not name.strip():
+                st.warning("El campo nombre es obligatorio.")
+                return
 
-                # Añadir email
-                with st.form(f"add_email_{p.id}", clear_on_submit=True):
-                    new_email = st.text_input("Añadir email", key=f"email_input_{p.id}")
-                    if st.form_submit_button("➕ Agregar email") and new_email.strip():
-                        e = Email(address=new_email.strip(), person_id=p.id)
-                        s.add(e)
-                        s.commit()
-                        st.success(f"📧 Email agregado: {new_email}")
-                        st.rerun()
+            with get_session() as session:
+                new_person = Person(name=name.strip(), notes=notes.strip() if notes else "")
+                session.add(new_person)
+                session.commit()
 
-                # Añadir perfil
-                with st.form(f"add_profile_{p.id}", clear_on_submit=True):
-                    col1, col2, col3 = st.columns(3)
-                    platform = col1.selectbox("Plataforma", ["Twitter", "Instagram", "LinkedIn", "Facebook", "GitHub", "Otro"])
-                    handle = col2.text_input("Usuario / Handle")
-                    url = col3.text_input("URL del perfil")
-                    if st.form_submit_button("➕ Agregar perfil") and handle.strip():
-                        pr = Profile(platform=platform, handle=handle.strip(), url=url.strip(), person_id=p.id)
-                        s.add(pr)
-                        s.commit()
-                        st.success(f"🌐 Perfil agregado: {platform} / {handle}")
-                        st.rerun()
+                for e in email_list.splitlines():
+                    e = e.strip()
+                    if e:
+                        session.add(Email(address=e, person_id=new_person.id))
 
-                # Grafo
-                if st.button(f"Ver grafo de {p.name}", key=f"graph_{p.id}"):
-                    try:
-                        graph_path = build_graph_for_person(p.id)
-                        with open(graph_path, "r", encoding="utf-8") as f:
-                            components.html(f.read(), height=700, scrolling=True)
-                    except Exception as e:
-                        st.error(f"Error generando grafo: {e}")
+                for line in profiles_data.splitlines():
+                    if ":" in line:
+                        platform, handle = line.split(":", 1)
+                        session.add(Profile(platform=platform.strip(), handle=handle.strip(), person_id=new_person.id))
 
-                # Eliminar persona
-                if st.button("❌ Eliminar persona", key=f"del_person_{p.id}"):
-                    st.session_state[f"confirm_delete_{p.id}"] = True
+                session.commit()
+                logger.info(f"Nueva persona registrada: {name}")
+                st.success(f"✅ Persona '{name}' añadida correctamente.")
+                st.rerun()
 
-                if st.session_state.get(f"confirm_delete_{p.id}", False):
-                    with st.expander("⚠️ Confirma eliminación permanente", expanded=True):
-                        st.warning("Esta acción eliminará la persona y TODOS sus datos relacionados.")
-                        confirm_input = st.text_input("Escribe el nombre completo para confirmar", key=f"confirm_input_{p.id}")
-                        col_ok, col_cancel = st.columns([1, 1])
-                        if col_ok.button("Confirmar eliminación", key=f"confirm_del_btn_{p.id}"):
-                            if confirm_input.strip() == p.name:
-                                _delete_person(username, p)
-                                st.success("✅ Persona eliminada correctamente.")
-                                st.session_state.pop(f"confirm_delete_{p.id}", None)
-                                st.rerun()
-                            else:
-                                st.error("El texto no coincide con el nombre de la persona.")
-                        if col_cancel.button("Cancelar", key=f"cancel_del_btn_{p.id}"):
-                            st.session_state.pop(f"confirm_delete_{p.id}", None)
-                            st.info("Eliminación cancelada.")
+# ------------------ DETALLE PERSONA ------------------
+def _view_person_detail(username: str, person_id: str):
+    # Mantener la sesión abierta mientras se usa el objeto
+    with get_session() as session:
+        person = session.get(Person, int(person_id))
+
+        if not person:
+            st.error("Persona no encontrada.")
+            return
+
+        # Convertir a datos simples dentro del contexto
+        person_data = {
+            "name": person.name,
+            "notes": person.notes,
+            "created_at": person.created_at,
+            "emails": [e.address for e in (person.emails or [])],
+            "profiles": [(p.platform, p.handle, p.url) for p in (person.profiles or [])],
+        }
+
+    # Aquí ya no se usa el objeto Person, solo dict
+    st.markdown(f"### 👤 {person_data['name']}")
+    st.caption(f"🕒 Creado el {person_data['created_at'].strftime('%Y-%m-%d %H:%M:%S')}")
+    if person_data["notes"]:
+        st.info(person_data["notes"])
+
+    st.markdown("#### 📧 Emails")
+    if person_data["emails"]:
+        for e in person_data["emails"]:
+            st.write(f"- {e}")
+    else:
+        st.warning("Sin correos asociados.")
+
+    st.markdown("#### 🌐 Perfiles")
+    if person_data["profiles"]:
+        for platform, handle, url in person_data["profiles"]:
+            url = url or f"https://{platform}.com/{handle}"
+            st.markdown(f"- [{platform}]({url}) → {handle}")
+    else:
+        st.warning("Sin perfiles sociales registrados.")
+
+    st.markdown("---")
+    st.subheader("🧭 Buscar por categoría")
+
+    col1, col2, col3 = st.columns(3)
+    col4, col5, col6 = st.columns(3)
+
+    if col1.button("🔍 General"):
+        _run_and_render(username, person, search_general(person.name))
+    if col2.button("📄 Docs"):
+        _run_and_render(username, person, search_documents(person.name))
+    if col3.button("🧾 Pastes"):
+        first_email = person.emails[0].address if person.emails else ""
+        _run_and_render(username, person, search_pastes(person.name, email=first_email))
+    if col4.button("👥 Social"):
+        _run_and_render(username, person, search_social(person.name))
+    if col5.button("💻 Code"):
+        first_email = person.emails[0].address if person.emails else ""
+        _run_and_render(username, person, search_code(person.name, email=first_email))
+    if col6.button("🕰️ Histórico"):
+        _run_and_render(username, person, search_archive(person.name))
+
+    st.markdown("---")
+    _show_relations(person_id)
+
+# -------------- BUSQUEDA LIBRE MANUAL ----------------
+def _search_osint_interface(username: str):
+    st.markdown("### 🔎 Búsqueda libre OSINT")
+    query = st.text_input("Introduce un nombre, correo, dominio o alias social")
+    if st.button("Buscar"):
+        with st.spinner("Buscando en múltiples fuentes..."):
+            # por simplicidad, usa General
+            results = search_general(query, username=username)
+            if results:
+                _render_osint_results(username, None, results)
+            else:
+                st.warning("Sin resultados.")
+
+# ---------------- RENDER & PERSISTENCIA ---------------
+def _run_and_render(username, person, results):
+    if not results:
+        st.info("No se encontraron resultados.")
+        return
+    _render_osint_results(username, person, results)
+
+def _render_osint_results(username, person, results):
+    count = 0
+    for r in results:
+        count += 1
+        title = r.get("title") or r.get("link") or "sin título"
+        link = r.get("link") or ""
+        snippet = r.get("snippet") or ""
+        label = r.get("label", "")
+        category = r.get("category", "")
+
+        with st.expander(f"🌐 {title}"):
+            st.caption(f"{category} · {label}")
+            if link:
+                st.markdown(f"[Abrir enlace]({link})")
+            if snippet:
+                st.caption(snippet[:300] + ("..." if len(snippet) > 300 else ""))
+
+            c1, c2, c3 = st.columns(3)
+            if c1.button("🔗 Abrir", key=f"open_{count}_{title[:16]}"):
+                st.markdown(f"[Abrir enlace]({link})")
+            if c2.button("➕ Añadir al grafo", key=f"add_{count}_{title[:16]}"):
+                if person and link:
+                    add_relation(username, f"person:{person.id}", f"url:{link}", "referencia")
+                    st.success("Añadido al grafo.")
+            if c3.button("🧠 Enriquecer", key=f"enrich_{count}_{title[:16]}"):
+                try:
+                    out = smart_enrich(username, link or title)
+                    st.success("Enriquecimiento lanzado.")
+                except Exception as e:
+                    st.error(f"Error enriqueciendo: {e}")
+
+    # Guardar log (sin forzar user_id)
+    try:
+        with get_session() as session:
+            log = SearchLog(
+                query=f"osint:{person.name if person else 'manual'}",
+                result=json.dumps(results, ensure_ascii=False),
+                user_id=None,
+                type="osint_search",
+                created_at=datetime.utcnow()
+            )
+            session.add(log)
+            session.commit()
+        logger.info(f"[person_ui] Guardados {len(results)} resultados OSINT.")
+    except Exception as e:
+        logger.warning(f"No se pudo guardar SearchLog: {e}")
+
+# -------------------- RELACIONES ----------------------
+def _show_relations(person_id: str):
+    with get_session() as session:
+        rels = session.exec(select(Relation).where(Relation.source_id == f"person:{person_id}")).all()
+
+    if not rels:
+        st.info("No hay relaciones asociadas a esta persona.")
+        return
+
+    st.markdown("#### 🔗 Relaciones detectadas")
+    for r in rels:
+        st.write(f"- **{r.relation}** → {r.target_id} ({r.created_at.strftime('%Y-%m-%d')})")
+
+    if st.button("❌ Eliminar todas las relaciones de esta persona"):
+        with get_session() as session:
+            for r in rels:
+                session.delete(r)
+            session.commit()
+        st.warning("Relaciones eliminadas.")
+        st.rerun()

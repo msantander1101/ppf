@@ -1,80 +1,71 @@
+
 import streamlit as st
-from core.database import get_session
-from core.entities import Person
-from core.database import SearchLog
-from sqlmodel import select
+from core.auth import get_current_user, logout_user
+from ui.modules import person_ui, auto_enrich_ui, history_ui, graph_ui, settings_ui
 from utils.logger import logger
 
-# Importamos los módulos UI disponibles
-from ui.modules import person_ui, history_ui, settings_ui, graph_ui
 
-def main():
-    """
-    Panel principal de OSINT Suite.
-    Gestiona la navegación entre módulos y muestra métricas globales.
-    """
+def run():
+    # ==========================================================
+    # 🧍 CONTROL DE SESIÓN
+    # ==========================================================
+    user = get_current_user()
+    if not user:
+        st.warning("⚠️ No has iniciado sesión. Por favor, accede con tus credenciales.")
+        st.switch_page("login.py")
+        st.stop()
 
-    st.set_page_config(page_title="OSINT Suite Dashboard", page_icon="🕵️‍♂️", layout="wide")
-    st.sidebar.title("📂 OSINT Suite")
+    username = user["username"]
 
-    # Menú lateral de navegación
-    menu = st.sidebar.radio(
-        "Navegación",
-        ["Inicio", "Personas", "Historial", "Grafo", "Configuración"]
-    )
+    # ==========================================================
+    # 🧭 ENCABEZADO
+    # ==========================================================
+    st.set_page_config(page_title="OSINT Suite — Dashboard", page_icon="🧩", layout="wide")
+    st.title("🧩 OSINT Suite — Panel principal")
+    st.caption(f"Bienvenido, **{username}**")
 
-    username = st.session_state.get("username", "Invitado")
+    col1, col2 = st.columns([3, 1])
+    with col1:
+        st.info("Selecciona una sección para comenzar el análisis OSINT.")
+    with col2:
+        if st.button("🚪 Cerrar sesión"):
+            logout_user()
+            st.success("Sesión cerrada correctamente.")
+            st.switch_page("login.py")
+            st.stop()
 
-    if menu == "Inicio":
-        st.title("🕵️‍♂️ OSINT Suite — Panel Principal")
-        st.markdown(f"👋 Bienvenido, **{username}**.")
-        st.info("Selecciona un módulo en el menú lateral para comenzar tu investigación OSINT.")
+    st.markdown("---")
 
-        try:
-            from sqlalchemy import func
-            with get_session() as session:
-                total_personas = session.exec(select(func.count()).select_from(Person)).one()
-                total_logs = session.exec(select(func.count()).select_from(SearchLog)).one()
+    # ==========================================================
+    # 📁 SECCIONES PRINCIPALES
+    # ==========================================================
+    tabs = st.tabs([
+        "🧍 Personas",
+        "🧠 Auto-Enriquecimiento",
+        "📜 Historial",
+        "🌐 Grafo Global",
+        "⚙️ Configuración"
+    ])
 
-            col1, col2 = st.columns(2)
-            col1.metric("👤 Personas registradas", total_personas)
-            col2.metric("🔍 Búsquedas ejecutadas", total_logs)
-
-            # Mostrar últimos logs de actividad
-            st.markdown("### 🕓 Actividad reciente")
-            with get_session() as session:
-                logs = session.exec(
-                    select(SearchLog).order_by(SearchLog.created_at.desc()).limit(5)
-                ).all()
-
-                if not logs:
-                    st.info("No hay actividad reciente registrada.")
-                else:
-                    for log in logs:
-                        st.markdown(
-                            f"- **{log.query}**  \n"
-                            f"🧩 Tipo: `{log.type}`  \n"
-                            f"🕒 {log.created_at.strftime('%Y-%m-%d %H:%M:%S')}"
-                        )
-        except Exception as e:
-            st.error(f"Error cargando métricas: {e}")
-            logger.exception("Error en dashboard metrics")
-
-    elif menu == "Personas":
+    with tabs[0]:
         person_ui.run(username)
 
-    elif menu == "Historial":
+    with tabs[1]:
+        st.subheader("🧠 Enriquecimiento automático de entidades")
+        entity_type = st.selectbox("Tipo de entidad", ["person", "email", "domain"])
+        entity_value = st.text_input("Valor de la entidad", placeholder="Ej. msantander@example.com o dominio.com")
+
+        if st.button("🧩 Ejecutar enriquecimiento"):
+            if entity_value.strip():
+                auto_enrich_ui.run(username, entity_type, entity_value)
+            else:
+                st.warning("Introduce un valor válido para la entidad.")
+
+    with tabs[2]:
         history_ui.run(username)
 
-    elif menu == "Grafo":
+    with tabs[3]:
         graph_ui.run(username)
 
-    elif menu == "Configuración":
+    with tabs[4]:
         settings_ui.run(username)
-
-    else:
-        st.warning("Selecciona una opción válida en el menú lateral.")
-
-
-if __name__ == "__main__":
-    main()
