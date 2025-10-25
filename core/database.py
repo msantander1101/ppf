@@ -1,69 +1,49 @@
 # core/database.py
-import logging
+"""
+Gestión central de la base de datos para OSINT Suite.
+Incluye inicialización, contexto de sesión y soporte SQLite / PostgreSQL.
+"""
+
+import os
 from sqlmodel import SQLModel, create_engine, Session
 from contextlib import contextmanager
-from pathlib import Path
+from utils.logger import logger
 
-# Importa todos los modelos (import tardío para evitar ciclos)
-from core.entities import (
-    User,
-    UserSetting,
-    Person,
-    Email,
-    Profile,
-    SearchLog,
-    Relation,
-)
+# ==========================================================
+# 🔹 CONFIGURACIÓN DEL MOTOR
+# ==========================================================
+DATABASE_URL = os.environ.get("DATABASE_URL", "sqlite:///data/osint.db")
 
-logger = logging.getLogger("osint_suite")
-
-# ======================================================
-# CONFIGURACIÓN DE LA BASE DE DATOS
-# ======================================================
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-DB_PATH = BASE_DIR / "data" / "osint_suite.db"
-DB_PATH.parent.mkdir(exist_ok=True)
-
-DATABASE_URL = f"sqlite:///{DB_PATH}"
-engine = create_engine(DATABASE_URL, echo=False)
+# Si usas SQLite local, activa check_same_thread=False
+connect_args = {"check_same_thread": False} if DATABASE_URL.startswith("sqlite") else {}
+engine = create_engine(DATABASE_URL, echo=False, connect_args=connect_args)
 
 
-# ======================================================
-# FUNCIÓN: Inicializar Base de Datos
-# ======================================================
-def init_db() -> None:
-    """
-    Inicializa las tablas de la base de datos si no existen.
-    """
+# ==========================================================
+# 🧱 INICIALIZACIÓN
+# ==========================================================
+def init_db():
+    """Crea las tablas definidas si no existen."""
     try:
-        logger.info("Inicializando base de datos...")
+        from core import entities  # aseguramos que los modelos estén importados
         SQLModel.metadata.create_all(engine)
         logger.info("Base de datos inicializada correctamente.")
     except Exception as e:
-        logger.error(f"Error inicializando la base de datos: {e}", exc_info=True)
+        logger.exception(f"[init_db] Error al inicializar la base de datos: {e}")
 
 
-# ======================================================
-# CONTEXT MANAGER para obtener sesiones limpias
-# ======================================================
+# ==========================================================
+# 💾 SESIÓN DE BASE DE DATOS (CONTEXT MANAGER)
+# ==========================================================
 @contextmanager
 def get_session():
-    """
-    Devuelve una sesión de base de datos usando context manager.
-
-    Ejemplo:
-        with get_session() as session:
-            session.add(obj)
-            session.commit()
-    """
+    """Crea y gestiona una sesión SQLModel segura."""
     session = Session(engine)
     try:
         yield session
-        session.commit()
     except Exception as e:
         session.rollback()
-        logger.error(f"Error en sesión de base de datos: {e}", exc_info=True)
+        logger.exception(f"[get_session] Error en sesión: {e}")
         raise
     finally:
         session.close()

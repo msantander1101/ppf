@@ -1,75 +1,69 @@
 # core/entities.py
-from sqlmodel import SQLModel, Field, Relationship
-from typing import Optional, List
+"""
+Modelos principales de la base de datos OSINT Suite.
+Incluye entidades: User, UserSetting, Person, Email, Profile, Relation, SearchLog.
+"""
+
 from datetime import datetime
+from typing import Optional, List
+from sqlmodel import SQLModel, Field, Relationship
 
 
 # ==========================================================
-# 👤 USUARIO
+# 👤 USUARIO Y CONFIGURACIÓN
 # ==========================================================
 class User(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
-    username: str
+    username: str = Field(index=True, sa_column_kwargs={"unique": True})
     password_hash: str
     created_at: datetime = Field(default_factory=datetime.utcnow)
 
-    preferences: List["UserPreference"] = Relationship(back_populates="user")
-    persons: List["Person"] = Relationship(back_populates="owner")
+    settings: List["UserSetting"] = Relationship(back_populates="user")
 
 
-# ==========================================================
-# ⚙️ CONFIGURACIONES DE USUARIO
-# ==========================================================
-class UserPreference(SQLModel, table=True):
+class UserSetting(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
-    user_id: int = Field(foreign_key="user.id")
+    user_id: int = Field(foreign_key="user.id", index=True)
     key: str
-    value: str
+    value: str = ""
+    created_at: datetime = Field(default_factory=datetime.utcnow)
 
-    user: Optional[User] = Relationship(back_populates="preferences")
+    user: Optional[User] = Relationship(back_populates="settings")
 
 
 # ==========================================================
-# 🧍 PERSONA
+# 🧍 PERSONAS Y ELEMENTOS RELACIONADOS
 # ==========================================================
 class Person(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     name: str
     notes: Optional[str] = None
     created_at: datetime = Field(default_factory=datetime.utcnow)
-    owner_id: Optional[int] = Field(default=None, foreign_key="user.id")
 
     emails: List["Email"] = Relationship(back_populates="person")
     profiles: List["Profile"] = Relationship(back_populates="person")
-    owner: Optional[User] = Relationship(back_populates="persons")
 
 
-# ==========================================================
-# 📧 EMAILS
-# ==========================================================
 class Email(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
-    address: str
-    person_id: Optional[int] = Field(default=None, foreign_key="person.id")
+    address: str = Field(index=True)
+    person_id: Optional[int] = Field(foreign_key="person.id")
 
     person: Optional[Person] = Relationship(back_populates="emails")
 
 
-# ==========================================================
-# 🌐 PERFILES SOCIALES
-# ==========================================================
 class Profile(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     platform: str
     handle: str
     url: Optional[str] = None
-    person_id: Optional[int] = Field(default=None, foreign_key="person.id")
+    person_id: Optional[int] = Field(foreign_key="person.id")
 
     person: Optional[Person] = Relationship(back_populates="profiles")
 
 
 # ==========================================================
-# 🔗 RELACIONES ENTRE ENTIDADES
+# 🔗 RELACIONES / GRAFO
 # ==========================================================
 class Relation(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
@@ -80,12 +74,12 @@ class Relation(SQLModel, table=True):
 
 
 # ==========================================================
-# 📜 LOG DE BÚSQUEDAS
+# 🧠 REGISTRO DE BÚSQUEDAS
 # ==========================================================
 class SearchLog(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
+    user_id: Optional[int] = Field(default=None, foreign_key="user.id", index=True)
     query: str
     result: str
-    user_id: Optional[int] = Field(default=None, foreign_key="user.id")
-    type: str
+    type: str = "osint_search"
     created_at: datetime = Field(default_factory=datetime.utcnow)

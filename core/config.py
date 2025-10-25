@@ -22,7 +22,7 @@ DB_PATH = os.getenv("DB_PATH", "data/osint_suite.db")
 # ==========================================================
 def get_user_setting(username: str, key: str) -> str:
     """Recupera un valor de configuración del usuario (descifrado)."""
-    from core.entities import UserPreference
+    from core.entities import UserSetting
 
     with get_session() as session:
         user = session.exec(select(User).where(User.username == username)).first()
@@ -31,8 +31,8 @@ def get_user_setting(username: str, key: str) -> str:
             return None
 
         pref = session.exec(
-            select(UserPreference).where(
-                UserPreference.user_id == user.id, UserPreference.key == key
+            select(UserSetting).where(
+                UserSetting.user_id == user.id, UserSetting.key == key
             )
         ).first()
         return decrypt_value(pref.value) if pref else None
@@ -40,7 +40,7 @@ def get_user_setting(username: str, key: str) -> str:
 
 def set_user_setting(username: str, key: str, value: str):
     """Guarda o actualiza un valor cifrado en la configuración del usuario."""
-    from core.entities import UserPreference
+    from core.entities import UserSetting
 
     with get_session() as session:
         user = session.exec(select(User).where(User.username == username)).first()
@@ -49,8 +49,8 @@ def set_user_setting(username: str, key: str, value: str):
             return
 
         pref = session.exec(
-            select(UserPreference).where(
-                UserPreference.user_id == user.id, UserPreference.key == key
+            select(UserSetting).where(
+                UserSetting.user_id == user.id, UserSetting.key == key
             )
         ).first()
 
@@ -59,7 +59,7 @@ def set_user_setting(username: str, key: str, value: str):
         if pref:
             pref.value = encrypted_value
         else:
-            pref = UserPreference(user_id=user.id, key=key, value=encrypted_value)
+            pref = UserSetting(user_id=user.id, key=key, value=encrypted_value)
             session.add(pref)
 
         session.commit()
@@ -68,7 +68,7 @@ def set_user_setting(username: str, key: str, value: str):
 
 def delete_user_setting(username: str, key: str):
     """Elimina una clave o ajuste específico del usuario."""
-    from core.entities import UserPreference
+    from core.entities import UserSetting
 
     with get_session() as session:
         user = session.exec(select(User).where(User.username == username)).first()
@@ -76,8 +76,8 @@ def delete_user_setting(username: str, key: str):
             return
 
         pref = session.exec(
-            select(UserPreference).where(
-                UserPreference.user_id == user.id, UserPreference.key == key
+            select(UserSetting).where(
+                UserSetting.user_id == user.id, UserSetting.key == key
             )
         ).first()
         if pref:
