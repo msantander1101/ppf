@@ -14,6 +14,7 @@ from sqlmodel import select
 from datetime import datetime
 from collections import defaultdict
 import json
+from modules.ai.semantic_enricher import analyze_text_with_ai
 
 
 def run(entity_type: str, entity_value: str, extra_data: dict = None):

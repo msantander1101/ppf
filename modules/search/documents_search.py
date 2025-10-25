@@ -1,18 +1,11 @@
-# modules/search/documents_search.py
+# modules/search/document_search.py
+from modules.search.ai_ranking import rank_results
 from modules.search.buscadores import search_buscador
 
-TEMPLATES = [
-    ("PDF/DOCX/DOC", '"{q}" (filetype:pdf OR filetype:doc OR filetype:docx)'),
-    ("Currículums", '"{q}" (intitle:cv OR intitle:curriculum) (filetype:pdf OR filetype:docx)'),
-    ("Presentaciones", '"{q}" filetype:ppt OR filetype:pptx'),
-]
-
-def search_documents(q: str, username: str = None, max_results: int = 12):
-    results = []
-    for label, tpl in TEMPLATES:
-        hits = search_buscador(tpl.format(q=q), username=username, engine="auto", max_results=max_results)
-        for h in hits:
-            h["category"] = "documents"
-            h["label"] = label
-            results.append(h)
-    return results
+def search_documents(query, username=None, max_results=10):
+    """
+    Busca documentos (PDF, DOC, DOCX, etc.) relacionados con la entidad.
+    """
+    dork = f'("{query}" filetype:pdf OR filetype:doc OR filetype:docx OR filetype:pptx)'
+    results = search_buscador(dork, username=username, engine="auto", max_results=max_results)
+    return rank_results(query, results)

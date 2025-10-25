@@ -1,114 +1,86 @@
 # core/config.py
-import logging
-from typing import Optional
+"""
+Gestión de configuración general y ajustes de usuario.
+Incluye cifrado AES-256 para claves y variables sensibles.
+"""
 
+import os
+from sqlmodel import select
 from core.database import get_session
-from core.entities import UserSetting, User
-from typing import Union
+from core.entities import User
+from utils.logger import logger
+from utils.crypto import encrypt_value, decrypt_value
 
-logger = logging.getLogger("osint_suite")
+# ==========================================================
+# 🔹 VARIABLES GLOBALES DE CONFIGURACIÓN
+# ==========================================================
+APP_ENCRYPTION_KEY = os.getenv("APP_ENCRYPTION_KEY", None)
+DB_PATH = os.getenv("DB_PATH", "data/osint_suite.db")
 
+# ==========================================================
+# 🧩 FUNCIONES DE AJUSTES DE USUARIO
+# ==========================================================
+def get_user_setting(username: str, key: str) -> str:
+    """Recupera un valor de configuración del usuario (descifrado)."""
+    from core.entities import UserPreference
 
-# =========================================
-# Obtener la configuración de un usuario
-# =========================================
-def get_user_setting(user: Union[int, str], key: str) -> Optional[str]:
-    """
-    Devuelve el valor de una configuración concreta para un usuario.
+    with get_session() as session:
+        user = session.exec(select(User).where(User.username == username)).first()
+        if not user:
+            logger.warning(f"[config] Usuario {username} no encontrado.")
+            return None
 
-    Este helper acepta tanto un identificador numérico (`user_id`) como un
-    nombre de usuario (`username`). Si se pasa un `username`, se realizará
-    una búsqueda en la base de datos para obtener su `id`. Si el usuario no
-    existe o la configuración no está almacenada, se devuelve `None`.
-    """
-    try:
-        with get_session() as session:
-            # Determinar el user_id a partir del parámetro
-            if isinstance(user, int):
-                user_id = user
-            else:
-                # Buscar por nombre de usuario
-                u = session.query(User).filter_by(username=user).first()
-                if not u:
-                    logger.debug(f"Usuario no encontrado: {user}")
-                    return None
-                user_id = u.id
-
-            setting = session.query(UserSetting).filter_by(user_id=user_id, key=key).first()
-            if setting:
-                logger.debug(f"Configuración encontrada [{key}] = {setting.value}")
-                return setting.value
-            else:
-                logger.debug(f"Configuración [{key}] no encontrada para usuario {user_id}")
-                return None
-    except Exception as e:
-        logger.error(f"Error obteniendo configuración '{key}' para usuario {user}: {e}")
-        return None
+        pref = session.exec(
+            select(UserPreference).where(
+                UserPreference.user_id == user.id, UserPreference.key == key
+            )
+        ).first()
+        return decrypt_value(pref.value) if pref else None
 
 
-# =========================================
-# Guardar o actualizar una configuración
-# =========================================
-def set_user_setting(user: Union[int, str], key: str, value: str) -> None:
-    """
-    Crea o actualiza un valor de configuración para un usuario.
+def set_user_setting(username: str, key: str, value: str):
+    """Guarda o actualiza un valor cifrado en la configuración del usuario."""
+    from core.entities import UserPreference
 
-    Se acepta como primer parámetro tanto el `user_id` (int) como el
-    `username` (str). Si el usuario no existe en la base de datos, no se
-    realizará ninguna operación.
-    """
-    try:
-        with get_session() as session:
-            # Determinar el user_id
-            if isinstance(user, int):
-                user_id = user
-            else:
-                u = session.query(User).filter_by(username=user).first()
-                if not u:
-                    logger.debug(f"No existe el usuario '{user}' para guardar configuración.")
-                    return
-                user_id = u.id
+    with get_session() as session:
+        user = session.exec(select(User).where(User.username == username)).first()
+        if not user:
+            logger.warning(f"[config] Usuario {username} no encontrado.")
+            return
 
-            setting = session.query(UserSetting).filter_by(user_id=user_id, key=key).first()
-            if setting:
-                setting.value = value
-                logger.debug(f"Configuración actualizada [{key}] = {value}")
-            else:
-                setting = UserSetting(user_id=user_id, key=key, value=value)
-                session.add(setting)
-                logger.debug(f"Nueva configuración creada [{key}] = {value}")
+        pref = session.exec(
+            select(UserPreference).where(
+                UserPreference.user_id == user.id, UserPreference.key == key
+            )
+        ).first()
 
+        encrypted_value = encrypt_value(value)
+
+        if pref:
+            pref.value = encrypted_value
+        else:
+            pref = UserPreference(user_id=user.id, key=key, value=encrypted_value)
+            session.add(pref)
+
+        session.commit()
+        logger.info(f"[config] Guardado setting {key} para usuario {username}.")
+
+
+def delete_user_setting(username: str, key: str):
+    """Elimina una clave o ajuste específico del usuario."""
+    from core.entities import UserPreference
+
+    with get_session() as session:
+        user = session.exec(select(User).where(User.username == username)).first()
+        if not user:
+            return
+
+        pref = session.exec(
+            select(UserPreference).where(
+                UserPreference.user_id == user.id, UserPreference.key == key
+            )
+        ).first()
+        if pref:
+            session.delete(pref)
             session.commit()
-    except Exception as e:
-        logger.error(f"Error guardando configuración '{key}' para usuario {user}: {e}")
-
-
-# =========================================
-# Cargar todas las configuraciones de un usuario
-# =========================================
-def get_all_user_settings(user: Union[int, str]) -> dict:
-    """
-    Devuelve todas las configuraciones del usuario en forma de diccionario.
-
-    Acepta tanto `user_id` como `username`. Si el usuario no existe o no tiene
-    configuraciones, se devuelve un diccionario vacío.
-    """
-    try:
-        with get_session() as session:
-            # Determinar el user_id
-            if isinstance(user, int):
-                user_id = user
-            else:
-                u = session.query(User).filter_by(username=user).first()
-                if not u:
-                    logger.debug(f"Usuario no encontrado: {user}")
-                    return {}
-                user_id = u.id
-
-            settings = session.query(UserSetting).filter_by(user_id=user_id).all()
-            config_dict = {s.key: s.value for s in settings}
-            logger.debug(f"Configuraciones cargadas para usuario {user_id}: {config_dict}")
-            return config_dict
-    except Exception as e:
-        logger.error(f"Error obteniendo todas las configuraciones para usuario {user}: {e}")
-        return {}
+            logger.info(f"[config] Eliminado setting {key} de usuario {username}.")
