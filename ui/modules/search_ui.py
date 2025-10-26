@@ -15,7 +15,7 @@ from core.entities import SearchLog
 from utils.logger import logger
 from utils import config
 from core.config import get_user_setting
-from modules.search import hibpsearch
+from modules.search import hibp
 
 
 def run(username: Optional[str] = None):
