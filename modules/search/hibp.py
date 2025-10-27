@@ -1,55 +1,53 @@
-import time
 import requests
+from core.config import get_user_setting
 from utils.logger import logger
-from core.config import get_user_setting  # ✅ correcta función para leer configuraciones del usuario
+
+HIBP_API_BASE = "https://haveibeenpwned.com/api/v3"
+
+
+def _headers_for(username: str):
+    key = get_user_setting(username, "hibp")
+    if not key:
+        logger.warning(f"[HIBP] No se encontró clave API para el usuario {username}.")
+        return None
+    return {"hibp-api-key": key, "user-agent": "ppf-osint-suite/1.0"}
+
 
 def search_hibp(email: str, username: str):
     """
-    Busca si un email ha sido filtrado en Have I Been Pwned (HIBP).
-    Usa la API key almacenada en configuración (get_user_setting) y gestiona el rate limit automáticamente.
+    Consulta HIBP para un email y devuelve lista de breaches normalizada.
     """
-    api_key = get_user_setting(username, "hibp")
-    if not api_key:
-        logger.warning(f"[HIBP] No se encontró clave API para el usuario {username}.")
-        return None
+    if not email or not username:
+        return []
 
-    headers = {
-        "hibp-api-key": api_key,
-        "user-agent": f"OSINTSuite/{username}"
-    }
+    headers = _headers_for(username)
+    if not headers:
+        return []
 
-    url = f"https://haveibeenpwned.com/api/v3/breachedaccount/{email}"
-    max_retries = 5
-    delay = 2  # segundos entre intentos
-
-    for attempt in range(max_retries):
-        try:
-            resp = requests.get(url, headers=headers, timeout=15)
-
-            # ✅ 200 → resultados encontrados
-            if resp.status_code == 200:
-                return resp.json()
-
-            # ⚪ 404 → no hay filtraciones
-            elif resp.status_code == 404:
-                logger.info(f"[HIBP] {email} no encontrado en filtraciones.")
-                return None
-
-            # 🟡 429 → rate limit → espera y reintenta
-            elif resp.status_code == 429:
-                wait_time = 5 + attempt * 2
-                logger.warning(f"[HIBP] Rate limit alcanzado (429). Esperando {wait_time}s...")
-                time.sleep(wait_time)
-                continue
-
-            # 🔴 otros errores HTTP
-            else:
-                logger.warning(f"[HIBP] Error {resp.status_code}: {resp.text}")
-                return None
-
-        except requests.RequestException as e:
-            logger.error(f"[HIBP] Error de conexión al consultar {email}: {e}")
-            time.sleep(delay)
-
-    logger.warning(f"[HIBP] Demasiados intentos fallidos para {email}.")
-    return None
+    url = f"{HIBP_API_BASE}/breachedaccount/{email}"
+    params = {"truncateResponse": False}
+    try:
+        r = requests.get(url, headers=headers, params=params, timeout=15)
+        if r.status_code == 200:
+            data = r.json()
+            normalized = []
+            for b in data:
+                normalized.append({
+                    "Name": b.get("Name"),
+                    "Domain": b.get("Domain", ""),
+                    "BreachDate": b.get("BreachDate", ""),
+                    "PwnCount": b.get("PwnCount", ""),
+                    "Description": b.get("Description", "")
+                })
+            return normalized
+        elif r.status_code == 404:
+            return []
+        elif r.status_code == 429:
+            logger.warning(f"[HIBP] Rate limited (429) para {email}")
+            return []
+        else:
+            logger.warning(f"[HIBP] Código inesperado {r.status_code}: {r.text}")
+            return []
+    except Exception as e:
+        logger.exception(f"[HIBP] Error buscando {email}: {e}")
+        return []

@@ -1,5 +1,6 @@
 from modules.search.ai_ranking import rank_results
-from modules.search.buscadores import search_buscador
+from modules.search.buscadores import search_buscadores
+
 
 def search_general(query, username=None, max_results=10):
     """
