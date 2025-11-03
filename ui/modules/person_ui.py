@@ -1,129 +1,278 @@
+# modules/search/darkweb.py
 """
-Módulo: person_ui.py
--------------------------------------
-Interfaz de búsqueda, enriquecimiento y análisis de personas para OSINT Suite.
-Integración total con módulos de búsqueda (pastes, social, code, docs) y AI.
+Módulo de búsqueda Dark Web OSINT
+Fuentes: Danex, Torry, Dargle, Tor.link, Vormweb, OnionLand.io, Onion Search Engine, OnionLinkHub.
+- Proxy Tor automático (lee settings del usuario: proxy/use_tor)
+- Rotación de mirrors .onion cuando estén disponibles
+- Caché por (fuente, query) para reducir bloqueos
+- Logging en BD (SearchLog)
 """
 
-import streamlit as st
-from core.config import get_user_setting
-from modules.search.buscadores import search_general
-from modules.ai.intel_assistant import analyze_results_with_ai
+from __future__ import annotations
+from typing import List, Dict, Optional
+import time
+import hashlib
+
+import requests
+from bs4 import BeautifulSoup
+from fake_useragent import UserAgent
+import diskcache as dc
+
 from utils.logger import logger
+from core.database import get_session
+from core.entities import SearchLog
+from core.config import get_user_setting
+
+# =========================
+# Config general
+# =========================
+DEFAULT_TOR_PROXY = "socks5h://127.0.0.1:9050"
+TIMEOUT = 25
+SLEEP_BETWEEN_SOURCES = 2.0
+CACHE_DIR = "./cache/darkweb"
+CACHE_TTL = 60 * 60 * 6  # 6 horas
+cache = dc.Cache(CACHE_DIR)
+
+# =========================
+# Fuentes + mirrors .onion
+# (clearnet primero, luego posibles .onion)
+# =========================
+DARKWEB_SOURCES: List[Dict] = [
+    {
+        "name": "Danex",
+        "endpoints": [
+            {"url": "https://danex.io/search?q={query}", "parser": "html", "selector": ".result a, .result h3"},
+            # (No mirror onion público estable conocido)
+        ],
+    },
+    {
+        "name": "Torry",
+        "endpoints": [
+            {"url": "https://torry.io/search?q={query}", "parser": "html", "selector": "div.search-result a"},
+        ],
+    },
+    {
+        "name": "Dargle",
+        "endpoints": [
+            {"url": "https://dargle.io/search?q={query}", "parser": "html", "selector": "article a, article h2"},
+        ],
+    },
+    {
+        "name": "Tor.link",
+        "endpoints": [
+            {"url": "https://tor.link/search?q={query}", "parser": "html", "selector": "div.result a"},
+        ],
+    },
+    {
+        "name": "Vormweb",
+        "endpoints": [
+            {"url": "https://vormweb.com/search?q={query}", "parser": "html", "selector": "div.result-item a"},
+        ],
+    },
+    {
+        "name": "OnionLand.io",
+        "endpoints": [
+            {"url": "https://onionland.io/search?q={query}&format=json", "parser": "json"},
+            # Ejemplo ficticio de mirror onion:
+            {"url": "http://onionlandxxxxxxxxxxxxxxxxxxxxxxx.onion/search?q={query}&format=json", "parser": "json", "requires_tor": True},
+        ],
+    },
+    {
+        "name": "Onion Search Engine",
+        "endpoints": [
+            {"url": "https://onionsearchengine.com/search?q={query}", "parser": "html", "selector": "div.result a"},
+            # Mirror onion hipotético:
+            {"url": "http://osexxxxxxxxxxxxxxxxxxxxxxxxxxxx.onion/search?q={query}", "parser": "html", "selector": "div.result a", "requires_tor": True},
+        ],
+    },
+    {
+        "name": "OnionLinkHub",
+        "endpoints": [
+            {"url": "https://onionhub.link/search?q={query}", "parser": "html", "selector": "div.result-card a"},
+        ],
+    },
+]
 
 
-# ==========================================================
-# 🔹 Interfaz principal
-# ==========================================================
-def run(username: str):
-    st.title("🕵️‍♂️ Análisis de Persona / Entidad")
-    st.caption("Busca información en fuentes abiertas, documentos, redes sociales, repositorios y filtraciones.")
+# =========================
+# Helpers
+# =========================
+def _cache_key(query: str, source: str, endpoint_url: str) -> str:
+    return hashlib.sha256(f"{source}:{endpoint_url}:{query}".encode()).hexdigest()
 
-    # Mantener estado persistente entre ejecuciones
-    if "search_results" not in st.session_state:
-        st.session_state.search_results = []
-    if "current_target" not in st.session_state:
-        st.session_state.current_target = ""
 
-    # ==========================================================
-    # 🔍 Formulario de búsqueda
-    # ==========================================================
-    st.subheader("🔎 Búsqueda OSINT")
+def _headers() -> dict:
+    ua = UserAgent()
+    return {
+        "User-Agent": ua.random,
+        "Accept-Language": "en-US,en;q=0.9",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,application/json,*/*;q=0.8",
+        "Connection": "close",
+    }
 
-    persona = st.text_input("Nombre o entidad objetivo", st.session_state.current_target or "")
-    max_results = st.slider("Número máximo de resultados", 5, 30, 15)
 
-    col1, col2, col3, col4 = st.columns(4)
-    with col1:
-        buscar = st.button("🔍 Buscar")
-    with col2:
-        enrich = st.button("♻️ Auto-enriquecer")
-    with col3:
-        ai_analyze = st.button("🧠 Analizar con IA")
-    with col4:
-        clear = st.button("🧹 Limpiar resultados")
+def _resolve_proxy(username: Optional[str]) -> Dict[str, str] | None:
+    """
+    Determina qué proxy usar:
+    - Si el usuario tiene 'proxy' -> usarlo (http/https)
+    - Si 'use_tor' == 'true' -> usar Tor socks5h por defecto
+    - Si la URL es .onion y no hay Tor/proxy socks -> no se puede acceder
+    """
+    user_proxy = get_user_setting(username, "proxy") if username else None
+    use_tor = (get_user_setting(username, "use_tor") or "").lower() == "true" if username else False
 
-    # ==========================================================
-    # 🎯 Ejecución de búsqueda
-    # ==========================================================
-    if buscar and persona.strip():
-        try:
-            st.session_state.current_target = persona.strip()
-            with st.spinner("Buscando información OSINT..."):
-                results = search_general(persona, username, "auto", max_results)
-                st.session_state.search_results = results
+    # Si el usuario ha configurado un proxy explícito, úsalo
+    if user_proxy:
+        # Para .onion necesitarás un proxy SOCKS (ej: socks5h://localhost:9050)
+        return {"http": user_proxy, "https": user_proxy}
 
-            st.success(f"✅ Se encontraron {len(results)} resultados para **{persona}**")
+    # Si no hay proxy explícito pero use_tor está activo -> Tor por defecto
+    if use_tor:
+        return {"http": DEFAULT_TOR_PROXY, "https": DEFAULT_TOR_PROXY}
 
-        except Exception as e:
-            st.error(f"❌ Error en la búsqueda: {e}")
-            logger.exception(f"[person_ui] Error buscando: {e}")
+    # Sin proxy
+    return None
 
-    # ==========================================================
-    # ♻️ Auto-enriquecimiento (búsquedas temáticas)
-    # ==========================================================
-    if enrich and persona.strip():
-        try:
-            st.session_state.current_target = persona.strip()
-            st.info("🧩 Ejecutando enriquecimiento automático...")
 
-            enrich_queries = [
-                f'"{persona}" (filetype:pdf OR filetype:docx)',
-                f'"{persona}" site:pastebin.com OR site:ghostbin.com',
-                f'"{persona}" site:twitter.com OR site:linkedin.com OR site:facebook.com',
-                f'"{persona}" site:github.com OR site:gitlab.com'
-            ]
+def _can_use_endpoint(endpoint_url: str, proxies: Optional[Dict[str, str]], endpoint_requires_tor: bool) -> bool:
+    """
+    Si el endpoint requiere Tor (.onion o marcado), solo usamos si proxies apuntan a socks5h
+    """
+    is_onion = endpoint_url.startswith("http://") and endpoint_url.endswith(".onion") or ".onion/" in endpoint_url
+    if endpoint_requires_tor or is_onion:
+        if not proxies:
+            return False
+        # Consideramos Tor si contiene socks5h
+        return str(proxies.get("http", "")) .startswith("socks5h") or str(proxies.get("https", "")).startswith("socks5h")
+    return True
 
-            all_results = []
-            with st.spinner("Recopilando resultados de distintas fuentes..."):
-                for q in enrich_queries:
-                    all_results.extend(search_general(q, username, "auto", max_results // 2))
 
-            st.session_state.search_results = all_results
-            st.success(f"✅ Enriquecimiento completado ({len(all_results)} resultados combinados)")
+def _fetch_html(url: str, proxies: Optional[Dict[str, str]]) -> Optional[BeautifulSoup]:
+    try:
+        r = requests.get(url, headers=_headers(), proxies=proxies, timeout=TIMEOUT)
+        if r.status_code == 200 and "text/html" in r.headers.get("Content-Type", ""):
+            return BeautifulSoup(r.text, "html.parser")
+        logger.warning(f"[darkweb] [{r.status_code}] no HTML en {url}")
+    except Exception as e:
+        logger.warning(f"[darkweb] fallo fetch HTML {url}: {e}")
+    return None
 
-        except Exception as e:
-            st.error(f"❌ Error en el enriquecimiento: {e}")
-            logger.exception(f"[person_ui] Error en auto-enrich: {e}")
 
-    # ==========================================================
-    # 🧠 Análisis con IA
-    # ==========================================================
-    if ai_analyze and st.session_state.search_results:
-        try:
-            with st.spinner("Analizando resultados con inteligencia artificial..."):
-                analysis = analyze_results_with_ai(st.session_state.current_target, st.session_state.search_results, username)
-            st.markdown("### 🧠 Informe generado por IA")
-            st.write(analysis)
+def _fetch_json(url: str, proxies: Optional[Dict[str, str]]) -> Optional[List[Dict]]:
+    try:
+        r = requests.get(url, headers=_headers(), proxies=proxies, timeout=TIMEOUT)
+        if r.status_code == 200 and "application/json" in r.headers.get("Content-Type", ""):
+            return r.json()
+        logger.warning(f"[darkweb] [{r.status_code}] no JSON en {url}")
+    except Exception as e:
+        logger.warning(f"[darkweb] fallo fetch JSON {url}: {e}")
+    return None
 
-        except Exception as e:
-            st.error(f"❌ Error durante el análisis con IA: {e}")
-            logger.exception(f"[person_ui] Error IA: {e}")
 
-    # ==========================================================
-    # 🧹 Limpiar resultados
-    # ==========================================================
-    if clear:
-        st.session_state.search_results = []
-        st.session_state.current_target = ""
-        st.info("🧹 Resultados limpiados.")
+def _normalize_result(title: str, link: str, snippet: str, source: str) -> Dict:
+    return {
+        "title": title.strip() if title else "Sin título",
+        "link": link.strip() if link else "",
+        "snippet": snippet.strip() if snippet else "",
+        "source": source,
+        "_type": "darkweb",
+    }
 
-    # ==========================================================
-    # 📊 Mostrar resultados (persistentes)
-    # ==========================================================
-    if st.session_state.search_results:
-        st.markdown("---")
-        st.subheader(f"📂 Resultados para: {st.session_state.current_target}")
 
-        for i, item in enumerate(st.session_state.search_results, start=1):
-            with st.expander(f"🔗 {i}. {item.get('title', 'Sin título')}"):
-                st.markdown(f"**Fuente:** `{item.get('source', 'desconocida')}`")
-                st.markdown(f"**URL:** [{item.get('link', 'Sin enlace')}]({item.get('link', '#')})")
-                if item.get("snippet"):
-                    st.markdown(f"📝 *{item.get('snippet')}*")
+# =========================
+# API principal
+# =========================
+def search_darkweb(query: str, username: Optional[str] = None, max_results: int = 30, use_cache: bool = True) -> List[Dict]:
+    """
+    Busca 'query' en todas las fuentes declaradas.
+    - Respeta mirrors .onion si hay proxy Tor
+    - Devuelve lista homogénea de dicts
+    - Guarda log en BD
+    """
+    proxies = _resolve_proxy(username)
+    all_results: List[Dict] = []
 
-    else:
-        st.info("🕵️‍♂️ Introduce un nombre y haz clic en **Buscar** para comenzar.")
+    for src in DARKWEB_SOURCES:
+        source_name = src["name"]
+        source_results: List[Dict] = []
 
-    st.markdown("---")
-    st.caption("🧩 OSINT Suite — Módulo de análisis de personas")
+        for ep in src["endpoints"]:
+            url = ep["url"].format(query=query)
+            requires_tor = ep.get("requires_tor", False)
+
+            # Si endpoint requiere Tor / onion y no hay Tor activo, saltamos
+            if not _can_use_endpoint(url, proxies, requires_tor):
+                logger.info(f"[darkweb] saltando endpoint (requiere Tor): {url}")
+                continue
+
+            key = _cache_key(query, source_name, url)
+            if use_cache:
+                cached = cache.get(key)
+                if cached:
+                    logger.info(f"[darkweb] cache hit: {source_name} -> {url}")
+                    source_results.extend(cached)
+                    break  # este endpoint ya nos dio resultados
+
+            logger.info(f"[darkweb] 🔍 {source_name} → {url}")
+            fetched: List[Dict] = []
+
+            if ep["parser"] == "json":
+                data = _fetch_json(url, proxies)
+                if data:
+                    for d in data[:max_results]:
+                        fetched.append(
+                            _normalize_result(
+                                d.get("title") or d.get("name", "Sin título"),
+                                d.get("link") or d.get("url", ""),
+                                d.get("snippet") or d.get("description", ""),
+                                source_name,
+                            )
+                        )
+
+            elif ep["parser"] == "html":
+                soup = _fetch_html(url, proxies)
+                if soup:
+                    # Buscamos anchors y descripciones cercanas
+                    for a in soup.select(ep["selector"])[:max_results]:
+                        title = a.get_text(" ", strip=True)
+                        link = a.get("href") or ""
+                        # Heurística de snippet
+                        parent = a.parent if a else None
+                        snippet_el = None
+                        if parent:
+                            snippet_el = parent.find("p") or parent.find(class_="desc") or parent.find(class_="snippet")
+                        snippet = snippet_el.get_text(" ", strip=True) if snippet_el else ""
+                        fetched.append(_normalize_result(title, link, snippet, source_name))
+
+            if fetched:
+                # guarda en cache y añade a resultados
+                if use_cache:
+                    cache.set(key, fetched, expire=CACHE_TTL)
+                source_results.extend(fetched)
+                # pasamos al siguiente source (un endpoint bueno basta)
+                break
+
+            # Si este endpoint no devolvió nada, probamos siguiente mirror
+            time.sleep(1.0)
+
+        all_results.extend(source_results)
+        time.sleep(SLEEP_BETWEEN_SOURCES)
+
+    logger.info(f"[darkweb] total resultados: {len(all_results)}")
+
+    # ==== Log en BD ====
+    try:
+        with get_session() as session:
+            log = SearchLog(
+                query=f"darkweb:{query}",
+                result=str(all_results),
+                user_id=username,
+                type="darkweb_search",
+            )
+            session.add(log)
+            session.commit()
+        logger.info("[darkweb] Log guardado en BD")
+    except Exception as e:
+        logger.warning(f"[darkweb] no se pudo guardar log en BD: {e}")
+
+    return all_results

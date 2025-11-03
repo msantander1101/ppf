@@ -1,7 +1,7 @@
 # modules/search/engines.py
 from utils.logger import logger
 from modules.search.buscadores import search_buscador
-from modules.search.pastes import search_pastes
+from modules.search.paste_search import search_pastes
 from modules.search.social import search_social
 from modules.search.code import search_code
 from modules.search.infosearch import search_info
@@ -10,7 +10,7 @@ from modules.search.archive_search import search_archive
 # modules/search/engines.py
 def search(query, username=None, category='general', max_results=10):
     from modules.search import (
-        general_search, docs, pastes,
+        general_search, docs, paste_search,
         social, code, archive_search
     )
     category_map = {

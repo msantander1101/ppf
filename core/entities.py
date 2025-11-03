@@ -83,3 +83,19 @@ class SearchLog(SQLModel, table=True):
     result: str
     type: str = "osint_search"
     created_at: datetime = Field(default_factory=datetime.utcnow)
+
+# core/entities.py
+
+from sqlmodel import SQLModel, Field, Relationship
+from datetime import datetime
+
+class OsintResult(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    person_id: int | None = Field(default=None, foreign_key="person.id")
+    query: str
+    mode: str
+    title: str
+    link: str
+    snippet: str
+    source: str
+    date: datetime = Field(default_factory=datetime.utcnow)
