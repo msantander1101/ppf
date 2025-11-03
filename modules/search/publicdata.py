@@ -226,7 +226,7 @@ def _collect(username: str, group: str, sources: List[Dict[str, str]], query: st
 # ---------------------------
 # API público: search_public_data
 # ---------------------------
-def search_public_data(query: str, username: str, max_results: int = 30, use_cache: bool = True) -> List[Dict[str, Any]]:
+def search_publicdata(query: str, username: str, max_results: int = 30, use_cache: bool = True) -> List[Dict[str, Any]]:
     """
     Ejecuta búsquedas en fuentes públicas (publicdata).
     Devuelve una lista de registros normalizados.
@@ -277,6 +277,6 @@ def search_public_data(query: str, username: str, max_results: int = 30, use_cac
 # Si se ejecuta directamente (test)
 # ---------------------------
 if __name__ == "__main__":
-    test = search_public_data("Miguel Santander Romera", "demo", max_results=10, use_cache=False)
+    test = search_publicdata("Miguel Santander Romera", "demo", max_results=10, use_cache=False)
     print(json.dumps(test, indent=2, ensure_ascii=False))
 

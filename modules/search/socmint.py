@@ -1,27 +1,47 @@
-# modules/search/emailint.py
+# modules/search/socmint.py
 """
-EMAILINT — Email Intelligence & Enumeration
-===========================================
+SOCMINT — Social Media Intelligence
+===================================
+Módulo OSINT para búsquedas, monitoreo y análisis en redes sociales.
 
-Fuentes soportadas:
-    Email Info:
-        - TraceFind.info
-        - SkyMem.info
-        - ghunt online
-        - Hashtray
+Fuentes integradas:
     Misc:
-        - emailfinder
-        - Email-Crawler-Lead-Generator
-        - Email2PhoneNumber
-        - emailGuesser
-    Email Verification:
-        - gmail_permutator
+        Snapchat Username Checker, Sockpuppet.io, Disboard, Spoonbill.io,
+        Badoo Wayback, DuolingOSINT, SocialBlade, ExportComments
+    Discord:
+        Doxcord
+    YouTube:
+        youtube_data_extractor, MW Geofind, YouTube Video Finder, ChannelCrawler,
+        ReelTime AI, YouTube History Analyze, youtube-tools-comments,
+        YouTube Comment Finder, Youtube Subscription History, youtube-handles-fuzz,
+        OsintTube, Filmot
+    TikTok:
+        TikSpyder, TokInsights, Urlebird.com, TikFace, WatchWithout,
+        OMAR-Thing tiktok tool, Sticktock
+    Mastodon:
+        Big Mastodon Hashtag Search
+    Facebook:
+        Social Media Index, Facebook Catalogue, Meta_Scan, Have I Been Zuckered?
+    Twitter / X:
+        WaybackTweets, Sotwe.com, tweetfeed, TwStalker,
+        Twitter Trending Archive
+    Instagram:
+        DolphinRadar Instagram Viewer, InstagramPrivSniffer,
+        InDownloader Instagram Profile Viewer, Instagram Monitor,
+        Dumpor.io, InsTrack.app, InstaClip, Stalkiana, greatfon instagram viewer,
+        InstaTracker, ExportGram, Instagram Network Analysis Tool
+    LinkedIn:
+        LinkedInDumper, CrossLinked, LinkedIn Profile Viewer, LinkdTime
+    Reddit:
+        Vapor, RedditOSINT, SnooSnoop, Reveddit, redditmetis
+    GEO Tracking:
+        HuntIntel
 
 Características:
-    - Cache SQLite centralizada
-    - Soporte Proxy / Tor
-    - Resultados estructurados listos para grafo e IA
-    - Búsqueda concurrente
+    - Cache SQLite
+    - Rotación automática Tor/Proxy
+    - Resultados normalizados
+    - Soporte multi-fuente concurrente
 """
 
 import os
@@ -34,7 +54,6 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import requests
-
 from core.config import get_user_setting
 from utils.logger import logger
 
@@ -47,15 +66,15 @@ CACHE_DIR = os.path.join("data", "cache")
 DB_PATH = os.path.join(CACHE_DIR, "osint_cache.db")
 os.makedirs(CACHE_DIR, exist_ok=True)
 
-DEFAULT_TTL = 60 * 60 * 24
-DEFAULT_WORKERS = 4
+DEFAULT_TTL = 60 * 60 * 24  # 24h
+DEFAULT_WORKERS = 6
 DEFAULT_TIMEOUT = (10, 25)
 
 _db_lock = threading.Lock()
 
 
 # ============================================================
-# 💾 Cache
+# 💾 Cache (SQLite)
 # ============================================================
 
 def _ensure_schema():
@@ -114,7 +133,7 @@ def _cache_set(group: str, q: str, username: str, payload: List[Dict[str, Any]])
 
 
 # ============================================================
-# 🌐 HTTP session
+# 🌐 HTTP session (Tor/Proxy)
 # ============================================================
 
 def _build_session(username: str) -> requests.Session:
@@ -132,7 +151,6 @@ def _build_session(username: str) -> requests.Session:
         s.proxies.update({"http": proxy, "https": proxy})
     else:
         s.proxies.update({"http": "socks5h://127.0.0.1:9050", "https": "socks5h://127.0.0.1:9050"})
-
     s.timeout = DEFAULT_TIMEOUT
     return s
 
@@ -141,36 +159,104 @@ def _build_session(username: str) -> requests.Session:
 # 🔍 Fuentes
 # ============================================================
 
-def _emailint_sources(q: str) -> List[Dict[str, str]]:
+def _socmint_sources(q: str) -> List[Dict[str, str]]:
     q_enc = requests.utils.requote_uri(q)
-    return [
-        # --- Email Info ---
-        {"name": "TraceFind.info", "url": f"https://tracefind.info/search?q={q_enc}"},
-        {"name": "SkyMem.info", "url": f"https://www.skymem.info/srch?q={q_enc}"},
-        {"name": "ghunt online", "url": f"https://ghunt.io/search/{q_enc}"},
-        {"name": "Hashtray", "url": f"https://hashtray.io/search?q={q_enc}"},
-
+    srcs = [
         # --- Misc ---
-        {"name": "emailfinder", "url": f"https://emailfinder.io/search?q={q_enc}"},
-        {"name": "Email-Crawler-Lead-Generator", "url": f"https://leadgen.example/search?q={q_enc}"},
-        {"name": "Email2PhoneNumber", "url": f"https://email2phone.example/search?q={q_enc}"},
-        {"name": "emailGuesser", "url": f"https://emailguesser.example/search?q={q_enc}"},
+        ("Snapchat Username Checker", f"https://snapcheck.example/?user={q_enc}"),
+        ("Sockpuppet.io", f"https://sockpuppet.io/search?q={q_enc}"),
+        ("Disboard", f"https://disboard.org/search?q={q_enc}"),
+        ("Spoonbill.io", f"https://spoonbill.io/search?q={q_enc}"),
+        ("Badoo Wayback", f"https://badoo.example/wayback?q={q_enc}"),
+        ("DuolingOSINT", f"https://duoling.example/search?q={q_enc}"),
+        ("SocialBlade", f"https://socialblade.com/search/{q_enc}"),
+        ("ExportComments", f"https://exportcomments.com/search?q={q_enc}"),
 
-        # --- Email Verification ---
-        {"name": "gmail_permutator", "url": f"https://gmailpermutator.example/search?q={q_enc}"}
+        # --- Discord ---
+        ("Doxcord", f"https://doxcord.example/search?q={q_enc}"),
+
+        # --- YouTube ---
+        ("YouTube Data Extractor", f"https://ytdx.example/search?q={q_enc}"),
+        ("MW Geofind", f"https://mwgeofind.example/search?q={q_enc}"),
+        ("YouTube Video Finder", f"https://ytvideofinder.example/search?q={q_enc}"),
+        ("ChannelCrawler", f"https://channelcrawler.com/?q={q_enc}"),
+        ("ReelTime AI", f"https://reeltime.example/search?q={q_enc}"),
+        ("YouTube History Analyze", f"https://ythistory.example/search?q={q_enc}"),
+        ("youtube-tools-comments", f"https://ytcomments.example/search?q={q_enc}"),
+        ("YouTube Comment Finder", f"https://ytcommentfinder.example/search?q={q_enc}"),
+        ("Youtube Subscription History", f"https://ytsubhistory.example/search?q={q_enc}"),
+        ("youtube-handles-fuzz", f"https://ythandles.example/search?q={q_enc}"),
+        ("OsintTube", f"https://osinttube.example/search?q={q_enc}"),
+        ("Filmot", f"https://filmot.com/search?q={q_enc}"),
+
+        # --- TikTok ---
+        ("TikSpyder", f"https://tikspyder.example/search?q={q_enc}"),
+        ("TokInsights", f"https://tokinsights.example/search?q={q_enc}"),
+        ("Urlebird.com", f"https://urlebird.com/search/{q_enc}/"),
+        ("TikFace", f"https://tikface.io/search?q={q_enc}"),
+        ("WatchWithout", f"https://watchwithout.com/search?q={q_enc}"),
+        ("OMAR-Thing TikTok Tool", f"https://omarthing.example/search?q={q_enc}"),
+        ("Sticktock", f"https://sticktock.example/search?q={q_enc}"),
+
+        # --- Mastodon ---
+        ("Big Mastodon Hashtag Search", f"https://mastodonhashtag.example/search?q={q_enc}"),
+
+        # --- Facebook ---
+        ("Social Media Index", f"https://socialmediaindex.example/search?q={q_enc}"),
+        ("Facebook Catalogue", f"https://fbcat.example/search?q={q_enc}"),
+        ("Meta_Scan", f"https://metascan.example/search?q={q_enc}"),
+        ("Have I Been Zuckered?", f"https://zuckered.example/search?q={q_enc}"),
+
+        # --- Twitter / X ---
+        ("WaybackTweets", f"https://waybacktweets.example/search?q={q_enc}"),
+        ("Sotwe.com", f"https://sotwe.com/search?q={q_enc}"),
+        ("tweetfeed", f"https://tweetfeed.example/search?q={q_enc}"),
+        ("TwStalker", f"https://twstalker.io/search?q={q_enc}"),
+        ("Twitter Trending Archive", f"https://trendarchive.example/search?q={q_enc}"),
+
+        # --- Instagram ---
+        ("DolphinRadar Instagram Viewer", f"https://dolphinradar.com/search?q={q_enc}"),
+        ("InstagramPrivSniffer", f"https://privsniffer.example/search?q={q_enc}"),
+        ("InDownloader", f"https://indownloader.com/search?q={q_enc}"),
+        ("Instagram Monitor", f"https://instamonitor.example/search?q={q_enc}"),
+        ("Dumpor.io", f"https://dumpor.io/search?q={q_enc}"),
+        ("InsTrack.app", f"https://insttrack.app/search?q={q_enc}"),
+        ("InstaClip", f"https://instaclip.example/search?q={q_enc}"),
+        ("Stalkiana", f"https://stalkiana.com/search?q={q_enc}"),
+        ("greatfon", f"https://greatfon.com/search?q={q_enc}"),
+        ("InstaTracker", f"https://instatracker.example/search?q={q_enc}"),
+        ("ExportGram", f"https://exportgram.example/search?q={q_enc}"),
+        ("Instagram Network Analysis Tool", f"https://instanetana.example/search?q={q_enc}"),
+
+        # --- LinkedIn ---
+        ("LinkedInDumper", f"https://linkedindumper.example/search?q={q_enc}"),
+        ("CrossLinked", f"https://crosslinked.example/search?q={q_enc}"),
+        ("LinkedIn Profile Viewer", f"https://linkedinprofile.example/search?q={q_enc}"),
+        ("LinkdTime", f"https://linkdtime.example/search?q={q_enc}"),
+
+        # --- Reddit ---
+        ("Vapor", f"https://vapor.example/search?q={q_enc}"),
+        ("RedditOSINT", f"https://reddit-osint.example/search?q={q_enc}"),
+        ("SnooSnoop", f"https://snoosnoop.example/search?q={q_enc}"),
+        ("Reveddit", f"https://reveddit.com/search?q={q_enc}"),
+        ("redditmetis", f"https://redditmetis.example/search?q={q_enc}"),
+
+        # --- GEO Tracking ---
+        ("HuntIntel", f"https://huntintel.example/search?q={q_enc}")
     ]
+    return [{"name": n, "url": u} for n, u in srcs]
 
 
 # ============================================================
 # 🧠 Normalización
 # ============================================================
 
-def _normalize(source: str, q: str, url: str, category: str = "emailint") -> Dict[str, Any]:
+def _normalize(source: str, q: str, url: str, category="socmint") -> Dict[str, Any]:
     return {
         "source": source,
-        "title": f"{source} — resultados EmailINT para {q}",
+        "title": f"{source} — resultados SOCMINT para {q}",
         "link": url,
-        "snippet": "Abrir para analizar información asociada al correo electrónico.",
+        "snippet": "Abrir para revisar perfiles, comentarios o actividad en redes sociales.",
         "query": q,
         "category": category,
         "structured": {},
@@ -180,7 +266,7 @@ def _normalize(source: str, q: str, url: str, category: str = "emailint") -> Dic
 
 
 # ============================================================
-# 🧩 Colector
+# 🧩 Colector concurrente
 # ============================================================
 
 def _collect(username: str, group: str, sources: List[Dict[str, str]], q: str, use_cache=True) -> List[Dict[str, Any]]:
@@ -190,14 +276,13 @@ def _collect(username: str, group: str, sources: List[Dict[str, str]], q: str, u
             return cached
 
     session = _build_session(username)
-    results: List[Dict[str, Any]] = []
-
+    results = []
     for s in sources:
         try:
             rec = _normalize(s["name"], q, s["url"], category=group)
             results.append(rec)
         except Exception as e:
-            logger.warning(f"[emailint] Error en {s}: {e}")
+            logger.warning(f"[socmint] Error normalizando {s}: {e}")
 
     _cache_set(group, q, username, results)
     return results
@@ -207,18 +292,15 @@ def _collect(username: str, group: str, sources: List[Dict[str, str]], q: str, u
 # 🚀 Módulo principal
 # ============================================================
 
-def search_emailint(query: str, username: str, max_results: int = 25, use_cache: bool = True) -> List[Dict[str, Any]]:
-    """
-    Ejecuta inteligencia OSINT sobre direcciones de correo electrónico.
-    """
-    group = "emailint"
-    sources = _emailint_sources(query)
+def search_socmint(query: str, username: str, max_results: int = 50, use_cache: bool = True) -> List[Dict[str, Any]]:
+    group = "socmint"
+    sources = _socmint_sources(query)
 
     workers = DEFAULT_WORKERS
     try:
-        cfg = get_user_setting(username, "concurrency")
-        if cfg:
-            workers = int(cfg)
+        c = get_user_setting(username, "concurrency")
+        if c:
+            workers = int(c)
     except Exception:
         pass
 
@@ -229,13 +311,14 @@ def search_emailint(query: str, username: str, max_results: int = 25, use_cache:
             try:
                 results.extend(f.result())
             except Exception as e:
-                logger.warning(f"[emailint] Error en worker: {e}")
+                logger.warning(f"[socmint] Error en worker: {e}")
 
     seen = set()
     unique = []
     for r in results:
-        if r["link"] not in seen:
-            seen.add(r["link"])
+        link = r.get("link")
+        if link not in seen:
+            seen.add(link)
             unique.append(r)
 
     return unique[:max_results]
@@ -246,5 +329,5 @@ def search_emailint(query: str, username: str, max_results: int = 25, use_cache:
 # ============================================================
 
 if __name__ == "__main__":
-    data = search_emailint("john.doe@gmail.com", "demo", max_results=10, use_cache=False)
+    data = search_socmint("john_doe", "demo", max_results=10, use_cache=False)
     print(json.dumps(data, indent=2, ensure_ascii=False))

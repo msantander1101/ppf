@@ -211,7 +211,7 @@ def _collect_from_sources(username: str, group: str, sources: List[Dict[str, str
 # 🚀 Módulo principal
 # ============================================================
 
-def search_domain_intel(query: str, username: str, max_results: int = 30, use_cache: bool = True) -> List[Dict[str, Any]]:
+def search_domainint(query: str, username: str, max_results: int = 30, use_cache: bool = True) -> List[Dict[str, Any]]:
     """
     Ejecuta búsqueda de inteligencia sobre dominios y subdominios.
     Detecta automáticamente si el valor es dominio, subdominio o IP.
@@ -273,5 +273,5 @@ def search_domain_intel(query: str, username: str, max_results: int = 30, use_ca
 # ============================================================
 
 if __name__ == "__main__":
-    test = search_domain_intel("example.com", "demo", max_results=10, use_cache=False)
+    test = search_domainint("example.com", "demo", max_results=10, use_cache=False)
     print(json.dumps(test, indent=2, ensure_ascii=False))

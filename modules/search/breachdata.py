@@ -219,7 +219,7 @@ def _collect_from_sources(username: str, group: str, sources: List[Dict[str, str
 # 🚀 Módulo principal
 # ============================================================
 
-def search_breach_data(query: str, username: str, max_results: int = 30, use_cache: bool = True) -> List[Dict[str, Any]]:
+def search_breachdata(query: str, username: str, max_results: int = 30, use_cache: bool = True) -> List[Dict[str, Any]]:
     """
     Ejecuta búsqueda OSINT sobre fugas de datos relacionadas con:
         - emails
@@ -281,5 +281,5 @@ def search_breach_data(query: str, username: str, max_results: int = 30, use_cac
 # ============================================================
 
 if __name__ == "__main__":
-    test = search_breach_data("demo@example.com", "demo", max_results=10, use_cache=False)
+    test = search_breachdata("demo@example.com", "demo", max_results=10, use_cache=False)
     print(json.dumps(test, indent=2, ensure_ascii=False))

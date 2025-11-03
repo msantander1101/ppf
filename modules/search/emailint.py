@@ -30,7 +30,7 @@ def hibp_breaches_for_email(username: str, email: str):
         logger.error(f"[HIBP] Error al consultar HIBP: {e}")
         return []
 
-def search_email_intelligence(username: str, email: str, engine: str = "auto", max_results: int = 15):
+def search_emailint(username: str, email: str, engine: str = "auto", max_results: int = 15):
     """
     Analiza un correo con HIBP y buscadores OSINT.
     """

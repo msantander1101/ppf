@@ -216,7 +216,7 @@ def _collect_from_sources(username: str, group: str, sources: List[Dict[str, str
 # 🚀 Módulo principal
 # ============================================================
 
-def search_image_intel(query: str, username: str, max_results: int = 20, use_cache: bool = True) -> List[Dict[str, Any]]:
+def search_imageint(query: str, username: str, max_results: int = 20, use_cache: bool = True) -> List[Dict[str, Any]]:
     """
     Ejecuta búsqueda OSINT sobre una imagen (URL, archivo, hash o descripción).
     """
@@ -275,5 +275,5 @@ def search_image_intel(query: str, username: str, max_results: int = 20, use_cac
 # ============================================================
 
 if __name__ == "__main__":
-    test = search_image_intel("https://example.com/photo.jpg", "demo", max_results=10, use_cache=False)
+    test = search_imageint("https://example.com/photo.jpg", "demo", max_results=10, use_cache=False)
     print(json.dumps(test, indent=2, ensure_ascii=False))
